@@ -67,6 +67,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                     fill
                     className={styles.img}
                     sizes="100vw"
+                    unoptimized
                     priority={i === 0}
                     loading={i === 0 ? undefined : "lazy"}
                     onLoad={() =>

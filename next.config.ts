@@ -37,6 +37,7 @@ function devContentSecurityPolicy(): string {
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
+    unoptimized: process.env.NODE_ENV === "production",
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       { protocol: "https", hostname: "placehold.co", pathname: "/**" },
