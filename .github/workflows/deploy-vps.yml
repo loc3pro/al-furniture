@@ -14,14 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     steps:
-      - name: Require VPS_HOST
-        run: |
-          if [ -z "$VPS_HOST" ]; then
-            echo "::error::Thiếu VPS_HOST. Vào Settings → Secrets and variables → Actions → tab Variables → New repository variable: VPS_HOST = IP VPS (ví dụ 103.183.120.113)."
-            exit 1
-          fi
-        env:
-          VPS_HOST: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.2.0
         env:
