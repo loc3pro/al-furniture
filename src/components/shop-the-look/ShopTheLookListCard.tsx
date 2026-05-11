@@ -54,6 +54,7 @@ export function ShopTheLookListCard({
               fill
               className={styles.cardImage}
               sizes={imageOnly ? "(max-width: 640px) 100vw, 33vw" : "(max-width: 768px) 50vw, 25vw"}
+              unoptimized
             />
           </Link>
         </div>

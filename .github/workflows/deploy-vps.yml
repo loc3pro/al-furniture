@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Validate SSH target
         env:
-          VPS_HOST: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
-          VPS_USER: ${{ vars.VPS_USER || secrets.VPS_USER }}
+          VPS_HOST: ${{ secrets.VPS_HOST || vars.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER || vars.VPS_USER }}
           VPS_SSH_PASSWORD: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
         run: |
           if [ -z "$VPS_HOST" ]; then
@@ -61,8 +61,8 @@ jobs:
           CHAT_UPLOAD_RETENTION_MS: ${{ vars.CHAT_UPLOAD_RETENTION_MS || secrets.CHAT_UPLOAD_RETENTION_MS }}
           CHAT_UPLOAD_RETENTION_HOURS: ${{ vars.CHAT_UPLOAD_RETENTION_HOURS || secrets.CHAT_UPLOAD_RETENTION_HOURS }}
         with:
-          host: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
-          username: ${{ vars.VPS_USER || secrets.VPS_USER }}
+          host: ${{ secrets.VPS_HOST || vars.VPS_HOST }}
+          username: ${{ secrets.VPS_USER || vars.VPS_USER }}
           password: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
           script_stop: true
           envs: >-
