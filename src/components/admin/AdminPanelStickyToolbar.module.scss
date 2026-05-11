@@ -1,0 +1,38 @@
+/**
+ * Thanh công cụ sticky đầu nội dung trong AdminRightPanel — dùng chung (SP, đơn, …).
+ * Khớp padding panelBody (1rem / 1.1rem).
+ */
+.stickyRoot {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  margin: -1rem -1.1rem 1rem;
+  padding: 0.65rem 1.1rem 0.85rem;
+  border-bottom: 1px solid var(--admin-border-inner, #dee2e6);
+  background: var(--admin-surface, #fff);
+  /**
+   * Offset cho sticky con trong panel (vd. ô tìm SP form đơn thủ công).
+   * padding + hàng nút tối thiểu ~2.75rem + border 1px
+   */
+  --admin-panel-toolbar-offset: calc(0.65rem + 2.75rem + 0.85rem + 1px);
+}
+
+:global([data-admin-dark="true"]) .stickyRoot {
+  background: var(--admin-surface, #1a2430);
+}
+
+.actionsRow {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.actionsRow > :global(.btn) {
+  flex: 1 1 0;
+  min-width: 0;
+}

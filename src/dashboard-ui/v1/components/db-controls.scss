@@ -1,0 +1,453 @@
+/* Dashboard v1 — scoped to [data-admin-dashboard-v1] để không ảnh hưởng shop (global .db-*). */
+[data-admin-dashboard-v1] {
+  /* Khung + màu bảng — đồng bộ trang Danh mục (có thể dùng ngoài .db-table) */
+  --admin-table-chrome-radius: 12px;
+  --admin-table-chrome-border: rgba(26, 22, 18, 0.08);
+  --admin-table-chrome-bg: #fff;
+  --admin-table-thead-fill: #faf9f7;
+  --admin-table-thead-muted: rgba(26, 22, 18, 0.45);
+  --admin-table-row-line: rgba(26, 22, 18, 0.11);
+  /* Vạch dọc giữa cột — đậm hơn một chút so với chrome-border để đọc rõ trên nền trắng */
+  --admin-table-col-line: rgba(26, 22, 18, 0.15);
+  --admin-table-body-bg: #fff;
+  --admin-table-body-bg-alt: #fff;
+  --admin-table-row-hover: rgba(0, 122, 100, 0.045);
+
+  .db-btn {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: var(--admin-control-height, 44px);
+    padding: 0 1.15rem;
+    border-radius: var(--admin-pill-radius, 999px);
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.2;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: var(--admin-surface, #fff);
+    color: var(--admin-text, #1a1a1a);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .db-btn:disabled,
+  .db-btn[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .db-btn--default:hover:not(:disabled) {
+    background: var(--admin-control-fill, #f5f6f7);
+    border-color: rgba(15, 23, 42, 0.14);
+  }
+
+  .db-btn--primary {
+    border-color: transparent;
+    background: var(--admin-btn-primary-bg, #007a64);
+    color: var(--admin-btn-primary-text, #fff);
+    box-shadow: 0 4px 14px rgba(0, 122, 100, 0.28);
+  }
+
+  .db-btn--primary:hover:not(:disabled) {
+    background: var(--admin-btn-primary-bg-hover, #005a49);
+  }
+
+  .db-btn--danger {
+    border-color: rgba(184, 50, 50, 0.45);
+    color: #a83232;
+    background: rgba(184, 50, 50, 0.06);
+  }
+
+  .db-btn--danger:hover:not(:disabled) {
+    background: rgba(184, 50, 50, 0.12);
+  }
+
+  &[data-admin-dark="true"] .db-btn--danger {
+    color: #f0a8a8;
+    border-color: rgba(240, 140, 140, 0.45);
+    background: rgba(184, 50, 50, 0.12);
+  }
+
+  .db-btn--link {
+    border: none;
+    background: transparent;
+    color: var(--admin-accent, #007a64);
+    box-shadow: none;
+    min-height: auto;
+    padding: 0.25rem 0.35rem;
+  }
+
+  .db-btn--link:hover:not(:disabled) {
+    text-decoration: underline;
+    background: transparent;
+  }
+
+  .db-btn--sm {
+    min-height: 32px;
+    padding: 0 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .db-input,
+  .db-textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--admin-control-height, 44px);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--admin-field-radius, 12px);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: var(--admin-surface, #fff);
+    color: var(--admin-text, #1a1a1a);
+    font: inherit;
+  }
+
+  .db-input--pill {
+    border-radius: var(--admin-pill-radius, 999px);
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    background: var(--admin-control-fill, #f5f6f7);
+    border-color: rgba(15, 23, 42, 0.06);
+  }
+
+  /* Ant Design Select (DbSelect) — đồng bộ chiều cao / bo góc với .db-input */
+  .db-select.ant-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .db-select.ant-select .ant-select-selector {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: var(--admin-control-height, 44px) !important;
+    height: auto !important;
+    border-radius: var(--admin-field-radius, 12px) !important;
+    border: 1px solid rgba(15, 23, 42, 0.1) !important;
+    background: var(--admin-surface, #fff) !important;
+    box-shadow: none !important;
+    padding-inline: 0.85rem !important;
+  }
+
+  .db-select.ant-select .ant-select-content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    justify-content: flex-start !important;
+    text-align: start !important;
+  }
+
+  .db-select.ant-select .ant-select-suffix {
+    flex: none !important;
+  }
+
+  .db-select.ant-select .ant-select-selection-wrap {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .db-select.ant-select .ant-select-selection-item,
+  .db-select.ant-select .ant-select-selection-placeholder {
+    line-height: calc(var(--admin-control-height, 44px) - 2px) !important;
+    text-align: start !important;
+  }
+
+  .db-select.ant-select.db-select--pill .ant-select-selector {
+    border-radius: var(--admin-pill-radius, 999px) !important;
+    background: var(--admin-control-fill, #f5f6f7) !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    padding-inline: 1.1rem !important;
+  }
+
+  .db-select.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: rgba(15, 23, 42, 0.16) !important;
+  }
+
+  .db-select.ant-select-focused:not(.ant-select-disabled) .ant-select-selector {
+    border-color: var(--admin-accent, #007a64) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--admin-accent) 22%, transparent) !important;
+  }
+
+  .db-textarea {
+    min-height: auto;
+    resize: vertical;
+    line-height: 1.45;
+  }
+
+  .db-input:focus-visible,
+  .db-textarea:focus-visible {
+    outline: 2px solid var(--admin-accent, #007a64);
+    outline-offset: 1px;
+  }
+
+  .db-search {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    border-radius: var(--admin-pill-radius, 999px);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: var(--admin-control-fill, #f5f6f7);
+    overflow: hidden;
+  }
+
+  .db-search__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: none;
+    padding: 0 0.85rem;
+    font: inherit;
+    color: var(--admin-text);
+    background: transparent;
+    min-height: var(--admin-control-height, 44px);
+  }
+
+  .db-search__input:focus {
+    outline: none;
+  }
+
+  .db-search:focus-within {
+    outline: 2px solid var(--admin-accent, #007a64);
+    outline-offset: 1px;
+  }
+
+  .db-search__btn {
+    flex-shrink: 0;
+    border: none;
+    padding: 0 1.15rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background: var(--admin-btn-primary-bg, #007a64);
+    color: var(--admin-btn-primary-text, #fff);
+  }
+
+  .db-search__btn:hover {
+    background: var(--admin-btn-primary-bg-hover, #005a49);
+  }
+
+  .db-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .db-tabs__btn {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    background: var(--admin-control-fill, #f5f6f7);
+    color: var(--admin-text);
+  }
+
+  .db-tabs__btn:hover {
+    border-color: var(--admin-border-inner);
+  }
+
+  .db-tabs__btn--active {
+    background: var(--admin-btn-primary-bg, #007a64);
+    color: #fff;
+  }
+
+  .db-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(15, 38, 34, 0.45);
+  }
+
+  .db-modal {
+    width: 100%;
+    max-width: 560px;
+    max-height: min(90vh, 900px);
+    overflow: auto;
+    border-radius: var(--admin-card-radius, 24px);
+    background: var(--admin-surface, #fff);
+    color: var(--admin-text);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+  }
+
+  .db-modal__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--admin-border-inner);
+  }
+
+  .db-modal__title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .db-modal__close {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--admin-muted);
+    padding: 0.15rem 0.35rem;
+    border-radius: 8px;
+  }
+
+  .db-modal__close:hover {
+    background: var(--admin-table-hover);
+    color: var(--admin-text);
+  }
+
+  .db-modal__body {
+    padding: 1rem 1.1rem 1.15rem;
+  }
+
+  .db-field {
+    margin-bottom: 0.85rem;
+  }
+
+  .db-field__label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    margin-bottom: 0.35rem;
+    color: var(--admin-text);
+  }
+
+  .db-field__hint {
+    margin: 0.35rem 0 0;
+    font-size: 0.75rem;
+    color: var(--admin-muted);
+    line-height: 1.35;
+  }
+
+  .db-switch-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .db-switch-row input[type="checkbox"] {
+    width: 1.05rem;
+    height: 1.05rem;
+    accent-color: var(--admin-accent, #007a64);
+  }
+
+  .db-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--admin-table-hover, #f1f5f9);
+    color: var(--admin-muted);
+  }
+
+  .db-tag--success {
+    background: rgba(0, 166, 81, 0.14);
+    color: #04783c;
+  }
+
+  &[data-admin-dark="true"] .db-tag--success {
+    color: #9ee0b8;
+  }
+
+  .db-table-wrap {
+    width: 100%;
+    overflow: auto;
+    border-radius: var(--admin-table-chrome-radius, 12px);
+    border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+    background: var(--admin-table-chrome-bg, #fff);
+  }
+
+  .db-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.875rem;
+    background: var(--admin-table-chrome-bg, #fff);
+    /* Viền lưới trong — tách rõ khỏi viền khung .db-table-wrap */
+    box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+    border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+  }
+
+  .db-table th {
+    text-align: start;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+    background: var(--admin-table-thead-fill, #faf9f7);
+    white-space: nowrap;
+  }
+
+  .db-table td {
+    padding: 0.85rem 0.75rem;
+    border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+    vertical-align: middle;
+    text-align: start;
+    background: var(--admin-table-body-bg, #fff);
+  }
+
+  .db-table th:not(:first-child),
+  .db-table td:not(:first-child) {
+    border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+  }
+
+  .db-table tbody tr:nth-child(even) td {
+    background: var(--admin-table-body-bg-alt, #fff);
+  }
+
+  .db-table tbody tr:hover td {
+    background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+  }
+
+  .db-table-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cột «Thao tác» cuối bảng — căn giữa (FAQ, keys, …); bảng có class riêng (đơn hàng, SP) có thể đè thêm */
+  .db-table thead tr th:last-child {
+    text-align: center;
+  }
+
+  .db-table tbody tr td:last-child {
+    text-align: center;
+  }
+}
+
+@media (max-width: 991px) {
+  [data-admin-dashboard-v1] {
+    .db-table-wrap {
+      max-width: 100%;
+      min-width: 0;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
+
+    .db-table th,
+    .db-table td {
+      padding: 0.62rem 0.5rem;
+    }
+  }
+}

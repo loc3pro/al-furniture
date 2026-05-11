@@ -1,0 +1,981 @@
+/* Chi tiết đơn admin — full width cột chính, thẻ thông tin + dòng SP có ảnh */
+
+.page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.back {
+  margin: 0;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: linear-gradient(135deg, var(--admin-surface) 0%, var(--admin-accent-softer) 100%);
+  box-shadow: 0 4px 24px rgba(40, 53, 72, 0.07);
+}
+
+.heroMain {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.title {
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--admin-text);
+  line-height: 1.2;
+}
+
+.orderIdFull {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+  color: var(--admin-muted);
+  word-break: break-all;
+  opacity: 0.9;
+}
+
+.meta {
+  margin-top: 0.5rem;
+  font-size: 0.86rem;
+  color: var(--admin-muted);
+  line-height: 1.45;
+}
+
+.invoicePrintLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.35rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--admin-text);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border-inner);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.invoicePrintLink:hover {
+  background: var(--admin-accent-softer);
+  border-color: var(--admin-accent-border);
+}
+
+.heroAside {
+  flex: 0 1 auto;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+}
+
+@media (max-width: 560px) {
+  .heroAside {
+    width: 100%;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .statusPill {
+    max-width: none;
+    width: auto !important;
+  }
+}
+
+.heroTotalLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+}
+
+.heroTotal {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--admin-text);
+  line-height: 1.1;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1rem 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.card {
+  padding: 1.15rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  box-shadow: 0 2px 14px rgba(40, 53, 72, 0.05);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--admin-border-inner);
+}
+
+.cardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 10px;
+  background: var(--admin-accent-soft);
+  color: var(--admin-accent-strong);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--admin-accent-strong);
+}
+
+.defList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem 0;
+}
+
+.defRow {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.35rem 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.defRow dt {
+  margin: 0;
+  font-weight: 600;
+  color: var(--admin-muted);
+  font-size: 0.8rem;
+}
+
+.defRow dd {
+  margin: 0;
+  color: var(--admin-text);
+  word-break: break-word;
+}
+
+.defRowHighlight {
+  composes: defRow;
+  margin-top: 0.35rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--admin-border-inner);
+}
+
+.defRowHighlight dt {
+  font-weight: 800;
+  color: var(--admin-text);
+}
+
+.defRowHighlight dd {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.noteBlock {
+  white-space: pre-wrap;
+}
+
+.muted {
+  color: var(--admin-muted);
+  font-weight: 500;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--admin-accent-strong);
+}
+
+.txsSection {
+  margin-top: 1.35rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border-inner);
+  background: var(--admin-surface);
+  box-shadow: 0 2px 12px rgba(40, 53, 72, 0.04);
+}
+
+.txTimeline {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  border-left: 2px solid var(--admin-border-inner);
+  margin-left: 0.45rem;
+}
+
+.txItem {
+  position: relative;
+  padding: 0 0 1rem 1.35rem;
+}
+
+.txItem:last-child {
+  padding-bottom: 0;
+}
+
+.txDot {
+  position: absolute;
+  left: -0.41rem;
+  top: 0.35rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--admin-accent);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+
+.txBody {
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: var(--admin-accent-softer);
+  border: 1px solid var(--admin-border-inner);
+}
+
+.txTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+}
+
+.txProvider {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--admin-text);
+}
+
+.txTime {
+  font-size: 0.78rem;
+  color: var(--admin-muted);
+}
+
+.txStatus {
+  display: inline-block;
+  margin-top: 0.45rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.txOk {
+  background: rgba(61, 154, 98, 0.14);
+  color: #1a5c36;
+}
+
+.txPending {
+  background: rgba(212, 160, 18, 0.18);
+  color: #7a5500;
+}
+
+.txFail {
+  background: rgba(201, 74, 92, 0.14);
+  color: #8f2434;
+}
+
+.txNeutral {
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+}
+
+.productsSection {
+  margin-top: 1.35rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: 0 4px 20px rgba(40, 53, 72, 0.06);
+}
+
+.productsSectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.itemCount {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+}
+
+.lineList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/**
+ * Một dòng SP: ảnh | tên + chip + SKU | Đơn giá | SL | Thành tiền (3 cột: nhãn giữa, số căn phải; thành tiền sát đáy phải).
+ */
+.lineItem {
+  display: grid;
+  grid-template-columns:
+    4.25rem minmax(0, 1fr) minmax(6.5rem, 1fr) minmax(3.25rem, 0.48fr) minmax(7.25rem, 1fr);
+  grid-template-rows: auto;
+  column-gap: 0.85rem;
+  row-gap: 0;
+  align-items: stretch;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border-inner);
+  background: color-mix(in srgb, var(--admin-accent-softer) 88%, var(--admin-surface));
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.lineItem:hover {
+  background: color-mix(in srgb, var(--admin-accent-soft) 35%, var(--admin-surface));
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+.lineThumb {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  width: 4.25rem;
+  height: 4.25rem;
+  min-width: 4.25rem;
+  min-height: 4.25rem;
+  flex-shrink: 0;
+  align-self: start;
+  justify-self: start;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--admin-table-header-bg);
+  border: 1px solid var(--admin-border-inner);
+}
+
+.lineThumbImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lineThumbPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--admin-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gridProductCol {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  padding-right: 0.65rem;
+  border-right: 1px dotted var(--admin-border-inner);
+}
+
+.gridProductCol > .productLink:first-child {
+  min-height: 1.35rem;
+}
+
+/* Trang chi tiết đơn đầy đủ: SKU một hàng riêng dưới chip (panel vẫn gộp chip + SKU một hàng). */
+.gridProductCol > .lineSkuMono {
+  display: block;
+  width: 100%;
+  margin-top: 0.2rem;
+}
+
+.lineMetricsRow {
+  display: contents;
+}
+
+.lineColUnit,
+.lineColQty,
+.lineColTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.38rem;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-top: 0.12rem;
+}
+
+.lineColUnit .numLabel,
+.lineColQty .numLabel,
+.lineColTotal .numLabel {
+  width: 100%;
+  text-align: start;
+}
+
+.lineColUnit .colPriceValue,
+.lineColQty .colQtyValue {
+  width: 100%;
+  text-align: start;
+}
+
+.lineColUnit {
+  padding-right: 0.55rem;
+  border-right: 1px dotted var(--admin-border-inner);
+}
+
+.lineColQty {
+  padding-inline: 0.45rem;
+  border-right: 1px dotted var(--admin-border-inner);
+}
+
+.lineColTotal {
+  padding-left: 0.35rem;
+}
+
+/* Chỉ khi .lineMetricsRow dùng display: contents — các ô là con trực tiếp của .lineItem */
+.lineItem > .lineColUnit {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.lineItem > .lineColQty {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.lineItem > .lineColTotal {
+  grid-column: 5;
+  grid-row: 1;
+}
+
+.lineColTotal .colTotalValue {
+  width: 100%;
+  text-align: start;
+}
+
+.productLink {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--admin-text);
+  text-decoration: none;
+  line-height: 1.35;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.productLink:hover {
+  color: var(--admin-accent-strong);
+  text-decoration: underline;
+}
+
+/* Chip màu / kích thước + SKU cùng hàng, SKU ngay sau chip (không đẩy về phải) */
+.variantChipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.variantChipsRow .variantChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.variantChipsRow .lineSkuMono {
+  flex: 0 1 auto;
+  text-align: start;
+  word-break: break-all;
+}
+
+.variantChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(61, 139, 196, 0.14);
+  color: #154a72;
+  border: 1px solid rgba(61, 139, 196, 0.22);
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+}
+
+.chipDim {
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: var(--admin-surface);
+  color: var(--admin-text);
+  border: 1px solid var(--admin-border-inner);
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+}
+
+.lineSkuMono {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  color: var(--admin-muted);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
+.numLabel {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+}
+
+.colPriceValue,
+.colQtyValue {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  letter-spacing: -0.02em;
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+}
+
+.colTotalValue {
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--admin-accent-strong);
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.currencyMark {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+@media (max-width: 720px) {
+  .lineItem {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: 0.75rem;
+    row-gap: 0.5rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .lineThumb {
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .gridProductCol {
+    grid-column: 2;
+    grid-row: 1;
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .lineMetricsRow {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 0.55rem;
+    padding-top: 0.55rem;
+    border-top: 1px dotted var(--admin-border-inner);
+  }
+
+  .lineColUnit,
+  .lineColQty,
+  .lineColTotal {
+    grid-column: auto;
+    grid-row: auto;
+    padding: 0;
+    border-right: none;
+    border-left: none;
+  }
+
+  .lineColQty {
+    border-left: 1px dotted var(--admin-border-inner);
+    border-right: 1px dotted var(--admin-border-inner);
+    padding-inline: 0.5rem;
+  }
+
+  .lineColTotal .colTotalValue {
+    margin-top: 0;
+  }
+}
+
+.statusPill {
+  display: inline-flex;
+  max-width: 100%;
+  width: min(18rem, 100%);
+}
+
+/* Mã đơn + Select cùng hàng (panel chi tiết nhanh) */
+.orderHeadRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.orderHeadRow .meta {
+  margin-top: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.orderHeadRow .statusPill {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: min(16rem, 100%);
+}
+
+.statusSelectShell {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* OrderStatusSelect = Ant Design Select — style .ant-select-selector (giống admin-orders.module). */
+.statusSelect:global(.ant-select) {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+.statusSelect:global(.ant-select .ant-select-selector) {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--admin-border-inner) !important;
+  background: var(--admin-surface) !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  color: var(--admin-text) !important;
+  cursor: pointer;
+  min-height: 2.35rem !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+/* Ant Design 6 (.ant-select-content + .ant-select-suffix) */
+.statusSelect:global(.ant-select .ant-select-content) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  justify-content: flex-start !important;
+  text-align: start !important;
+}
+
+.statusSelect:global(.ant-select .ant-select-suffix) {
+  flex: none !important;
+}
+
+.statusSelect:global(.ant-select .ant-select-selection-wrap) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.statusSelect:global(.ant-select .ant-select-selection-item),
+.statusSelect:global(.ant-select .ant-select-selection-placeholder) {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+  text-align: start !important;
+}
+
+.statusSelect:global(.ant-select-single.ant-select-show-arrow .ant-select-selector) {
+  padding-inline-end: 0.65rem !important;
+}
+
+.statusPill[data-status="COMPLETED"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #3d9a62 !important;
+  background: #f3faf6 !important;
+  border-color: rgba(61, 154, 98, 0.35) !important;
+  color: #1a5c36 !important;
+}
+
+.statusPill[data-status="FAILED"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #991b1b !important;
+  background: #fef2f2 !important;
+  border-color: rgba(153, 27, 27, 0.38) !important;
+  color: #7f1d1d !important;
+}
+
+.statusPill[data-status="CANCELLED"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #94a3b8 !important;
+  background: #f8fafc !important;
+  border-color: rgba(100, 116, 139, 0.45) !important;
+  color: #475569 !important;
+}
+
+.statusPill[data-status="RETURNED"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #c2410c !important;
+  background: #fff7ed !important;
+  border-color: rgba(194, 65, 12, 0.38) !important;
+  color: #9a3412 !important;
+}
+
+.statusPill[data-status="REFUNDED"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #be123c !important;
+  background: #fff1f2 !important;
+  border-color: rgba(190, 18, 60, 0.35) !important;
+  color: #9f1239 !important;
+}
+
+.statusPill[data-status="PENDING"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #d4a012 !important;
+  background: #fffbf0 !important;
+  border-color: rgba(212, 160, 18, 0.4) !important;
+  color: #7a5500 !important;
+}
+
+.statusPill[data-status="PAID"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #0f766e !important;
+  background: #ecfdf5 !important;
+  border-color: rgba(15, 118, 110, 0.38) !important;
+  color: #115e59 !important;
+}
+
+.statusPill[data-status="PROCESSING"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #6d28d9 !important;
+  background: #f5f3ff !important;
+  border-color: rgba(109, 40, 217, 0.35) !important;
+  color: #5b21b6 !important;
+}
+
+.statusPill[data-status="SHIPPING"] .statusSelect:global(.ant-select .ant-select-selector) {
+  border-left: 4px solid #0369a1 !important;
+  background: #e0f2fe !important;
+  border-color: rgba(3, 105, 161, 0.38) !important;
+  color: #0c4a6e !important;
+}
+
+.statusSelect:global(.ant-select-focused .ant-select-selector) {
+  border-color: var(--admin-accent-border) !important;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 0 0 3px var(--admin-accent-soft) !important;
+}
+
+.statusSelect:global(.ant-select-disabled) {
+  opacity: 0.62;
+  cursor: wait;
+}
+
+/* --- Panel phải “Xem / sửa đơn”: gọn chiều cao, địa chỉ xuống dòng, chọn copy text --- */
+.panelOrderBody {
+  user-select: text;
+}
+
+.panelOrderBody .meta {
+  margin-top: 0.35rem;
+  line-height: 1.35;
+}
+
+.panelOrderBody .orderHeadRow .meta {
+  margin-top: 0;
+}
+
+.panelOrderBody .card {
+  /* Tránh min-height: 100% của .card kéo thẻ cao bằng vùng scroll → khoảng trắng lớn */
+  min-height: 0;
+  padding: 0.85rem 1rem;
+}
+
+.panelOrderBody section.card {
+  margin-top: 0.65rem;
+}
+
+.panelOrderBody .cardHead {
+  margin-bottom: 0.55rem;
+  padding-bottom: 0.5rem;
+}
+
+.panelOrderBody .defRow dd {
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.panelOrderBody .productsSection {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.85rem 0.85rem;
+}
+
+/* Popup panel: dòng SP gọn — meta một hàng (cuộn ngang nếu cần), SL / Đơn giá / Thành tiền một hàng */
+.panelOrderBody .productsSectionHead {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
+/* Panel hẹp: ảnh + tên/SKU, rồi một hàng 3 cột (đơn giá | SL | thành tiền) */
+.panelOrderBody .lineItem {
+  grid-template-columns: 3.15rem minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.65rem;
+  row-gap: 0.45rem;
+  padding: 0.6rem 0.7rem;
+}
+
+.panelOrderBody .lineThumb {
+  width: 3.15rem;
+  height: 3.15rem;
+  min-width: 3.15rem;
+  min-height: 3.15rem;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+
+.panelOrderBody .gridProductCol {
+  grid-column: 2;
+  grid-row: 1;
+  border-right: none;
+  padding-right: 0;
+}
+
+.panelOrderBody .lineMetricsRow {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px dotted var(--admin-border-inner);
+}
+
+.panelOrderBody .lineColUnit,
+.panelOrderBody .lineColQty,
+.panelOrderBody .lineColTotal {
+  grid-column: auto;
+  grid-row: auto;
+  padding: 0;
+  border-right: none;
+}
+
+.panelOrderBody .lineColQty {
+  border-left: 1px dotted var(--admin-border-inner);
+  border-right: 1px dotted var(--admin-border-inner);
+  padding-inline: 0.4rem;
+}
+
+.panelOrderBody .lineColTotal .colTotalValue {
+  margin-top: 0;
+}
+
+.panelOrderBody .productLink {
+  font-size: 0.86rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panelOrderBody .variantChips {
+  flex-wrap: wrap;
+}
+
+.panelOrderBody .chip,
+.panelOrderBody .chipDim {
+  font-size: 0.7rem;
+  padding: 0.16rem 0.42rem;
+}
+
+.panelOrderBody .colTotalValue {
+  font-size: 0.95rem;
+}
+
+.panelOrderBody .colPriceValue,
+.panelOrderBody .colQtyValue {
+  font-size: 0.82rem;
+}
+
+.panelOrderBody .numLabel {
+  font-size: 0.58rem;
+}
+
+/* Nhãn đã chọn trong Select — token Ant đôi khi làm chữ quá nhạt so với viền pill */
+.statusSelect:global(.ant-select .ant-select-selection-item) {
+  color: inherit !important;
+  font-weight: inherit !important;
+}

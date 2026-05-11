@@ -1,0 +1,195 @@
+.hero {
+  margin-bottom: 1.25rem;
+}
+
+.heroTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.invoiceBtn {
+  flex-shrink: 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.heroTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.heroMeta {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.statusPill {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: rgba(26, 22, 18, 0.08);
+  color: #1a1612;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.section {
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.sectionTitle {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.defList {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.defList dt {
+  margin: 0 0 0.15rem;
+  font-size: 0.78rem;
+  color: rgba(26, 22, 18, 0.5);
+}
+
+.defList dd {
+  margin: 0 0 0.65rem;
+}
+
+.defList dd:last-child {
+  margin-bottom: 0;
+}
+
+.addrBlock {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.itemsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.itemsTable th,
+.itemsTable td {
+  padding: 0.5rem 0.35rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.itemsTable th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(26, 22, 18, 0.5);
+}
+
+.productLink {
+  color: #1a1612;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.productLink:hover {
+  color: #c45a2a;
+}
+
+.variantHint {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.txList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.txRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+  font-size: 0.86rem;
+}
+
+.txRow:last-child {
+  border-bottom: none;
+}
+
+.txBadge {
+  display: inline-block;
+  padding: 0.12rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.txOk {
+  background: rgba(34, 139, 34, 0.14);
+  color: rgb(25, 95, 35);
+}
+
+.txPending {
+  background: rgba(180, 140, 40, 0.15);
+  color: rgb(120, 85, 20);
+}
+
+.txFail {
+  background: rgba(200, 60, 40, 0.12);
+  color: rgb(140, 45, 30);
+}
+
+.txNeutral {
+  background: rgba(26, 22, 18, 0.08);
+  color: rgba(26, 22, 18, 0.75);
+}
+
+.err {
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(200, 60, 40, 0.1);
+  color: #5c2018;
+}

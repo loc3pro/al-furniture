@@ -1,0 +1,40 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid rgba(139, 115, 85, 0.25);
+  border-top-color: var(--color-accent, #8b7355);
+  animation: spin 0.75s linear infinite;
+  vertical-align: middle;
+}
+
+.inheritColor {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+}
+
+.sm {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.md {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.lg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

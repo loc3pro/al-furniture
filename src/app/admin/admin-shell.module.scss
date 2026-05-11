@@ -1,0 +1,1821 @@
+/* Admin — v1 Sellzy-aligned: vùng chính tối, thẻ trắng nổi; sidebar giữ teal; [data-admin-dark] = tối */
+.shell {
+  --admin-pill-radius: 999px;
+  --admin-field-radius: 12px;
+  --admin-control-radius: var(--admin-field-radius);
+  --admin-control-height: 44px;
+  --admin-table-action-w: 7.35rem;
+  --admin-table-action-h: 2.125rem;
+  --admin-control-fill: #f5f6f7;
+  /* Vùng chính dưới header — mint nhạt kiểu Sellzy */
+  --admin-main-canvas: #eef7f2;
+  --admin-card-radius: 28px;
+  --admin-card-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --admin-price-success: #00a651;
+  --admin-settings-tab-rule: #c9a227;
+
+  --admin-bg: var(--admin-main-canvas);
+  --admin-surface: #ffffff;
+  --admin-sidebar-bg: #0a4d52;
+  --admin-sidebar-border: rgba(255, 255, 255, 0.12);
+  --admin-sidebar-fg: rgba(255, 255, 255, 0.95);
+  --admin-sidebar-muted: rgba(255, 255, 255, 0.7);
+  --admin-sidebar-hover-bg: rgba(255, 255, 255, 0.08);
+  --admin-sidebar-active-bg: #d1fae5;
+  --admin-sidebar-active-fg: #063d42;
+  --admin-sidebar-brand-title: #ffffff;
+  --admin-sidebar-brand-sub: #f4d03f;
+  --admin-nav-group-color: #f4d03f;
+  --admin-nav-tree-line: rgba(255, 255, 255, 0.35);
+
+  --admin-border: #dce8e4;
+  --admin-border-inner: #cfe0d9;
+
+  --admin-text: #0f2622;
+  --admin-muted: #717171;
+
+  --admin-accent: #007a64;
+  --admin-accent-strong: #005a49;
+  --admin-accent-soft: rgba(0, 122, 100, 0.18);
+  --admin-accent-softer: rgba(0, 122, 100, 0.08);
+  --admin-accent-border: rgba(0, 122, 100, 0.35);
+
+  /* Menu sidebar: pill mint trên nền teal */
+  --admin-nav-active-bg: var(--admin-sidebar-active-bg);
+  --admin-nav-active-fg: var(--admin-sidebar-active-fg);
+  --admin-nav-hover-bg: var(--admin-sidebar-hover-bg);
+
+  --admin-btn-primary-bg: var(--admin-accent);
+  --admin-btn-primary-bg-hover: var(--admin-accent-strong);
+  --admin-btn-primary-text: #ffffff;
+
+  --admin-chrome-search-fill: #f5f6f7;
+
+  --admin-table-header-bg: #eef2f6;
+  --admin-table-header-text: #495057;
+  --admin-table-row: #ffffff;
+  --admin-table-row-alt: #fafbfc;
+  --admin-table-hover: #f1f5f9;
+  --admin-table-border: #ededed;
+
+  --admin-status-done: #6db88a;
+  --admin-status-warn: #e0bc4a;
+  --admin-status-progress: #5ba8d9;
+  --admin-status-ship: #7a9eb8;
+  --admin-status-neutral: #8fa3b0;
+
+  /* Thanh cuộn — một màu duy nhất giống thumb trên menu sidebar (pha active + nền sidebar) */
+  --admin-scrollbar-track: transparent;
+  --admin-scrollbar-thumb: color-mix(in srgb, var(--admin-sidebar-active-bg) 58%, var(--admin-sidebar-bg));
+  --admin-scrollbar-thumb-hover: color-mix(in srgb, #ffffff 38%, var(--admin-sidebar-bg));
+
+  display: flex;
+  flex-direction: column;
+  /* Khóa chiều cao viewport — shell flex + sidebar fixed */
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  background: var(--admin-main-canvas) !important;
+  color: var(--admin-text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/**
+ * Thanh cuộn toàn vùng admin — cùng `--admin-scrollbar-thumb` với `.navScroll` (sidebar).
+ * WebKit: áp vào mọi descendant có overflow scroll (không kế thừa pseudo-element).
+ */
+.shell :global(*) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--admin-scrollbar-thumb) var(--admin-scrollbar-track);
+}
+
+.shell :global(*)::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.shell :global(*)::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.shell :global(*)::-webkit-scrollbar-track {
+  background: var(--admin-scrollbar-track);
+}
+
+.shell :global(*)::-webkit-scrollbar-thumb {
+  background: var(--admin-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+.shell :global(*)::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-scrollbar-thumb-hover);
+}
+
+/**
+ * Ô gõ / textarea / select native — nền surface (trắng hoặc theo dark theme), không dính nền mint canvas.
+ */
+.shell :global(input[type="text"]),
+.shell :global(input[type="search"]),
+.shell :global(input[type="email"]),
+.shell :global(input[type="url"]),
+.shell :global(input[type="number"]),
+.shell :global(input[type="password"]),
+.shell :global(input[type="tel"]),
+.shell :global(input[type="date"]),
+.shell :global(input[type="datetime-local"]),
+.shell :global(input[type="month"]),
+.shell :global(input[type="week"]),
+.shell :global(input:not([type])),
+.shell :global(textarea),
+.shell :global(select:not([multiple])) {
+  background-color: var(--admin-surface, #fff);
+}
+
+/**
+ * `globals.scss` — `.field input:focus` dùng `outline-offset: 1px` + `var(--color-accent)` (shop).
+ * Trong admin tạo khe sáng giữa border ô và ring, trông như viền đôi / lệch khi hover hoặc focus.
+ * Ring focus admin: sát mép, màu theo theme (`--admin-accent` đổi ở dark mode).
+ */
+.shell :global(.field input:focus),
+.shell :global(.field input:focus-visible),
+.shell :global(.field textarea:focus),
+.shell :global(.field textarea:focus-visible),
+.shell :global(.field select:focus),
+.shell :global(.field select:focus-visible) {
+  outline: 2px solid var(--admin-accent, #007a64);
+  outline-offset: 0;
+}
+
+.shellBanner {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 30;
+}
+
+.shellSiderBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 185;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.42);
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shell[data-admin-mobile-drawer="true"] .shellSiderBackdrop {
+  display: block;
+}
+
+/* Hàng dưới banner: Sider + cột chính — flex để .mainColumn full chiều cao còn lại */
+.shellBody {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+.shellSider {
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.siderInner {
+  position: fixed;
+  left: 0;
+  top: var(--admin-shell-banner-h, 0px);
+  z-index: 190;
+  display: flex;
+  flex-direction: column;
+  width: var(--admin-sider-inner-w, 264px);
+  max-width: min(var(--admin-sider-inner-w, 264px), 100vw);
+  height: calc(100dvh - var(--admin-shell-banner-h, 0px));
+  max-height: calc(100dvh - var(--admin-shell-banner-h, 0px));
+  min-height: 0;
+  /* visible: nút collapse translate(50%) không bị cắt bởi mép phải */
+  overflow-x: visible;
+  overflow-y: visible;
+  box-sizing: border-box;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--admin-sidebar-bg);
+  border-right: 1px solid var(--admin-sidebar-border);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.22s ease,
+    visibility 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+/* Nút tròn nửa nằm trên mép phải sidebar — Sellzy */
+.siderEdgeCollapse {
+  display: none;
+  position: absolute;
+  z-index: 25;
+  top: calc(0.35rem + 2.1rem);
+  right: 0;
+  transform: translate(50%, 0);
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(15, 23, 42, 0.55);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #063d42;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 992px) {
+  .siderEdgeCollapse {
+    display: inline-flex;
+  }
+}
+
+.siderEdgeCollapse:hover {
+  background: #f5fbf8;
+  color: #002a24;
+}
+
+.shell[data-admin-mobile-drawer="true"] .siderInner {
+  z-index: 200;
+  box-shadow: 6px 0 32px rgba(0, 0, 0, 0.22);
+}
+
+.shellSider[data-admin-sider-collapsed="true"] .siderInner {
+  transform: translate3d(-100%, 0, 0);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 992px) {
+  .shellSider[data-admin-sider-collapsed="true"] .siderInner {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+    width: var(--admin-sider-rail-w, 72px);
+    max-width: min(var(--admin-sider-rail-w, 72px), 100vw);
+  }
+}
+
+.shellSider[data-admin-sider-collapsed="false"] .siderInner {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.siderBrand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  // margin: 0 0.35rem 0.85rem;
+  padding: 1rem 0.5rem 0.85rem;
+  /* chừa chỗ cho nút collapse nửa vòng tròn nằm ngoài mép */
+  padding-right: max(1.35rem, calc(env(safe-area-inset-right, 0px) + 1.1rem));
+  border-bottom: 1px solid var(--admin-sidebar-border);
+  background-color: #00695c;
+}
+
+.siderBrandMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.shellSiderCompact .siderBrand {
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.55rem;
+}
+
+.siderBrandTitle {
+  display: block;
+  font-weight: 800;
+  font-size: 1.12rem;
+  letter-spacing: -0.03em;
+  color: var(--admin-sidebar-brand-title);
+  line-height: 1.2;
+}
+
+.siderBrandSub {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--admin-sidebar-brand-sub);
+  margin-top: 0.25rem;
+}
+
+.siderBrandLink {
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.siderBrandLink:focus-visible {
+  outline: 2px solid var(--admin-accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.siderBrandRow,
+.siderBrandRowSolo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.siderBrandRow {
+  flex-wrap: wrap;
+}
+
+.siderBrandRowSolo {
+  flex-wrap: nowrap;
+}
+
+.siderBrandLogo {
+  display: block;
+  max-height: 2rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.siderBrandWordmark {
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: -0.03em;
+  color: var(--admin-sidebar-fg);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.siderStoreName {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  color: var(--admin-nav-group-color);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.navScroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--admin-scrollbar-thumb) var(--admin-scrollbar-track);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--admin-scrollbar-thumb);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--admin-scrollbar-thumb-hover);
+  }
+}
+
+.navSection {
+  min-width: 0;
+}
+
+.navGroupTitle {
+  margin: 0;
+  padding: 10px 14px 6px;
+  color: var(--admin-nav-group-color);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.navList {
+  list-style: none;
+  margin: 0 0 0.35rem;
+  padding: 0;
+}
+
+.navItemText {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.navRailSep {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0 0.45rem;
+}
+
+.navRailSepDots {
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.35);
+  user-select: none;
+}
+
+.navBranch {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navBranchHead {
+  width: calc(100% - 16px);
+  margin: 3px 8px;
+  padding: 0.6rem 0.65rem 0.6rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--admin-sidebar-fg);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.navBranchHeadOpen {
+  color: var(--admin-sidebar-fg);
+}
+
+.navBranchHeadActive {
+  background: var(--admin-sidebar-active-bg);
+  color: var(--admin-nav-active-fg);
+  font-weight: 600;
+}
+
+.navBranchHeadActive .navIcon {
+  color: var(--admin-nav-active-fg);
+}
+
+.navBranchChevron {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.55);
+  transition: transform 0.2s ease;
+}
+
+.navBranchHeadActive .navBranchChevron {
+  color: var(--admin-nav-active-fg);
+}
+
+.navBranchChevronOpen {
+  transform: rotate(90deg);
+}
+
+.navSubList {
+  list-style: none;
+  margin: 0 8px 8px;
+  padding: 2px 0 4px 0;
+  border-left: 2px solid var(--admin-nav-tree-line);
+  margin-left: 1.65rem;
+}
+
+.navSubLink {
+  display: flex;
+  align-items: center;
+  margin: 2px 0 2px 10px;
+  padding: 0.38rem 0.55rem 0.38rem 0.75rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 500;
+  position: relative;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Tâm chấm trùng giữa đường kẻ 2px của .navSubList: 10px margin + 1px */
+.navSubLink::before {
+  content: "";
+  position: absolute;
+  left: calc(-10px - 1px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.navSubLink:hover {
+  background: var(--admin-sidebar-hover-bg);
+  color: var(--admin-nav-group-color);
+}
+
+.navSubLink:hover::before {
+  border-color: var(--admin-nav-group-color);
+}
+
+.navSubLinkActive {
+  font-weight: 600;
+  color: var(--admin-nav-group-color);
+}
+
+.navSubLinkActive::before {
+  border: none;
+  width: 7px;
+  height: 7px;
+  background: var(--admin-nav-group-color);
+}
+
+.navSubLink:focus-visible {
+  outline: 2px solid var(--admin-nav-group-color);
+  outline-offset: 2px;
+  color: var(--admin-nav-group-color);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 3px 8px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  color: var(--admin-sidebar-fg);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.navItem:hover {
+  background: var(--admin-sidebar-hover-bg);
+  color: var(--admin-sidebar-fg);
+}
+
+.navItemActive {
+  background: var(--admin-sidebar-active-bg);
+  color: var(--admin-nav-active-fg);
+  font-weight: 600;
+}
+
+.navIcon {
+  display: inline-flex;
+  width: 1.15rem;
+  flex-shrink: 0;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.navItemActive .navIcon {
+  color: var(--admin-nav-active-fg);
+}
+
+.shellSider[data-admin-sider-rail="true"] .navGroupTitle {
+  display: none;
+}
+
+.shellSider[data-admin-sider-rail="true"] .navItemText {
+  display: none;
+}
+
+.shellSider[data-admin-sider-rail="true"] .navItem,
+.shellSider[data-admin-sider-rail="true"] .navItem.navItemActive {
+  justify-content: center;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+}
+
+.shellSider[data-admin-sider-rail="true"] .navIcon {
+  width: auto;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrand {
+  justify-content: center;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandMain {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandSub {
+  display: none;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandTitle {
+  font-size: 0.68rem;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandLogo {
+  max-height: 1.85rem;
+  margin: 0 auto;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandRow,
+.shellSider[data-admin-sider-rail="true"] .siderBrandRowSolo {
+  justify-content: center;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderBrandWordmark {
+  display: none;
+}
+
+.shellSider[data-admin-sider-rail="true"] .siderStoreName {
+  display: none;
+}
+
+/* Khối user — sidebar mở rộng (gọn hơn) */
+.siderAdminStrip {
+  flex-shrink: 0;
+  padding: 0.4rem 0.5rem 0.5rem;
+  border-top: 1px solid var(--admin-sidebar-border);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.siderUserCard {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.3rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.siderUserTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.siderUserLine1 {
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: var(--admin-sidebar-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siderUserLine2 {
+  font-size: 0.68rem;
+  color: var(--admin-sidebar-muted);
+}
+
+.siderFooterRail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.35rem 0.5rem;
+}
+
+.siderFooterIconBtn,
+.siderFooterIconBtnActive {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: background 0.15s ease;
+}
+
+.siderFooterIconBtn:hover {
+  background: var(--admin-sidebar-hover-bg);
+  color: #fff;
+}
+
+.siderFooterIconBtnActive {
+  background: var(--admin-sidebar-active-bg);
+  color: var(--admin-nav-active-fg);
+}
+
+.siderFooterRailAvatar {
+  margin-top: 0.15rem;
+}
+
+.siderFooterRailAvatar .siderUserAvatar {
+  width: 34px;
+  height: 34px;
+  font-size: 0.82rem;
+}
+
+.navBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.28rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: #e6b400;
+  color: #1a1a1a;
+}
+
+.menuItemRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.siderFooterChatRow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.siderFooter {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 0.85rem 0.5rem 0.35rem;
+  border-top: 1px solid var(--admin-sidebar-border);
+}
+
+.siderFooterStack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.siderFooterSettings,
+.siderFooterSettingsActive {
+  display: block;
+  text-align: center;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.siderFooterSettings {
+  color: var(--admin-sidebar-muted);
+  background: transparent;
+}
+
+.siderFooterSettings:hover {
+  background: var(--admin-sidebar-hover-bg);
+  color: var(--admin-sidebar-fg);
+}
+
+.siderFooterSettingsActive {
+  background: var(--admin-sidebar-hover-bg);
+  color: var(--admin-sidebar-active-bg);
+  border: 1px solid var(--admin-sidebar-border);
+}
+
+.siderUserFoot {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.35rem 0;
+  border-top: 1px solid var(--admin-sidebar-border);
+}
+
+.siderUserAvatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+  background: var(--admin-accent, #007a64);
+  overflow: hidden;
+}
+
+.siderUserAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.siderUserMeta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.siderUserName {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--admin-sidebar-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siderUserRole {
+  font-size: 0.68rem;
+  color: var(--admin-sidebar-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siderLogout {
+  width: 100%;
+  text-align: center;
+  padding: 0.55rem 0.65rem !important;
+  border-radius: 999px !important;
+  color: var(--admin-sidebar-muted) !important;
+  background: var(--admin-sidebar-hover-bg) !important;
+  border: 1px solid transparent !important;
+  font-weight: 600 !important;
+}
+
+.siderLogout:hover {
+  color: var(--admin-sidebar-fg) !important;
+  background: var(--admin-sidebar-border) !important;
+}
+
+.siderHint {
+  margin: 0.35rem 0 0;
+  font-size: 0.68rem;
+  color: var(--admin-sidebar-muted);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.mainColumn {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--admin-main-canvas);
+  margin-left: var(--admin-main-offset, 0px);
+  transition: margin-left 0.2s ease;
+}
+
+.chromeHeader {
+  flex-shrink: 0;
+  line-height: 1.4;
+  padding: 0 20px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.chromeHeaderInner {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+@media (max-width: 520px) {
+  .chromeUserText {
+    display: none;
+  }
+
+  .chromeHeaderRight {
+    gap: 8px;
+  }
+}
+
+.chromeHeaderLeft {
+  flex: 1 1 240px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.chromeHeaderRight {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.chromeMenuBtn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--admin-text);
+  cursor: pointer;
+}
+
+.chromeMenuBtn:hover {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.chromeSearchForm {
+  flex: 1;
+  min-width: 0;
+  max-width: min(480px, 100%);
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--admin-chrome-search-fill, #f5f6f7);
+}
+
+.chromeSearchIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0.85rem;
+  color: var(--admin-muted);
+  pointer-events: none;
+}
+
+.chromeSearchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  padding: 0 0.5rem 0 0.35rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--admin-text);
+  min-height: 42px;
+}
+
+.chromeSearchInput:focus {
+  outline: none;
+}
+
+.chromeSearchSubmit {
+  flex-shrink: 0;
+  border: none;
+  padding: 0 1.1rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  background: var(--admin-btn-primary-bg, #00695c);
+  color: #fff;
+  border-radius: 0 999px 999px 0;
+}
+
+.chromeSearchSubmit:hover {
+  background: var(--admin-btn-primary-bg-hover, #005a49);
+}
+
+.chromeIconBtn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 40px;
+  padding: 0 0.65rem;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--admin-muted);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+.chromeIconBtn:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--admin-text);
+}
+
+.chromeIconLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.chromeBellText {
+  font-weight: 600;
+}
+
+.chromeUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chromeUserText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.chromeUserName {
+  display: block;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chromeUserRole {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--admin-muted);
+}
+
+.chromeLang {
+  position: relative;
+}
+
+.chromeLangSummary {
+  list-style: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 0.65rem;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--admin-muted);
+  cursor: pointer;
+}
+
+.chromeLangSummary::-webkit-details-marker {
+  display: none;
+}
+
+.chromeLangSummary:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--admin-text);
+}
+
+.chromeLangMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 10rem;
+  padding: 0.35rem 0;
+  margin: 0;
+  list-style: none;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border-inner, #cfe0d9);
+  background: var(--admin-surface, #fff);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+}
+
+.chromeLangMenu li button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 0.45rem 0.85rem;
+  font: inherit;
+  cursor: pointer;
+  color: var(--admin-text);
+}
+
+.chromeLangMenu li button:hover:not(:disabled) {
+  background: var(--admin-table-hover);
+}
+
+.chromeLangMenu li button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chromeAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #fff;
+  background: var(--admin-accent, #008080);
+}
+
+.chromeAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chromeChatBadge {
+  position: relative;
+  display: inline-flex;
+}
+
+.chromeChatCount {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1.1rem;
+  text-align: center;
+  background: #e6b400;
+  color: #1a1a1a;
+}
+
+/* Chế độ gọn: chữ nhỏ hơn, ít padding — đồng bộ footer sidebar · Khu admin */
+.shell[data-admin-density="compact"] .main {
+  --admin-section-pad-x: 0.85rem;
+  --admin-below-chrome: 0.75rem;
+  padding: 0rem 0 1.35rem;
+}
+
+.shell[data-admin-density="compact"] .mainViewport {
+  font-size: 0.9375rem;
+}
+
+/* Giảm chuyển động — nút / sticky không nhảy nhẹ */
+.shell[data-admin-motion="reduced"] :global(.btn.btn--primary:hover:not(:disabled)) {
+  transform: none;
+}
+
+.shell[data-admin-motion="reduced"] :global(.btn.btn--ghost:hover:not(:disabled)) {
+  transform: none;
+}
+
+.shell[data-admin-dark="true"] {
+  --admin-settings-tab-rule: #b8922e;
+
+  --admin-main-canvas: #0d1218;
+  --admin-control-fill: #1a222c;
+  --admin-chrome-search-fill: #1a222c;
+
+  --admin-bg: #121a24;
+  --admin-surface: #1a2430;
+  --admin-sidebar-bg: #0f1a22;
+  --admin-sidebar-border: rgba(255, 255, 255, 0.08);
+  --admin-sidebar-fg: rgba(255, 255, 255, 0.92);
+  --admin-sidebar-muted: rgba(255, 255, 255, 0.65);
+  --admin-sidebar-hover-bg: rgba(255, 255, 255, 0.07);
+  --admin-sidebar-active-bg: #1e4d47;
+  --admin-sidebar-active-fg: #e8fdf8;
+  --admin-sidebar-brand-title: #ffffff;
+  --admin-sidebar-brand-sub: #e6c35c;
+  --admin-nav-group-color: #d4b85c;
+  --admin-nav-tree-line: rgba(255, 255, 255, 0.22);
+
+  --admin-border: #2a3544;
+  --admin-border-inner: #243140;
+
+  --admin-text: #e8f0f7;
+  --admin-muted: #9db0c0;
+
+  --admin-accent: #4da3e6;
+  --admin-accent-strong: #6ab8f0;
+  --admin-accent-soft: #1e3a52;
+  --admin-accent-softer: #152330;
+  --admin-accent-border: #3d6a8c;
+
+  --admin-nav-active-bg: var(--admin-sidebar-active-bg);
+  --admin-nav-active-fg: var(--admin-sidebar-active-fg);
+  --admin-nav-hover-bg: var(--admin-sidebar-hover-bg);
+
+  --admin-btn-primary-bg: var(--admin-accent);
+  --admin-btn-primary-bg-hover: var(--admin-accent-strong);
+  --admin-btn-primary-text: #ffffff;
+
+  --admin-table-header-bg: #1e3346;
+  --admin-table-header-text: #c5d8e8;
+  --admin-table-row: #1a2430;
+  --admin-table-row-alt: #151f2a;
+  --admin-table-hover: #243548;
+  --admin-table-border: #2c3d50;
+
+  --admin-status-done: #5db883;
+  --admin-status-warn: #d4a832;
+  --admin-status-progress: #4a9fd4;
+  --admin-status-ship: #6a8fa8;
+  --admin-status-neutral: #7a8fa0;
+}
+
+.shell[data-admin-dark="true"] .chromeHeader {
+  background: var(--admin-surface);
+  border-bottom-color: var(--admin-border);
+}
+
+.shell[data-admin-dark="true"] .chromeSearchForm {
+  border-color: var(--admin-border-inner);
+}
+
+.shell[data-admin-dark="true"] .chromeSearchInput {
+  color: var(--admin-text);
+}
+
+.mainStage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  background: var(--admin-main-canvas);
+}
+
+.main {
+  --admin-section-pad-x: 1.1rem;
+  /* Khoảng cách giữa header/toolbar cố định và nội dung cuộn phía dưới */
+  --admin-below-chrome: 1rem;
+  width: 100%;
+  max-width: none;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0.35rem 0 max(0.35rem, env(safe-area-inset-bottom, 0px));
+  background: var(--admin-main-canvas);
+}
+
+/* Mọi trang admin con — flex + cuộn nội bộ do AdminPageLayout.scroll */
+.mainViewport {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Con trực tiếp (kể cả div bọc nhầm) phải co trong chiều cao main — không thì cuộn nhảy lên body, header trôi */
+.mainViewport > * {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Hàng tiêu đề: tiêu đề / mô tả trái — nút căn phải giữa dọc */
+/* Bọc quanh {@link AdminPagination} — dính đáy vùng cuộn; khoảng dọc thanh phân trang: 5px (xem PaginationBar .outer) */
+.shell :global(.adminPaginationSticky) {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+  padding-bottom: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  /* Thẻ cha (card) có thể đặt --admin-pagination-sticky-bg trùng nền card */
+  background: var(--admin-pagination-sticky-bg, var(--admin-main-canvas));
+}
+
+.shell :global(.adminPageHeaderRow) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  width: 100%;
+}
+
+.shell :global(.adminPageHeaderMain) {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.shell :global(.adminPageHeaderRow > .adminToolbar),
+.shell :global(.adminPageHeaderRow > .adminToolbar--end),
+.shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end) {
+  flex-shrink: 0;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+/* Toolbar / nút trên header — dùng chung */
+.shell :global(.adminToolbar) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shell :global(.adminToolbar--end) {
+  justify-content: flex-end;
+}
+
+.shell :global(.adminToolbarBtn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-sizing: border-box;
+  min-height: 2.375rem;
+  padding: 0.5rem 1rem;
+  /* Cùng chiều rộng tối thiểu trong một nhóm nút toolbar */
+  min-width: 9.25rem;
+}
+
+/* Base button design — dùng chung toàn admin */
+.shell :global(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.45rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--admin-pill-radius, 999px);
+  font-weight: 700;
+  line-height: 1.2;
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.shell :global(.btn:disabled) {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 420px) {
+  .shell :global(.adminToolbar .adminToolbarBtn) {
+    min-width: min(100%, 9.25rem);
+    flex: 1 1 auto;
+  }
+}
+
+/* Nút primary trong khu admin — dùng accent xanh thay màu shop */
+.shell :global(.btn.btn--primary) {
+  background: var(--admin-btn-primary-bg);
+  color: var(--admin-btn-primary-text);
+  border-radius: var(--admin-pill-radius, 999px);
+  box-shadow: 0 4px 14px rgba(0, 122, 100, 0.28);
+}
+
+.shell :global(.btn.btn--primary:hover:not(:disabled)) {
+  background: var(--admin-btn-primary-bg-hover);
+  transform: translateY(-1px);
+}
+
+.shell[data-admin-dark="true"] :global(.btn.btn--primary) {
+  box-shadow: 0 2px 12px rgba(77, 163, 230, 0.22);
+}
+
+/* Panel phải / form admin — ghost đồng bộ với theme */
+.shell :global(.btn.btn--ghost) {
+  border: 1px solid var(--admin-border-inner);
+  color: var(--admin-text);
+  background: var(--admin-surface);
+}
+
+.shell :global(.btn.btn--ghost:hover:not(:disabled)) {
+  background: var(--admin-table-hover);
+  border-color: var(--admin-border);
+}
+
+/* Hủy / đóng panel — hover cảnh báo (tách khỏi ghost mặc định) */
+.shell :global(.btn.adminCancelGhost.btn--ghost) {
+  border-color: rgba(180, 83, 9, 0.38);
+  color: #9a3412;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.shell :global(.btn.adminCancelGhost.btn--ghost:hover:not(:disabled)) {
+  background: rgba(251, 191, 36, 0.28);
+  border-color: rgba(154, 52, 18, 0.55);
+  color: #7c2d12;
+}
+
+.shell[data-admin-dark="true"] :global(.btn.adminCancelGhost.btn--ghost) {
+  color: #fcd34d;
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(180, 83, 9, 0.15);
+}
+
+.shell[data-admin-dark="true"] :global(.btn.adminCancelGhost.btn--ghost:hover:not(:disabled)) {
+  background: rgba(180, 83, 9, 0.28);
+  border-color: rgba(251, 191, 36, 0.55);
+  color: #fef3c7;
+}
+
+.shell :global(.btn.adminPanelGhostAccent.btn--ghost) {
+  border-color: var(--admin-accent-border);
+  color: var(--admin-accent-strong);
+  background: var(--admin-accent-softer);
+}
+
+.shell :global(.btn.adminPanelGhostAccent.btn--ghost:hover:not(:disabled)) {
+  background: var(--admin-accent-soft);
+}
+
+.shell :global(.btn.adminPanelGhostDanger.btn--ghost) {
+  border-color: rgba(184, 50, 50, 0.42);
+  color: #a83232;
+  background: rgba(184, 50, 50, 0.06);
+}
+
+.shell :global(.btn.adminPanelGhostDanger.btn--ghost:hover:not(:disabled)) {
+  background: rgba(184, 50, 50, 0.11);
+}
+
+.shell[data-admin-dark="true"] :global(.btn.adminPanelGhostDanger.btn--ghost) {
+  color: #f0a8a8;
+  border-color: rgba(240, 140, 140, 0.45);
+  background: rgba(184, 50, 50, 0.12);
+}
+
+/**
+ * Nút / link trong bảng admin — cùng kích thước, một dòng, text dài → …
+ * Dùng: `className="adminTableBtn"` (+ `adminTableBtn--start` căn trái; `adminTableBtnDanger` nút xóa).
+ */
+.shell :global(a.adminTableBtn) {
+  text-decoration: none;
+}
+
+.shell :global(.adminTableBtn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--admin-table-action-w);
+  min-width: var(--admin-table-action-w);
+  max-width: var(--admin-table-action-w);
+  height: var(--admin-table-action-h);
+  min-height: var(--admin-table-action-h);
+  max-height: var(--admin-table-action-h);
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.15;
+  font-family: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--admin-accent-border);
+  color: var(--admin-accent-strong);
+  background: var(--admin-accent-softer);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.shell :global(.adminTableBtn.adminTableBtn--start) {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.shell :global(.adminTableBtn:hover:not(:disabled)) {
+  background: var(--admin-accent-soft);
+}
+
+.shell :global(.adminTableBtn:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.shell :global(.adminTableBtnDanger) {
+  border-color: rgba(184, 50, 50, 0.42);
+  color: #a83232;
+  background: rgba(184, 50, 50, 0.06);
+}
+
+.shell :global(.adminTableBtnDanger:hover:not(:disabled)) {
+  background: rgba(184, 50, 50, 0.11);
+}
+
+.shell :global(.adminTableBtn .adminTableBtnLabel) {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.shell :global(.adminTableBtn.adminTableBtn--start .adminTableBtnLabel) {
+  text-align: start;
+}
+
+.shell :global(.db-table-actions) {
+  flex-wrap: nowrap;
+}
+
+.shell :global(.db-table-actions .db-btn) {
+  width: var(--admin-table-action-w);
+  min-width: var(--admin-table-action-w);
+  max-width: var(--admin-table-action-w);
+  height: var(--admin-table-action-h);
+  min-height: var(--admin-table-action-h);
+  max-height: var(--admin-table-action-h);
+  padding: 0 0.35rem;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: flex-start;
+}
+
+.shell :global(.db-table-actions .db-btn .adminTableBtnLabel) {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.shell[data-admin-dark="true"] :global(.adminTableBtn) {
+  color: #c6f5e6;
+  border-color: rgba(110, 231, 183, 0.35);
+  background: rgba(0, 122, 100, 0.18);
+}
+
+.shell[data-admin-dark="true"] :global(.adminTableBtn:hover:not(:disabled)) {
+  background: rgba(0, 122, 100, 0.28);
+}
+
+.shell[data-admin-dark="true"] :global(.adminTableBtnDanger) {
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(185, 28, 28, 0.2);
+}
+
+.shell[data-admin-dark="true"] :global(.adminTableBtnDanger:hover:not(:disabled)) {
+  background: rgba(185, 28, 28, 0.32);
+}
+
+/* Chỉ icon (bút / thùng rác) — thay nhãn chữ trong cột Thao tác */
+.shell :global(.adminTableBtn.adminTableBtn--iconOnly) {
+  width: 2.375rem;
+  min-width: 2.375rem;
+  max-width: 2.375rem;
+  padding: 0;
+}
+
+.shell :global(.adminTableBtn.adminTableBtn--iconOnly svg) {
+  width: 1.08rem;
+  height: 1.08rem;
+  flex-shrink: 0;
+}
+
+.shell :global(.adminTableBtn.adminTableBtn--iconOnly .adminTableBtnIcon--spin) {
+  animation: adminTableBtnIconSpin 0.75s linear infinite;
+}
+
+.shell :global(.db-table-actions .db-btn.db-btn--iconOnly) {
+  width: 2.375rem !important;
+  min-width: 2.375rem !important;
+  max-width: 2.375rem !important;
+  padding-inline: 0 !important;
+}
+
+.shell :global(.db-table-actions .db-btn.db-btn--iconOnly svg) {
+  width: 1.08rem;
+  height: 1.08rem;
+  flex-shrink: 0;
+}
+
+.shell :global(.db-table-actions .db-btn.db-btn--iconOnly .adminTableBtnIcon--spin) {
+  animation: adminTableBtnIconSpin 0.75s linear infinite;
+}
+
+@keyframes adminTableBtnIconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * Mobile / drawer admin (<992px — cùng ngưỡng `isLgUp` trong AdminShell).
+ * Desktop (≥992px) không đổi.
+ */
+@media (max-width: 991px) {
+  .main {
+    /* Lề ngang nhỏ + full width nội dung (header / toolbar / scroll dùng cùng biến) */
+    --admin-section-pad-x: 0.4rem;
+    --admin-below-chrome: 0.65rem;
+    padding: 0 0 max(0.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .mainViewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mainViewport > * {
+    width: 100%;
+    max-width: 44rem;
+  }
+
+  .chromeHeader {
+    padding: 0 12px;
+  }
+
+  .chromeHeaderInner {
+    min-height: 56px;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .chromeSearchForm {
+    max-width: 100%;
+  }
+
+  /* Tiêu đề trang + toolbar: xếp dọc, không tràn ngang */
+  .shell :global(.adminPageHeaderRow) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    position: static;
+    padding: 0 0 0.05rem;
+    background: transparent;
+  }
+
+  .shell :global(.adminPageHeaderRow > .adminPageHeaderMain) {
+    order: 1;
+  }
+
+  .shell :global(.adminPageHeaderRow > .adminToolbar),
+  .shell :global(.adminPageHeaderRow > .adminToolbar--end),
+  .shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end) {
+    order: 2;
+    margin-left: 0;
+    justify-content: center !important;
+    width: auto;
+    position: fixed;
+    left: max(var(--admin-section-pad-x, 0.4rem), env(safe-area-inset-left, 0px));
+    right: max(var(--admin-section-pad-x, 0.4rem), env(safe-area-inset-right, 0px));
+    bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    z-index: 60;
+    padding: 0 0.2rem;
+    background: transparent;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .shell :global(.adminPageHeaderRow > .adminToolbar:has(.adminToolbarBtn:nth-child(2))),
+  .shell :global(.adminPageHeaderRow > .adminToolbar--end:has(.adminToolbarBtn:nth-child(2))),
+  .shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end:has(.adminToolbarBtn:nth-child(2))) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shell :global(.adminPageHeaderRow > .adminToolbar:has(.adminToolbarBtn:nth-child(3))),
+  .shell :global(.adminPageHeaderRow > .adminToolbar--end:has(.adminToolbarBtn:nth-child(3))),
+  .shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end:has(.adminToolbarBtn:nth-child(3))) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Card / bảng: co trong viewport — cuộn ngang nằm trong ô bọc */
+  .mainViewport :global([class*="tableWrap"]),
+  .mainViewport :global([class*="tableScroll"]),
+  .mainViewport :global([class*="listShell"]),
+  .mainViewport :global([class*="shellCard"]),
+  .mainViewport :global([class*="surfaceCard"]),
+  .mainViewport :global([class*="listCard"]) {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .mainViewport :global([class*="tableWrap"]),
+  .mainViewport :global([class*="tableScroll"]) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  /* Bảng .db-table: không ép width 100% trên mobile — giữ min-width/colgroup từng trang, cuộn ngang trong tableWrap/tableScroll */
+
+  /* Nút toolbar header — bớt min-width cố định khi cột hẹp */
+  .shell :global(.adminToolbar .adminToolbarBtn) {
+    min-width: 0;
+    flex: 1 1 auto;
+    width: 100% !important;
+    max-width: none;
+    min-height: 2.6rem;
+    background: var(--admin-surface, #fff);
+  }
+
+  /* Giữ nền nút rõ ràng khi toolbar được kéo xuống đáy mobile */
+  .shell :global(.adminPageHeaderRow > .adminToolbar .btn.btn--primary.adminToolbarBtn),
+  .shell :global(.adminPageHeaderRow > .adminToolbar--end .btn.btn--primary.adminToolbarBtn),
+  .shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end .btn.btn--primary.adminToolbarBtn) {
+    background: var(--admin-btn-primary-bg) !important;
+    color: var(--admin-btn-primary-text) !important;
+    box-shadow: 0 4px 14px rgba(0, 122, 100, 0.28);
+  }
+
+  .shell :global(.adminPageHeaderRow > .adminToolbar .btn.btn--ghost.adminToolbarBtn),
+  .shell :global(.adminPageHeaderRow > .adminToolbar--end .btn.btn--ghost.adminToolbarBtn),
+  .shell :global(.adminPageHeaderRow .adminToolbar.adminToolbar--end .btn.btn--ghost.adminToolbarBtn) {
+    background: var(--admin-surface, #fff) !important;
+    color: var(--admin-text, #0f2622) !important;
+    border: 1px solid var(--admin-border-inner, #dce8e4) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  }
+}

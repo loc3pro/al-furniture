@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    mem_limit: 512m
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: furniture_ecm
+    command:
+      - postgres
+      - -c
+      - shared_buffers=128MB
+      - -c
+      - effective_cache_size=256MB
+      - -c
+      - max_connections=40
+    ports:
+      - "5432:5432"
+    volumes:
+      - furniture_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d furniture_ecm"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    mem_limit: 192m
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - furniture_redis:/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: furniture-ecm-web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NODE_OPTIONS: --max-old-space-size=1024
+    mem_limit: 1536m
+    ports:
+      - "3000:3000"
+    command: sh -c "npx prisma migrate deploy && npm run start -- -p 3000"
+
+volumes:
+  furniture_pg:
+  furniture_redis:

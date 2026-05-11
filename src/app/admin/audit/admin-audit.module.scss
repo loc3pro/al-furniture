@@ -1,0 +1,133 @@
+.page {
+  width: 100%;
+  max-width: none;
+}
+
+.title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--admin-text);
+}
+
+.lead {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  color: var(--admin-muted);
+}
+
+.tabNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border, #c8dbe8);
+  background: var(--admin-surface, #fff);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  text-decoration: none;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.tab:hover {
+  border-color: var(--admin-accent-border, #7eb8e8);
+  color: var(--admin-accent-strong, #3d8bc4);
+}
+
+.tabActive {
+  border-color: var(--admin-accent, #007a64);
+  background: var(--admin-accent-softer, rgba(0, 122, 100, 0.08));
+  color: var(--admin-accent-strong, #007a64);
+}
+
+.shellCard {
+  --admin-pagination-sticky-bg: var(--admin-surface, #fff);
+
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 0;
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  background: var(--admin-surface);
+  overflow: hidden;
+}
+
+.tableScroll {
+  flex: 1 1 0;
+  min-height: max(14rem, 34vh);
+  overflow-x: auto;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.table {
+  width: 100%;
+  min-width: 880px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.84rem;
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th,
+.table td {
+  padding: 0.65rem 0.85rem;
+  text-align: start;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  vertical-align: top;
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+.table td {
+  background: var(--admin-table-body-bg, #fff);
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.table thead th {
+  background: var(--admin-table-thead-fill, #faf9f7);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+}
+
+.mono {
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+.meta {
+  color: var(--admin-muted);
+  font-size: 0.82rem;
+}
+
+.emptyCell {
+  text-align: start;
+  color: var(--admin-muted);
+  font-style: italic;
+  padding: 1.25rem !important;
+}

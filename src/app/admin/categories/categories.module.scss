@@ -1,0 +1,376 @@
+.page {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.pageHead {
+  text-align: left;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: var(--admin-text, #1e3a4d);
+  letter-spacing: -0.02em;
+}
+
+.pageLead {
+  margin: 0;
+  max-width: none;
+  text-align: left;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+.listShell {
+  --admin-pagination-sticky-bg: var(--admin-surface, #fff);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 0;
+  border-radius: 12px;
+  border: 1px solid var(--admin-border, #c8dbe8);
+  background: var(--admin-surface, #fff);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(40, 53, 72, 0.06);
+}
+
+.categoryCreateBtn {
+  flex-shrink: 0;
+}
+
+.thSortCell {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.thSort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0;
+  padding: 0.25rem 0.35rem;
+  transition: background 0.15s ease, color 0.15s ease;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.thSort:hover {
+  background: rgba(59, 154, 232, 0.12);
+  color: var(--admin-accent-strong, #3d8bc4);
+}
+
+.thSortActive {
+  color: var(--admin-accent-strong, #3d8bc4);
+  font-weight: 800;
+}
+
+.sortGlyphs {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  line-height: 0.85;
+  font-size: 0.62rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sortArrowDim {
+  opacity: 0.38;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.sortArrowOn {
+  opacity: 1;
+  color: var(--admin-accent-strong, #3d8bc4);
+}
+
+.inputReadonly {
+  background: rgba(26, 22, 18, 0.04);
+  cursor: default;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.editCard {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  background: #fff;
+  border: 1px solid var(--admin-accent-border, #a8cef0);
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 4px 18px rgba(40, 53, 72, 0.06);
+  text-align: left;
+}
+
+.editTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.editFields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  justify-content: flex-start;
+}
+
+.saveBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: var(--admin-btn-primary-bg, #5ba3d9);
+  color: #fff;
+}
+
+.secondaryBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--admin-border, #c8dbe8);
+  background: #fff;
+  color: var(--admin-text, #1e3a4d);
+}
+
+.thActions {
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  min-width: 7.5rem;
+}
+
+.tdActions {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+}
+
+.form {
+  background: #fff;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 4px 18px rgba(26, 22, 18, 0.05);
+  text-align: left;
+}
+
+/* Form trong AdminRightPanel — không lồng thẻ card; tự pad ngang vì `.bodyScroll` không pad. */
+.formPanel {
+  text-align: left;
+  margin: 0;
+  padding: 0.5rem 1.1rem 0.75rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .formPanel {
+    padding-inline: 1.35rem;
+  }
+}
+
+.formTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.field input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+  min-width: 0;
+  background: var(--admin-surface, #fff);
+}
+
+/* Cùng chiều cao với .field input */
+.formSubmitBtn {
+  box-sizing: border-box;
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  padding-left: 1.15rem !important;
+  padding-right: 1.15rem !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.err {
+  margin: 0.5rem 0 0;
+  color: #b83232;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.tableWrap {
+  flex: 1 1 0;
+  min-height: max(14rem, 32vh);
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.table {
+  width: 100%;
+  min-width: 52rem;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+/* Khoảng cách giữa các cột — gutter */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  text-align: start;
+  width: 34%;
+  padding-right: 1.5rem;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  text-align: start;
+  width: 46%;
+  padding-left: 1.25rem;
+  padding-right: 1.5rem;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  text-align: center;
+  width: 20%;
+  min-width: 8rem;
+  padding-left: 1.25rem;
+}
+
+.table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--admin-table-thead-fill, #faf9f7);
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+}
+
+.table td {
+  background: var(--admin-table-body-bg, #fff);
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.muted {
+  color: rgba(26, 22, 18, 0.45);
+  font-style: italic;
+}
+
+@media (max-width: 991px) {
+  .pageScroll {
+    padding-bottom: calc(2.8rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .wrap {
+    gap: 0.65rem;
+  }
+
+  .pageHead {
+    font-size: 1.2rem;
+  }
+}

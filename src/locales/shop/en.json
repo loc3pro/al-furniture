@@ -1,0 +1,43 @@
+{
+  "header": {
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "homeAria": "Home",
+    "searchPlaceholder": "Search products…",
+    "searchSubmitAria": "Search",
+    "accountTitle": "Account",
+    "accountAria": "Account",
+    "loginTitle": "Log in",
+    "loginAria": "Log in",
+    "wishlistTitle": "Wishlist",
+    "wishlistTitleWithCount": "Wishlist — {{count}} items",
+    "cartEmpty": "Cart is empty",
+    "cartSummary": "Cart — {{lines}} line(s) · {{pieces}} pc(s)",
+    "languageTitle": "Language",
+    "languageAria": "Choose language",
+    "logoutPanelAria": "Log out",
+    "navAria": "Categories",
+    "megaAria": "Categories and products",
+    "navHome": "Home",
+    "navProducts": "Products",
+    "navAllProducts": "All products",
+    "megaEmpty": "No categories yet.",
+    "megaEmptyProducts": "No products in this category yet.",
+    "shopTheLook": "Shop the look",
+    "comboSavings": "Bundle deals",
+    "specialPrices": "Special Prices",
+    "blog": "Blog",
+    "showroom": "Showroom",
+    "drawerTitle": "Menu",
+    "drawerCloseAria": "Close menu",
+    "drawerNavAria": "Main menu",
+    "accountLink": "Account",
+    "logout": "Log out",
+    "login": "Log in",
+    "viewAllCategory": "View all {{name}}"
+  },
+  "locale": {
+    "vi": "Tiếng Việt",
+    "en": "English"
+  }
+}

@@ -1,0 +1,36 @@
+.box {
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px dashed var(--admin-border-inner, rgba(26, 22, 18, 0.18));
+  background: rgba(139, 115, 85, 0.08);
+}
+
+.lead {
+  margin: 0 0 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--admin-text);
+}
+
+.btn {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  background: var(--admin-accent-strong, #1a1612);
+  color: #faf8f5;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.err {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: #b42318;
+}

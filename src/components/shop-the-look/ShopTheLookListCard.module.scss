@@ -1,0 +1,236 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  overflow: visible;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  box-shadow: 0 4px 24px rgba(26, 22, 18, 0.06);
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 36px rgba(26, 22, 18, 0.1);
+  transform: translateY(-2px);
+}
+
+/** Trang chủ — chỉ khối ảnh vuông, không viền card / không footer */
+.imageOnlyRoot {
+  display: block;
+  overflow: visible;
+}
+
+.imageOnlyWrap {
+  position: relative;
+  aspect-ratio: 1;
+  background: #e8e4de;
+  overflow: visible;
+  border-radius: 12px;
+}
+
+.imageOnlyClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.cardImageWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #f0eeeb;
+  overflow: visible;
+  border-radius: 12px 12px 0 0;
+}
+
+.cardImageClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.cardImageLink {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.pinLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.pinWrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.pinWrapOpen {
+  z-index: 8;
+}
+
+.pin {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.15s ease;
+}
+
+.pin:hover,
+.pin:focus-visible {
+  transform: scale(1.06);
+  outline: none;
+}
+
+.pin:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+.popover {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.5rem;
+  min-width: 180px;
+  max-width: min(260px, 70vw);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(26, 22, 18, 0.18);
+  pointer-events: auto;
+  z-index: 20;
+}
+
+.popover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #fff;
+}
+
+.popThumb {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f0eeeb;
+}
+
+.popThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.popThumbPlaceholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8e4df, #f5f3f0);
+}
+
+.popText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  text-align: left;
+  align-items: stretch;
+}
+
+.popName {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1a1612;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-decoration: none;
+  word-break: break-word;
+  padding-bottom: 0.05em;
+}
+
+.popName:hover {
+  text-decoration: underline;
+}
+
+.popPrice {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #b83232;
+  line-height: 1.25;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+.cardBody {
+  padding: 1rem 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1a1612;
+}
+
+.cardBtn {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #1a1612;
+  border: 1px solid #1a1612;
+  border-radius: 4px;
+  background: transparent;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.cardBtn:hover {
+  background: #1a1612;
+  color: #fff;
+}

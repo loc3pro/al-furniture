@@ -1,0 +1,90 @@
+.footer {
+  margin-top: 4rem;
+  background: #141210;
+  color: rgba(250, 248, 245, 0.92);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  padding: 3rem 0 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.92rem;
+}
+
+.col a:hover,
+.fakeLink:hover {
+  opacity: 0.85;
+}
+
+.colTitle {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  color: rgba(250, 248, 245, 0.55);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.lead {
+  margin: 0;
+  line-height: 1.55;
+  color: rgba(250, 248, 245, 0.75);
+  max-width: 28rem;
+}
+
+.contact {
+  margin: 0.5rem 0 0;
+  line-height: 1.7;
+}
+
+.contact a {
+  color: inherit;
+}
+
+.muted {
+  color: rgba(250, 248, 245, 0.55);
+  font-size: 0.88rem;
+}
+
+.fakeLink {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.strip {
+  border-top: 1px solid rgba(250, 248, 245, 0.12);
+  padding: 1rem 0 1.5rem;
+}
+
+.stripInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  color: rgba(250, 248, 245, 0.45);
+}
+
+.pay {
+  letter-spacing: 0.02em;
+}

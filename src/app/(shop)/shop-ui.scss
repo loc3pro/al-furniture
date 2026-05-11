@@ -1,0 +1,58 @@
+/* Cửa hàng: hover nút dùng màu theme `--color-button-hover` (Admin → Giao diện / Theme). */
+.shop-chrome {
+  :is(.btn, .btn--primary, .btn--ghost):hover:not(:disabled) {
+    background-color: var(--color-button-hover) !important;
+    color: var(--color-menu) !important;
+    box-shadow: none !important;
+  }
+
+  :is(.btn--primary):hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  :is(.btn--ghost):hover:not(:disabled) {
+    border-color: rgba(26, 22, 18, 0.22) !important;
+  }
+
+  :is(
+    button:hover:not(:disabled),
+    input[type="submit"]:hover:not(:disabled),
+    input[type="button"]:hover:not(:disabled)
+  ):not([data-no-shop-hover]) {
+    background-color: var(--color-button-hover) !important;
+    color: var(--color-menu) !important;
+  }
+
+  a:is(.btn, .btn--primary, .btn--ghost):hover {
+    background-color: var(--color-button-hover) !important;
+    color: var(--color-menu) !important;
+    box-shadow: none !important;
+  }
+
+  /* Đang nhấn (click): nền kem + chữ đậm */
+  :is(.btn, .btn--primary, .btn--ghost):active:not(:disabled) {
+    background-color: var(--shop-btn-active-bg) !important;
+    color: var(--shop-btn-active-text) !important;
+    border: 1px solid var(--shop-btn-active-border) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  :is(
+    button:active:not(:disabled),
+    input[type="submit"]:active:not(:disabled),
+    input[type="button"]:active:not(:disabled)
+  ):not([data-no-shop-hover]):not([data-no-shop-press]) {
+    background-color: var(--shop-btn-active-bg) !important;
+    color: var(--shop-btn-active-text) !important;
+    border: 1px solid var(--shop-btn-active-border) !important;
+    box-shadow: none !important;
+  }
+
+  a:is(.btn, .btn--primary, .btn--ghost):active {
+    background-color: var(--shop-btn-active-bg) !important;
+    color: var(--shop-btn-active-text) !important;
+    border: 1px solid var(--shop-btn-active-border) !important;
+    box-shadow: none !important;
+  }
+}

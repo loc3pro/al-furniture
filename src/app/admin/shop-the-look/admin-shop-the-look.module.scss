@@ -1,0 +1,169 @@
+.page {
+  width: 100%;
+  max-width: 960px;
+}
+
+.head {
+  margin-bottom: 0;
+}
+
+/*
+ * Trang này chỉ có 1 nút duy nhất ("+ Tạo") nên giữ tiêu đề + nút trên CÙNG
+ * MỘT HÀNG ngay cả ở viewport hẹp — override rule mặc định ở
+ * `admin-shell.module.scss` (≤991px → column / nút full-width).
+ */
+.head:global(.adminPageHeaderRow) {
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center !important;
+  gap: 0.6rem;
+}
+
+.head :global(.adminToolbar),
+.head :global(.adminToolbar.adminToolbar--end) {
+  width: auto !important;
+  flex: 0 0 auto;
+  margin-left: auto !important;
+  justify-content: flex-end !important;
+}
+
+.head :global(.adminToolbarBtn) {
+  flex: 0 0 auto !important;
+  /* Cho nút có chiều rộng vừa mắt — không co theo nội dung "+ Tạo" mà cũng không tràn full-width */
+  width: clamp(7rem, 28vw, 10rem) !important;
+  min-width: 7rem !important;
+  padding-inline: 1.1rem;
+  white-space: nowrap;
+}
+
+.toolbarStripSpacer {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  text-align: start;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+.table td {
+  background: var(--admin-table-body-bg, #fff);
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.table thead th {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+  background: var(--admin-table-thead-fill, #faf9f7);
+}
+
+.code {
+  font-size: 0.82rem;
+}
+
+.empty {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: min(26rem, 100%);
+}
+
+.thOrder {
+  width: 4.5rem;
+}
+
+.orderCell {
+  vertical-align: middle;
+}
+
+.orderBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: stretch;
+}
+
+.orderBtn {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.1;
+  padding: 0.2rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border-inner);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  cursor: pointer;
+}
+
+.orderBtn:hover:not(:disabled) {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-softer);
+}
+
+.orderBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.thActions {
+  text-align: center;
+  white-space: nowrap;
+  width: 6.5rem;
+}
+
+/* Cột «Hiển thị» (pill) — cùng nhịp căn giữa với trạng thái */
+.table thead th:nth-child(5),
+.table tbody td:nth-child(5) {
+  text-align: center;
+}
+
+.tdActions {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  /* Hai nút icon (sửa + xóa) */
+  width: 6.5rem;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+}

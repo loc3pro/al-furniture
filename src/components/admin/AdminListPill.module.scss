@@ -1,0 +1,85 @@
+/**
+ * Nhãn dạng pill — đồng bộ nhóm màu với cột trạng thái đơn (admin-orders .statusLabel).
+ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.label {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 2.05rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border-inner, #cfe0d9);
+  background: var(--admin-surface, #fff);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--admin-text, #0f2622);
+  line-height: 1.25;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.labelTruncate {
+  max-width: min(20rem, 46vw);
+}
+
+.labelMono {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 0.75rem;
+}
+
+.labelTabular {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+}
+
+/* Xanh dương — nhãn thông tin (không gắn với trạng thái đơn) */
+.pill[data-tone="blue"] .label {
+  border-left: 4px solid #3d8bc4;
+  background: #f2f8fd;
+  border-color: rgba(61, 139, 196, 0.38);
+  color: #154a72;
+}
+
+/* Xanh lá — COMPLETED */
+.pill[data-tone="green"] .label {
+  border-left: 4px solid #3d9a62;
+  background: #f3faf6;
+  border-color: rgba(61, 154, 98, 0.35);
+  color: #1a5c36;
+}
+
+/* Vàng — PENDING */
+.pill[data-tone="amber"] .label {
+  border-left: 4px solid #d4a012;
+  background: #fffbf0;
+  border-color: rgba(212, 160, 18, 0.4);
+  color: #7a5500;
+}
+
+/* Đỏ — hủy / lỗi */
+.pill[data-tone="rose"] .label {
+  border-left: 4px solid #c94a5c;
+  background: #fdf5f6;
+  border-color: rgba(201, 74, 92, 0.35);
+  color: #8f2434;
+}
+
+/* Mặc định — nền surface, không vạch trái */
+.pill[data-tone="neutral"] .label {
+  background: var(--admin-surface, #fff);
+  color: var(--admin-text, #0f2622);
+}

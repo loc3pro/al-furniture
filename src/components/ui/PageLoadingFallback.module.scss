@@ -1,0 +1,44 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  min-height: min(1200px, 85vh);
+}
+
+.rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  height: 3px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 40%;
+  border-radius: 0 2px 2px 0;
+  animation: routeProgressIndeterminate 1.1s ease-in-out infinite;
+}
+
+.wrap[data-variant="shop"] .bar {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent, #8b7355),
+    color-mix(in srgb, var(--color-primary, #2c2620) 70%, var(--color-accent, #8b7355))
+  );
+}
+
+.wrap[data-variant="admin"] .bar {
+  background: linear-gradient(90deg, #64748b, #334155);
+}
+
+@keyframes routeProgressIndeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}

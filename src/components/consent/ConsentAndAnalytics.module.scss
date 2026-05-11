@@ -1,0 +1,21 @@
+.bar {
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem 1.25rem;
+  background: rgba(18, 16, 14, 0.92);
+  color: #f5f1eb;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.bar p {
+  margin: 0;
+  max-width: 56ch;
+}

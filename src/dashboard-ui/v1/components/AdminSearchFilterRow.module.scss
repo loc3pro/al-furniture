@@ -1,0 +1,78 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.search {
+  flex: 1 1 260px;
+  min-width: 200px;
+  max-width: 520px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.rootFiltersEnd .filters {
+  margin-left: auto;
+  flex: 0 1 auto;
+  justify-content: flex-end;
+}
+
+@media (max-width: 991px) {
+  .search {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .filters {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .rootFiltersEnd .filters {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /*
+   * Một control lọc (DbSelect, v.v.) trên hàng riêng: full width.
+   * Đè style inline minWidth/maxWidth từ các *FilterClient (antd Select).
+   */
+  .filters > :only-child {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+}

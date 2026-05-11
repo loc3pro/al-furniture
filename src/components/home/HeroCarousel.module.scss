@@ -1,0 +1,129 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: clamp(0.75rem, 2.4vw, 1.5rem);
+  padding-block: 0.5rem 0.75rem;
+  box-sizing: border-box;
+}
+
+.viewport {
+  overflow: hidden;
+  border-radius: 0;
+  width: 100%;
+  border-radius: 20px
+}
+
+.container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+.slideLink {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 19 / 9;
+  min-height: 220px;
+  max-height: min(78vh, 620px);
+  overflow: hidden;
+  background: #e8e4de;
+}
+
+.slideBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #efe9e2, #e0d8cf);
+}
+
+.slideBgPending::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 240, 235, 0.35) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(245, 240, 235, 0.35) 100%
+  );
+  background-size: 200% 100%;
+  animation: heroCarouselShimmer 1.1s ease-in-out infinite;
+}
+
+/* Bắt buộc phủ kín + căn giữa (tránh xung đột với style global / next) */
+.img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover;
+  object-position: center center;
+  position: relative;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.slideBg:not(.slideBgPending) .img {
+  opacity: 1;
+}
+
+@keyframes heroCarouselShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.dot,
+.dotActive {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(26, 22, 18, 0.25);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dotActive {
+  background: #1a1612;
+  transform: scale(1.15);
+}
+
+.placeholder {
+  aspect-ratio: 19 / 9;
+  min-height: 220px;
+  background: linear-gradient(135deg, #f5f0eb, #e8dfd6);
+  border-radius: 0;
+}
+
+.phInner {
+  width: 100%;
+  height: 100%;
+}

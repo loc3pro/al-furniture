@@ -1,0 +1,891 @@
+.fab {
+  border-radius: 0;
+  padding: 0;
+  min-height: unset;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+.fab:hover .fabInner {
+  transform: scale(1.04);
+  box-shadow:
+    0 8px 28px rgba(0, 122, 100, 0.45),
+    0 3px 12px rgba(26, 22, 18, 0.14);
+}
+
+.fab:active .fabInner {
+  transform: scale(0.97);
+}
+
+.fabInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  border-radius: 50%;
+  /* Cùng nhịp teal admin (`--admin-accent` / sidebar) */
+  background: linear-gradient(155deg, #0a4d52 0%, #007a64 55%, #059669 100%);
+  box-shadow:
+    0 5px 22px rgba(0, 90, 73, 0.4),
+    0 2px 9px rgba(26, 22, 18, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.18s ease;
+}
+
+.fabIcon {
+  display: block;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.fabLabel {
+  white-space: nowrap;
+  font-size: 0.92rem;
+}
+
+.fabBadge {
+  position: absolute;
+  top: -0.05rem;
+  right: -0.05rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.fabBadgePulse {
+  animation: fabBadgeZoom 1.15s ease-in-out infinite;
+}
+
+@keyframes fabBadgeZoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.18);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fabBadgePulse {
+    animation: none;
+  }
+
+  .fab:hover .fabInner,
+  .fab:active .fabInner {
+    transform: none;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 22, 18, 0.4);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  animation: chatFadeIn 0.18s ease;
+}
+
+@keyframes chatFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.panel {
+  /* Đồng bộ accent với admin shell — dùng trong nút Gửi / hover */
+  --chat-admin-accent: #007a64;
+  --chat-admin-accent-strong: #005a49;
+  --chat-admin-accent-soft: rgba(0, 122, 100, 0.18);
+
+  position: fixed;
+  z-index: 161;
+  right: 1rem;
+  bottom: 4.25rem;
+  width: min(400px, calc(100vw - 2rem));
+  height: min(480px, 78vh);
+  max-height: min(480px, 78vh);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow:
+    0 24px 64px rgba(26, 22, 18, 0.18),
+    0 0 0 1px rgba(26, 22, 18, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.85rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: linear-gradient(180deg, #f4f6f8 0%, #fafbfc 50%);
+  scrollbar-gutter: stable;
+}
+
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(26, 22, 18, 0.15);
+  border-radius: 999px;
+}
+
+.msgLane {
+  display: flex;
+  width: 100%;
+  gap: 0.55rem;
+  align-items: flex-end;
+  max-width: 100%;
+}
+
+.msgLaneUser {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.msgLaneStaff {
+  align-self: flex-start;
+}
+
+/* Giống admin chat: vỏ tròn + ảnh cắt tròn */
+.avatarWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+}
+
+.avatarRing {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(26, 22, 18, 0.1);
+  background: rgba(26, 22, 18, 0.06);
+}
+
+.avatarMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.onlineDot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+  z-index: 1;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 0 1 45%;
+  min-width: 0;
+  max-width: 45%;
+}
+
+@media (max-width: 640px) {
+  .stack {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+}
+
+.senderName {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(26, 22, 18, 0.48);
+  padding: 0 0.15rem;
+}
+
+.msgLaneUser .senderName {
+  text-align: right;
+}
+
+.bubble {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.75rem;
+  border-radius: 18px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+/* Khách (Bạn): giống bubbleUser admin — slate */
+.bubbleUser {
+  background: #e2e8f0;
+  color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+/* Hỗ trợ: giống bubbleStaff admin — mint */
+.bubbleStaff {
+  background: #d1fae5;
+  color: #0f172a;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+.msgMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.2rem;
+}
+
+.msgLaneUser .msgMeta {
+  justify-content: flex-end;
+}
+
+.msgTime {
+  font-size: 0.65rem;
+  color: rgba(26, 22, 18, 0.42);
+}
+
+.attachThumbBtn {
+  margin: 0;
+  margin-top: 0.35rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 100%;
+  cursor: zoom-in;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.attachThumbBtn:focus-visible {
+  outline: 2px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+.attachThumb {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  margin: 0;
+  display: block;
+  vertical-align: middle;
+}
+
+.attachLink {
+  font-size: 0.82rem;
+  word-break: break-all;
+  color: inherit;
+  opacity: 0.95;
+}
+
+.bubbleStaff .attachLink {
+  color: #0f766e;
+  font-weight: 600;
+}
+
+.bubbleUser .attachLink {
+  color: #0369a1;
+  font-weight: 600;
+}
+
+.muted {
+  opacity: 0.65;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(180deg, #fff 0%, #fafbfc 100%);
+  border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.headTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1a1612;
+}
+
+.headSub {
+  font-size: 0.78rem;
+  color: rgba(26, 22, 18, 0.48);
+}
+
+.closeBtnText {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.closeBtn {
+  flex-shrink: 0;
+  min-width: 3.25rem;
+  height: 2.35rem;
+  padding: 0 10px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(26, 22, 18, 0.06);
+  color: #1a1612;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.closeBtn:hover {
+  background: rgba(26, 22, 18, 0.11);
+}
+
+.err {
+  color: #b83232;
+  font-size: 0.78rem;
+  margin: 0 0.85rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(184, 50, 50, 0.06);
+  border-radius: 8px;
+}
+
+.composerDock {
+  flex-shrink: 0;
+  flex-grow: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 16;
+  background: #fff;
+  box-shadow: 0 -6px 24px rgba(26, 22, 18, 0.08);
+}
+
+.composerInner {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(26, 22, 18, 0.07);
+  background: #fff;
+  padding: 0.65rem 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reviewLabel {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(26, 22, 18, 0.45);
+  letter-spacing: 0.02em;
+}
+
+.exclusiveHint {
+  margin: 0;
+  padding: 0 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.48);
+  line-height: 1.35;
+}
+
+.embedHint {
+  margin: 0.45rem 0 0;
+  padding: 0 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.42);
+  line-height: 1.35;
+}
+
+/* Danh sách đính kèm chờ gửi — cùng một kiểu hàng cho ảnh (thumb + tên) và tệp (📎 + tên) */
+.pendingStrip {
+  flex-shrink: 0;
+  width: 100%;
+  min-width: 0;
+  padding: 0.45rem 0.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.pendingImageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.pendingImageCell {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e5e7eb;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.pendingZoomBtn {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: inherit;
+}
+
+.pendingImageThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.pendingImageRemove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(26, 22, 18, 0.62);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pendingImageRemove:hover {
+  background: rgba(185, 50, 50, 0.92);
+}
+
+.pendingFileRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.45rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #fff;
+}
+
+.pendingRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.45rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #fff;
+}
+
+.pendingImgWrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+
+.pendingImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pendingFileIcon {
+  flex-shrink: 0;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.pendingFileName {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1612;
+  word-break: break-word;
+}
+
+.pendingRowRemove {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(26, 22, 18, 0.55);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pendingRowRemove:hover {
+  background: rgba(185, 50, 50, 0.85);
+}
+
+.pendingAddBtn {
+  align-self: flex-start;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 22, 18, 0.18);
+  background: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: rgba(26, 22, 18, 0.78);
+}
+
+.pendingAddBtn:hover:not(:disabled) {
+  border-color: rgba(26, 22, 18, 0.28);
+  background: #fafafa;
+}
+
+.pendingAddBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.outgoingLane {
+  opacity: 0.96;
+}
+
+.outgoingBubble {
+  position: relative;
+}
+
+.outgoingHint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.82;
+}
+
+.outgoingMedia {
+  position: relative;
+  margin-top: 0.15rem;
+  max-width: min(240px, 72vw);
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.outgoingImgHit {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+  border-radius: inherit;
+}
+
+.outgoingImgHit:focus-visible {
+  outline: 2px solid var(--chat-admin-accent-soft, rgba(0, 122, 100, 0.35));
+  outline-offset: 2px;
+}
+
+.outgoingImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: cover;
+  filter: blur(12px);
+  transform: scale(1.06);
+  transition:
+    filter 0.35s ease,
+    transform 0.35s ease;
+  pointer-events: none;
+}
+
+.outgoingImgUploaded {
+  filter: none;
+  transform: none;
+}
+
+.outgoingShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.38) 100%);
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.outgoingShadeDone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.2) 100%);
+  opacity: 0.45;
+  transition: opacity 0.35s ease;
+}
+
+.outgoingBadge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(26, 22, 18, 0.55);
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.outgoingBadgeSoft {
+  font-weight: 700;
+  background: rgba(26, 22, 18, 0.38);
+}
+
+.outgoingFileRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.outgoingFileIcon {
+  flex-shrink: 0;
+}
+
+.outgoingFileName {
+  flex: 1;
+  min-width: 0;
+  word-break: break-all;
+  font-weight: 600;
+}
+
+.outgoingFilePct {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+.composerBar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.toolBtnIcon {
+  width: 1.28rem;
+  height: 1.28rem;
+  flex-shrink: 0;
+}
+
+.toolBtn {
+  flex-shrink: 0;
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid rgba(26, 22, 18, 0.11);
+  background: #f5f3f0;
+  color: #3d3834;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.toolBtn:hover:not(:disabled) {
+  background: #ece8e2;
+  border-color: rgba(26, 22, 18, 0.18);
+}
+
+/* Gắn vào document.body — tránh overflow:hidden trên panel chặn file picker */
+.fileInputPortal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0.01;
+  font-size: 0;
+}
+
+.toolBtnDisabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.inputShell {
+  flex: 1;
+  min-width: 0;
+  padding: 0.15rem 0.85rem;
+  border-radius: 22px;
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  background: #f3f4f6;
+}
+
+.inputField {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.45rem 0;
+}
+
+.inputField:focus {
+  outline: none;
+}
+
+.sendIconGlyph {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+/* Nút gửi dạng icon — cùng bố cục admin; màu teal cửa hàng */
+.sendIconBtn {
+  flex-shrink: 0;
+  min-width: 46px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--chat-admin-accent, #007a64);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(0, 90, 73, 0.32);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.sendIconBtn:hover {
+  background: var(--chat-admin-accent-strong, #005a49);
+  box-shadow: 0 5px 18px rgba(0, 90, 73, 0.42);
+}
+
+.sendIconBtn:active {
+  transform: scale(0.96);
+}
+
+.sendIconBtnDisabled,
+.sendIconBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.sendIconBtnDisabled:hover,
+.sendIconBtn:disabled:hover {
+  box-shadow: none;
+}

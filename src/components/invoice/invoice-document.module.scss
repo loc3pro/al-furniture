@@ -1,0 +1,234 @@
+/* Toolbar — ẩn khi in */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Vùng chỉ in hóa đơn — @media print ẩn phần còn lại trang */
+.printIsolation {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.invoice {
+  background: #fffef9;
+  border: 1px solid rgba(44, 38, 32, 0.12);
+  border-radius: 16px;
+  padding: 1.75rem 1.6rem 2rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 18px 48px rgba(26, 22, 18, 0.06);
+}
+
+.invoiceHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid rgba(139, 115, 85, 0.35);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.brandName {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-primary, #2c2620);
+}
+
+.docKind {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent, #8b7355);
+}
+
+.metaCol {
+  text-align: right;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(26, 22, 18, 0.72);
+}
+
+.metaStrong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-menu, #1a1612);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-bottom: 1.35rem;
+}
+
+@media (max-width: 560px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.block {
+  background: rgba(250, 248, 245, 0.85);
+  border: 1px solid rgba(26, 22, 18, 0.07);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.blockTitle {
+  margin: 0 0 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 18, 0.5);
+}
+
+.blockBody {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  white-space: pre-line;
+  color: var(--color-menu, #1a1612);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin: 0.25rem 0 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.55rem 0.65rem;
+  background: rgba(44, 38, 32, 0.06);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.table td {
+  padding: 0.55rem 0.65rem;
+  border-top: 1px solid rgba(26, 22, 18, 0.06);
+  vertical-align: top;
+}
+
+.colNum {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.lineName {
+  font-weight: 600;
+  color: var(--color-menu, #1a1612);
+}
+
+.variantHint {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.sku {
+  font-size: 0.72rem;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(139, 115, 85, 0.35);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  font-size: 0.88rem;
+  width: min(100%, 320px);
+}
+
+.totalRow dt {
+  margin: 0;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.totalRow dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.grand {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary, #2c2620);
+}
+
+.footerNote {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(26, 22, 18, 0.08);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+/* Chrome admin/shop khi in: invoice-print-globals.scss (import root layout) */
+
+@media print {
+  .printIsolation {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .toolbar {
+    display: none !important;
+  }
+
+  .invoice {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    background: #fff;
+  }
+}

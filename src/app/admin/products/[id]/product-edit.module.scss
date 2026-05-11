@@ -1,0 +1,44 @@
+.slugReadonly {
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px dashed var(--admin-border, #c8dbe8);
+  background: rgba(0, 0, 0, 0.03);
+  font-size: 0.9rem;
+}
+
+.slugReadonly code {
+  font-family: ui-monospace, monospace;
+  color: var(--admin-muted, #5a7a8e);
+}
+
+.readonlyHint {
+  cursor: default;
+  background: var(--admin-accent-softer, #f2f8fd);
+  color: var(--admin-text, #1e3a4d);
+  font-weight: 600;
+}
+
+/** Hàng nút sticky đầu form chỉnh sửa — full width wrap, cùng hệ với `actions` ở Tạo sản phẩm */
+.editFormFooter {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 0.6rem;
+  align-items: stretch;
+  width: min(420px, 100%);
+}
+
+.editFormFooter :global(.btn) {
+  width: 100%;
+  min-height: 2.5rem;
+  border-radius: 999px !important;
+  justify-content: center;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .editFormFooter {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

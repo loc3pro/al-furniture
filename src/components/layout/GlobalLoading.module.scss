@@ -1,0 +1,59 @@
+.topRail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  height: 3px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.topRail[data-active] .topBar {
+  opacity: 1;
+  animation: indeterminate 1.1s ease-in-out infinite;
+}
+
+.topBar {
+  height: 100%;
+  width: 40%;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent, #8b7355),
+    color-mix(in srgb, var(--color-primary, #2c2620) 70%, var(--color-accent, #8b7355))
+  );
+  border-radius: 0 2px 2px 0;
+  transition: opacity 0.15s ease;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 22, 18, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.overlayCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--radius, 12px);
+  background: var(--color-surface, #fff);
+  box-shadow: var(--shadow-soft, 0 12px 40px rgba(26, 22, 18, 0.12));
+}

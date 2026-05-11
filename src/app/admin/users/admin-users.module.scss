@@ -1,0 +1,324 @@
+.page {
+  width: 100%;
+  max-width: none;
+}
+
+.pageStack {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  margin-bottom: 0;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.03em;
+  color: var(--admin-text);
+}
+
+.lead {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--admin-muted);
+  max-width: 40rem;
+}
+
+.controlsStrip {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.addToggle {
+  min-width: auto;
+}
+
+.addPanel {
+  margin-top: 0.65rem;
+  margin-bottom: 0.75rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--admin-border-inner);
+  border-radius: 12px;
+  background: var(--admin-accent-softer);
+}
+
+/* Form thêm user trong right panel — không lồng thẻ nền kép */
+.addPanelForm {
+  margin: 0;
+  padding: 0;
+}
+
+.addTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.addGrid {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 28rem;
+}
+
+.addField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+}
+
+.addField input {
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border-inner);
+  font: inherit;
+  font-size: 0.9rem;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+.addRoleSelect:global(.ant-select) {
+  width: 100%;
+}
+
+.addRoleSelect:global(.ant-select .ant-select-selector) {
+  border-radius: 8px !important;
+  border: 1px solid var(--admin-border-inner) !important;
+  font: inherit !important;
+  font-size: 0.9rem !important;
+  background: var(--admin-bg) !important;
+  color: var(--admin-text) !important;
+  min-height: 2.5rem !important;
+  align-items: center;
+}
+
+.addField input:focus {
+  outline: none;
+  border-color: var(--admin-accent-border);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+
+.addRoleSelect:global(.ant-select-focused .ant-select-selector) {
+  border-color: var(--admin-accent-border) !important;
+  box-shadow: 0 0 0 3px var(--admin-accent-soft) !important;
+}
+
+.req {
+  color: #b8860b;
+}
+
+.addActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.shellCard {
+  --admin-pagination-sticky-bg: var(--admin-surface, #fff);
+
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--admin-surface);
+  border-radius: 14px;
+  border: 1px solid var(--admin-border-inner);
+  box-shadow: 0 8px 32px rgba(42, 37, 64, 0.06);
+  overflow: hidden;
+}
+
+.tableWrap {
+  flex: 1 1 0;
+  min-height: max(14rem, 34vh);
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.table {
+  width: 100%;
+  /* 7 cột — không ép vào viewport; cuộn ngang trong .tableWrap */
+  min-width: 58rem;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.88rem;
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th {
+  text-align: start;
+  padding: 0.65rem 1rem;
+  background: var(--admin-table-thead-fill, #faf9f7);
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+  font-weight: 600;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+}
+
+.table td {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  vertical-align: middle;
+  text-align: start;
+  background: var(--admin-table-body-bg, #fff);
+}
+
+/* Tên + email: không bẻ từng ký tự khi đã có cuộn ngang */
+.table td:nth-child(1),
+.table td:nth-child(2) {
+  white-space: nowrap;
+}
+
+.table td:nth-child(2) {
+  max-width: 22rem;
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+.thActions {
+  text-align: center !important;
+  width: 7.5rem;
+  min-width: 7.5rem;
+}
+
+.tdActions {
+  text-align: center !important;
+  vertical-align: middle !important;
+  width: 7.5rem;
+  min-width: 7.5rem;
+}
+
+.actionRow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.table td.mutedCell {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.mutedCell {
+  color: var(--admin-muted);
+  font-size: 0.82rem;
+}
+
+.roleSelect:global(.ant-select) {
+  min-width: 10.5rem;
+}
+
+.roleSelect:global(.ant-select .ant-select-selector) {
+  border-radius: 8px !important;
+  border: 1px solid var(--admin-border-inner) !important;
+  font: inherit !important;
+  font-weight: 600 !important;
+  background: var(--admin-bg) !important;
+  color: var(--admin-text) !important;
+  min-height: 2.25rem !important;
+  align-items: center;
+}
+
+.roleSelect:global(.ant-select-disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.badgeYou {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--admin-accent-soft);
+  color: var(--admin-accent-strong);
+}
+
+.err {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a32020;
+}
+
+@media (max-width: 991px) {
+  .pageScroll {
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .table {
+    min-width: 58rem;
+    table-layout: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.82rem;
+  }
+
+  .table td:nth-child(1),
+  .table td:nth-child(2) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .table td:nth-child(2) {
+    max-width: 22rem;
+  }
+
+  .roleSelect:global(.ant-select) {
+    min-width: 8.2rem;
+  }
+
+  .thActions,
+  .tdActions {
+    width: 6.25rem;
+    min-width: 6.25rem;
+  }
+
+  .actionRow {
+    gap: 0.25rem;
+  }
+}
+

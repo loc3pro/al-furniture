@@ -1,0 +1,20 @@
+node_modules
+.next
+.env
+.env.local
+# Bản env chuẩn bị copy lên VPS (có thể chứa secret — không commit)
+env.docker.vps
+*.log
+# JSON dump từ script (chạy lại bằng npm run dump:discount)
+data/
+backups/
+.DS_Store
+tsconfig.tsbuildinfo
+
+# Archive deploy / cache npm local (Windows)
+*.tar.gz
+npm-cache/
+
+# Artifact Windows / Git Bash
+nul
+bash.exe.stackdump

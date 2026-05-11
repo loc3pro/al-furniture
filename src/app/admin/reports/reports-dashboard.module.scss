@@ -1,0 +1,236 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.85rem 1.25rem;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: linear-gradient(165deg, rgba(139, 115, 85, 0.06) 0%, var(--admin-surface) 48%, var(--admin-surface) 100%);
+  box-shadow: 0 4px 24px rgba(40, 53, 72, 0.06);
+}
+
+.toolbarTitle {
+  flex: 1 1 100%;
+  margin: 0 0 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--admin-accent-strong, #8b7355);
+}
+
+.dateRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.65rem 1rem;
+}
+
+.dateField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.dateField label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--admin-muted);
+}
+
+.dateInput {
+  padding: 0.45rem 0.55rem;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-accent-softer, var(--admin-bg, #fff));
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--admin-text);
+  min-width: 11rem;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: var(--admin-accent-border);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+
+.applyBtn {
+  padding: 0.5rem 1.15rem;
+  border-radius: 10px;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  background: linear-gradient(145deg, #3d3630 0%, #2c2620 100%);
+  color: #faf8f5;
+  box-shadow: 0 2px 10px rgba(44, 38, 32, 0.2);
+  transition: transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.applyBtn:hover:not(:disabled) {
+  box-shadow: 0 4px 14px rgba(44, 38, 32, 0.28);
+}
+
+.applyBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.presetsLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--admin-muted);
+  margin-right: 0.25rem;
+}
+
+.presetBtn {
+  padding: 0.38rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.presetBtn:hover:not(:disabled) {
+  border-color: var(--admin-accent-strong, #8b7355);
+  background: rgba(139, 115, 85, 0.06);
+}
+
+.presetBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.errorBanner {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(185, 50, 50, 0.08);
+  border: 1px solid rgba(185, 50, 50, 0.25);
+  color: #9b2c2c;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.loadingBanner {
+  margin: 0 0 1rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(20, 184, 166, 0.08);
+  border: 1px solid rgba(20, 184, 166, 0.22);
+  color: var(--admin-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.kpiSection {
+  margin-bottom: 1.75rem;
+}
+
+.kpiHead {
+  margin-bottom: 0.75rem;
+}
+
+.kpiTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.kpiSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--admin-muted);
+  font-weight: 500;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.kpiCard {
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--admin-border);
+  background: linear-gradient(160deg, var(--admin-surface) 0%, rgba(139, 115, 85, 0.04) 100%);
+  box-shadow: 0 4px 18px rgba(40, 53, 72, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kpiCardLabel {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--admin-accent-strong, #8b7355);
+}
+
+.kpiCard strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--admin-text);
+  letter-spacing: -0.02em;
+}
+
+.sectionShell {
+  margin-bottom: 2rem;
+}
+
+.sectionHead {
+  margin-bottom: 0.65rem;
+}
+
+.sectionHead .h2 {
+  margin: 0;
+}
+
+.sectionDesc {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  color: var(--admin-muted);
+  line-height: 1.45;
+  max-width: 48rem;
+}
+
+.exportLead {
+  margin-top: 0.85rem;
+  font-size: 0.84rem;
+  color: var(--admin-muted);
+  line-height: 1.5;
+}
+
+.exportLead a {
+  color: var(--admin-accent-strong, #8b7355);
+  font-weight: 600;
+}

@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius, 12px);
+  background: rgba(250, 248, 245, 0.85);
+  border: 1px dashed rgba(139, 115, 85, 0.28);
+}
+
+.fill {
+  min-height: 200px;
+  width: 100%;
+}

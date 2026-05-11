@@ -1,0 +1,43 @@
+{
+  "header": {
+    "menuOpen": "Mở menu",
+    "menuClose": "Đóng menu",
+    "homeAria": "Trang chủ",
+    "searchPlaceholder": "Tìm kiếm sản phẩm…",
+    "searchSubmitAria": "Tìm kiếm",
+    "accountTitle": "Tài khoản",
+    "accountAria": "Tài khoản",
+    "loginTitle": "Đăng nhập",
+    "loginAria": "Đăng nhập",
+    "wishlistTitle": "Yêu thích",
+    "wishlistTitleWithCount": "Yêu thích — {{count}} sản phẩm",
+    "cartEmpty": "Giỏ hàng trống",
+    "cartSummary": "Giỏ hàng — {{lines}} mặt hàng · {{pieces}} cái",
+    "languageTitle": "Ngôn ngữ",
+    "languageAria": "Chọn ngôn ngữ",
+    "logoutPanelAria": "Đăng xuất",
+    "navAria": "Danh mục",
+    "megaAria": "Danh mục và sản phẩm",
+    "navHome": "Trang chủ",
+    "navProducts": "Sản phẩm",
+    "navAllProducts": "Tất cả sản phẩm",
+    "megaEmpty": "Chưa có danh mục.",
+    "megaEmptyProducts": "Chưa có sản phẩm trong danh mục này.",
+    "shopTheLook": "Shop the look",
+    "comboSavings": "Combo tiết kiệm",
+    "specialPrices": "Special Prices",
+    "blog": "Blog",
+    "showroom": "Showroom",
+    "drawerTitle": "Danh mục",
+    "drawerCloseAria": "Đóng menu",
+    "drawerNavAria": "Menu chính",
+    "accountLink": "Tài khoản",
+    "logout": "Đăng xuất",
+    "login": "Đăng nhập",
+    "viewAllCategory": "Xem tất cả {{name}}"
+  },
+  "locale": {
+    "vi": "Tiếng Việt",
+    "en": "English"
+  }
+}

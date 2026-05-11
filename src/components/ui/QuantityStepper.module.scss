@@ -1,0 +1,88 @@
+/* Stepper chung: − | qty | + — viền xám mảnh, nền trắng (đồng bộ giỏ hàng) */
+.stepper {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid rgba(26, 22, 18, 0.18);
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.btn {
+  width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-right: 1px solid rgba(26, 22, 18, 0.18);
+  background: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #1a1612;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.btn:last-of-type {
+  border-right: none;
+}
+
+.btn:hover:not(:disabled) {
+  background: #f7f6f4;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.valWrap {
+  min-width: 2.75rem;
+  padding: 0 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(26, 22, 18, 0.18);
+  background: #fff;
+}
+
+.valInput {
+  width: 100%;
+  min-width: 2ch;
+  max-width: 6rem;
+  margin: 0;
+  padding: 0.2rem 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1612;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.valInput:focus {
+  outline: none;
+}
+
+.valInput:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.stepperSm .btn {
+  width: 1.65rem;
+  min-height: 1.65rem;
+  font-size: 0.9rem;
+}
+
+.stepperSm .valWrap {
+  min-width: 1.85rem;
+  padding: 0 0.2rem;
+}
+
+.stepperSm .valInput {
+  font-size: 0.82rem;
+  max-width: 4.5rem;
+}

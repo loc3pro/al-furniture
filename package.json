@@ -1,0 +1,62 @@
+{
+  "name": "furniture-ecm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "db:reseed": "npx tsx scripts/reseed.ts",
+    "db:studio": "prisma studio",
+    "db:regenerate-skus": "npx tsx scripts/regenerate-variant-skus.ts",
+    "dump:discount": "npx tsx scripts/dump-product-discount.ts",
+    "worker": "npx tsx scripts/worker.ts"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.2.2",
+    "@ant-design/nextjs-registry": "^1.3.0",
+    "@prisma/client": "^5.22.0",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@tinymce/tinymce-react": "^6.3.0",
+    "antd": "^6.3.7",
+    "bcryptjs": "^3.0.3",
+    "bullmq": "^5.76.4",
+    "canvas-confetti": "^1.9.4",
+    "cloudinary": "^2.10.0",
+    "embla-carousel-react": "^8.6.0",
+    "ioredis": "^5.10.1",
+    "jose": "^6.2.3",
+    "lucide-react": "^1.14.0",
+    "next": "^15.5.15",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-easy-crop": "^5.5.7",
+    "react-redux": "^9.2.0",
+    "recharts": "^3.8.1",
+    "sanitize-html": "^2.17.3",
+    "sass": "^1.99.0",
+    "sharp": "^0.34.5",
+    "tinymce": "^8.5.0",
+    "zod": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/sanitize-html": "^2.16.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.15",
+    "prisma": "^5.22.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}

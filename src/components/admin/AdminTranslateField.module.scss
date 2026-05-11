@@ -1,0 +1,68 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wrapRich {
+  gap: 1rem;
+}
+
+.enInputShellRich {
+  min-height: 8rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.row input,
+.row textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.labelOnly {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.enInputShell {
+  position: relative;
+  border-radius: 10px;
+}
+
+.enInputShellMultiline {
+  min-height: 4.5rem;
+}
+
+.inputMultiline {
+  min-height: 4.5rem;
+  resize: vertical;
+}
+
+.translatingOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  /* Trên vùng TinyMCE (iframe / chrome UI thường z-index thấp). */
+  z-index: 20;
+}
+
+.err {
+  margin: 0;
+  font-size: 0.85rem;
+  color: crimson;
+}

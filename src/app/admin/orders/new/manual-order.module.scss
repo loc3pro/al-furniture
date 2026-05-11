@@ -1,0 +1,453 @@
+.form {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Offset sticky ô tìm SP — giá trị khớp AdminPanelStickyToolbar.stickyRoot */
+.formEmbeddedPanel {
+  --admin-panel-toolbar-offset: calc(0.65rem + 2.75rem + 0.85rem + 1px);
+}
+
+.section {
+  background: #fff;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 4px 18px rgba(26, 22, 18, 0.05);
+}
+
+.h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+.field input {
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.hint {
+  margin: 0 0 0.65rem;
+  font-size: 0.85rem;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.hitList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hitBtn {
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #faf9f7;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.hitBtn:hover {
+  border-color: rgba(26, 22, 18, 0.22);
+  background: #fff;
+}
+
+.linesBlock {
+  --manual-line-control-h: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.linesColHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(3.25rem, auto);
+  gap: 0.65rem 0.85rem;
+  align-items: end;
+  padding-bottom: 0.1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+/* Desktop: hai ô sau vẫn là hai cột grid; mobile: flex trong .linesColHeadMeta */
+.linesColHeadMeta {
+  display: contents;
+}
+
+.linesColHeadCenter {
+  text-align: start;
+  justify-self: start;
+  min-width: 7.25rem;
+}
+
+.linesColHeadActions {
+  justify-self: stretch;
+  min-width: 3.25rem;
+}
+
+.lineRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(3.25rem, auto);
+  gap: 0.65rem 0.85rem;
+  align-items: stretch;
+  margin-bottom: 0.75rem;
+}
+
+.lineMetaRow {
+  display: contents;
+}
+
+.productPick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: stretch;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+/* Một khối viền: tên SP + đơn giá — căn SL/Xóa theo chiều cao thực của hàng */
+.productPickCard {
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  background: rgba(26, 22, 18, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.productPickCard .productPickDisplay {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--admin-text, #212529);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.productPickCard .productPickMeta {
+  margin: 0;
+  padding: 0;
+}
+
+.productPickMeta {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--admin-muted, #6c757d);
+}
+
+.productPickEmpty {
+  min-height: var(--manual-line-control-h);
+  padding: 0 0.75rem;
+  border-radius: 10px;
+  border: 1px dashed rgba(26, 22, 18, 0.18);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-muted, #6c757d);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.lineQty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-width: 0;
+}
+
+.lineQtyStepper {
+  min-height: var(--manual-line-control-h);
+  height: var(--manual-line-control-h);
+  align-self: center;
+}
+
+.lineQtyStepper :global(button) {
+  min-height: 100%;
+}
+
+.lineQty > div {
+  border-radius: 10px !important;
+  border: 1px solid var(--admin-border-inner, #dee2e6) !important;
+  background: var(--admin-surface, #fff);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.lineQty > div > button {
+  background: linear-gradient(180deg, #fafbfc 0%, #f1f3f5 100%);
+  border-color: rgba(26, 22, 18, 0.08) !important;
+  color: var(--admin-text, #212529);
+}
+
+.lineQty > div > button:hover:not(:disabled) {
+  background: var(--admin-accent-softer, #f1f5f9);
+}
+
+.lineQty > div > div:nth-child(2) {
+  border-color: rgba(26, 22, 18, 0.08) !important;
+  background: var(--admin-surface, #fff);
+}
+
+.lineDeleteCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-width: 3.25rem;
+}
+
+.rowClear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  min-height: var(--manual-line-control-h);
+  height: var(--manual-line-control-h);
+  min-width: 3.25rem;
+  padding: 0 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border-inner, #dee2e6);
+  background: var(--admin-surface, #fff);
+  cursor: pointer;
+  color: var(--admin-muted, #6c757d);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.rowClear:hover:not(:disabled) {
+  border-color: rgba(184, 50, 50, 0.42);
+  color: #b83232;
+  background: rgba(184, 50, 50, 0.06);
+  box-shadow: none;
+}
+
+.rowClear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+:global([data-admin-dark="true"]) .lineQty > div {
+  box-shadow: none;
+  border-color: var(--admin-border-inner, #243140) !important;
+  background: var(--admin-surface, #1a2430);
+}
+
+:global([data-admin-dark="true"]) .lineQty > div > button {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--admin-text, #e8f0f7);
+}
+
+:global([data-admin-dark="true"]) .lineQty > div > button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-admin-dark="true"]) .lineQty > div > div:nth-child(2) {
+  background: var(--admin-surface, #1a2430) !important;
+}
+
+:global([data-admin-dark="true"]) .productPickCard {
+  border-color: var(--admin-border-inner, #243140);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+:global([data-admin-dark="true"]) .rowClear {
+  border-color: var(--admin-border-inner, #243140);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(220, 228, 236, 0.85);
+}
+
+:global([data-admin-dark="true"]) .rowClear:hover:not(:disabled) {
+  border-color: rgba(232, 120, 120, 0.45);
+  color: #f0a8a8;
+  background: rgba(184, 50, 50, 0.12);
+}
+
+.submitBtn {
+  justify-content: center;
+}
+
+.submitBtnBlock {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding-bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 991px) {
+  .form {
+    padding-bottom: calc(4.8rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .submitStickyBar {
+    position: fixed;
+    left: max(var(--admin-section-pad-x, 0.4rem), env(safe-area-inset-left, 0px));
+    right: max(var(--admin-section-pad-x, 0.4rem), env(safe-area-inset-right, 0px));
+    bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    z-index: 60;
+    padding: 0.25rem 0.2rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+  }
+
+  .submitBtnBlock {
+    margin-top: 0;
+    padding-bottom: 0;
+    min-width: min(92vw, 16rem);
+    width: min(92vw, 28rem) !important;
+    max-width: min(92vw, 28rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 1rem 1rem;
+  }
+
+  .linesColHead {
+    grid-template-columns: 1fr;
+    gap: 0.35rem 0;
+    align-items: stretch;
+  }
+
+  .linesColHeadMeta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .linesColHeadActions {
+    flex: 0 0 3.5rem;
+    min-height: 1em;
+  }
+
+  .lineRow {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .lineMetaRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .lineQty {
+    flex: 0 0 auto;
+  }
+
+  .lineDeleteCell {
+    flex: 0 0 auto;
+    min-width: 3.5rem;
+    justify-content: flex-end;
+  }
+}
+
+.fieldError {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #b83232;
+}
+
+.err {
+  color: #b83232;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/**
+ * Trong panel phải: giữ khối tìm biến thể luôn trong viewport khi cuộn form dài (địa chỉ / cascader).
+ * top kế thừa --admin-panel-toolbar-offset từ AdminPanelStickyToolbar.
+ */
+.productSearchStickyPanel {
+  position: sticky;
+  top: var(--admin-panel-toolbar-offset, 4.75rem);
+  z-index: 2;
+  margin: 0 0 0.85rem;
+  padding: 0.35rem 0 0.65rem;
+  background: #fff;
+  background: var(--admin-surface, #fff);
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  box-shadow: 0 10px 18px -14px rgba(15, 23, 42, 0.2);
+  /**
+   * Không chặn click tới các dòng SL/Xóa cuộn phía dưới (chỉ vùng con interactive nhận pointer).
+   */
+  pointer-events: none;
+
+  & * {
+    pointer-events: auto;
+  }
+
+  :global([data-admin-dark="true"]) & {
+    border-bottom-color: var(--admin-border-inner, #dee2e6);
+    box-shadow: 0 12px 20px -14px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.productSearchStickyPanel .hitList {
+  max-height: min(38vh, 300px);
+  overflow-y: auto;
+}

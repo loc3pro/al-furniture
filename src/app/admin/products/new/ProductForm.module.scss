@@ -1,0 +1,370 @@
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  /* Khoảng đệm 2 mép — tránh label/input dính sát viền panel/page khi `.bodyScroll` không pad. */
+  padding: 0.25rem 0.5rem 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 1.35rem;
+  }
+}
+
+.wrap :global(.field) {
+  text-align: left;
+}
+
+.wrap :global(.field) input,
+.wrap :global(.field) textarea,
+.wrap :global(.field) select,
+.wrap :global(.field) :global(.ant-select) {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.categorySelectWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.categorySelect {
+  flex: 1;
+  min-width: 10rem;
+}
+
+.categorySelect:global(.ant-select) {
+  min-width: 10rem;
+}
+
+.categoryCreateBtn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.84rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.descFieldTitle {
+  display: block;
+  margin: 0 0 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(26, 22, 18, 0.82);
+}
+
+.fieldError {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #a32020;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  margin: 1.25rem 0 0.75rem;
+  text-align: left;
+}
+
+.tabStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.tab {
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.14);
+  background: #faf9f7;
+  color: rgba(26, 22, 18, 0.75);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.tab:hover:not(:disabled) {
+  border-color: rgba(26, 22, 18, 0.28);
+  background: #fff;
+}
+
+.tab:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tabActive {
+  border-color: rgba(45, 110, 168, 0.45);
+  background: rgba(45, 110, 168, 0.1);
+  color: #1a4d7a;
+}
+
+.tabAdd {
+  border-style: dashed;
+  background: #fff;
+}
+
+.variantCard {
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(26, 22, 18, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.variantCardToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.variantRemoveBtn {
+  font-size: 0.82rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.colorTableWrap {
+  width: 100%;
+  min-width: 0;
+}
+
+/** Cùng lưới 3 cột với `.dimsGrid` để căng đều và thẳng hàng với kích thước */
+.colorGridHead {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.colorGridHead span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(26, 22, 18, 0.5);
+  padding: 0.15rem 0.05rem 0;
+}
+
+.colorGridRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.colorGridCell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.colorGridCell input[type="text"],
+.colorGridCell input[type="search"] {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+  text-align: left;
+}
+
+.hexInput {
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  border: 1px solid rgba(26, 22, 18, .15);
+  border-radius: 8px;
+  padding: .5rem .45rem;
+}
+
+.colorLabelInput {
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  border: 1px solid rgba(26, 22, 18, .15);
+  border-radius: 8px;
+  padding: .5rem .45rem;
+}
+.colorLabelInput:focus {
+  outline: none;
+  border-color: rgba(26, 22, 18, 0.28);
+  box-shadow: 0 0 0 2px rgba(26, 22, 18, 0.12);
+}
+
+.colorLabelInput:hover {
+  border-color: rgba(26, 22, 18, 0.28);
+}
+
+.swatchInput {
+  width: 100%;
+  min-width: 0;
+  height: 2.8rem;
+  border: 1px solid rgba(26, 22, 18, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+  box-sizing: border-box;
+}
+
+.colorSwatchCell {
+  justify-content: flex-start;
+}
+
+.hexHint {
+  font-size: 0.78rem;
+  color: rgba(26, 22, 18, 0.45);
+  margin: 0.35rem 0 0;
+  text-align: left;
+}
+
+.dimsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
+  max-width: none;
+}
+
+.dimField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+.dimField input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.45rem;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+  text-align: left;
+}
+
+.dimField .fieldError {
+  margin: 0;
+}
+
+/** Điều chỉnh giá biến thể — một hàng full width */
+.priceAdjustmentBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+.priceAdjustmentBlock label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+  text-align: left;
+}
+
+.priceAdjustmentInput {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0.5rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+  text-align: left;
+}
+
+.priceAdjustHint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(26, 22, 18, 0.5);
+  line-height: 1.45;
+  text-align: left;
+}
+
+.priceAdjustPreview {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.7);
+  text-align: left;
+}
+
+.stockBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.stockLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+.imagesField {
+  width: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+.imagesField label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+  text-align: left;
+}
+
+.imagesField textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+}
+
+.actions {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .dimsGrid {
+    grid-template-columns: 1fr;
+  }
+}

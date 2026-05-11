@@ -1,0 +1,86 @@
+.banner {
+  width: 100%;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.banner[data-variant="shop"] {
+  background: color-mix(in srgb, var(--color-accent, #8b7355) 12%, var(--color-header-bg, #f7f4ef));
+}
+
+.banner[data-variant="shop"][data-kind="warning"] {
+  background: #fff8e6;
+  border-color: rgba(180, 140, 40, 0.35);
+}
+
+.banner[data-variant="shop"][data-kind="promo"] {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-primary, #2c2620) 8%, #faf8f5),
+    color-mix(in srgb, var(--color-accent, #8b7355) 18%, #faf8f5)
+  );
+}
+
+.banner[data-variant="admin"] {
+  background: var(--admin-accent-soft, #d4e9f8);
+  border-color: var(--admin-accent-border, #9dcbf0);
+}
+
+.banner[data-variant="admin"][data-kind="warning"] {
+  background: #fff3cd;
+  border-color: #ffc107;
+}
+
+.inner {
+  width: min(1120px, 100% - 2rem);
+  margin-inline: auto;
+  padding: 0.55rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.banner[data-variant="admin"] .inner {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: 0.5rem 1.25rem;
+}
+
+.text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--color-text, #1a1612);
+}
+
+.banner[data-variant="admin"] .text {
+  color: var(--admin-text, #212529);
+}
+
+.dismiss {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: rgba(26, 22, 18, 0.06);
+  color: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dismiss:hover {
+  background: rgba(26, 22, 18, 0.12);
+}
+
+.banner[data-variant="admin"] .dismiss {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.banner[data-variant="admin"] .dismiss:hover {
+  background: rgba(37, 99, 235, 0.15);
+}

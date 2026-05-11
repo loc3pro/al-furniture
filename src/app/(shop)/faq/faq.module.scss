@@ -1,0 +1,48 @@
+@use "../../../design-system/tokens.scss" as t;
+
+.page {
+  padding: t.$space-3 0 t.$space-5;
+  max-width: 800px;
+}
+
+.h1 {
+  margin: 0 0 t.$space-2;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+}
+
+.lead {
+  margin: 0 0 t.$space-3;
+  font-size: t.$text-body;
+  color: var(--color-muted, #5c5349);
+  line-height: 1.5;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-2;
+}
+
+.details {
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  border-radius: t.$radius-md;
+  padding: t.$space-2;
+  background: var(--color-surface, #fff);
+}
+
+.summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.body {
+  margin-top: t.$space-2;
+  font-size: t.$text-body;
+  line-height: 1.55;
+}

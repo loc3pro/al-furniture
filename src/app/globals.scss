@@ -1,0 +1,522 @@
+:root {
+  /* Trùng mép dưới SiteHeader (sticky PLP). Chỉnh nếu vẫn hở/lấp header */
+  --site-header-offset: 118px;
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-text: #1a1612;
+  --color-muted: #5c5349;
+  --color-primary: #2c2620;
+  --color-accent: #8b7355;
+  --color-header-bg: #f7f4ef;
+  --nav-bar-bg: #ece6df;
+  --color-menu: #1a1612;
+  --color-on-primary: #faf8f5;
+  --color-button-hover: #ebe5df;
+  /* Nút storefront khi đang nhấn (:active) — kem ấm + chữ đậm (đồng bộ tab voucher) */
+  --shop-btn-active-bg: #f2ede4;
+  --shop-btn-active-border: rgba(26, 22, 18, 0.14);
+  --shop-btn-active-text: var(--color-menu);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --radius: 12px;
+  --shadow-soft: 0 12px 40px rgba(26, 22, 18, 0.08);
+}
+
+@media (max-width: 899px) {
+  :root {
+    /* Mobile: ẩn subBar, topBar 2 hàng (logo + search) */
+    --site-header-offset: 112px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* next/image `fill` cần width/height 100% — `height: auto` toàn cục làm ảnh không phủ khung */
+img:not([data-nimg="fill"]) {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: min(1120px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  font-family: inherit;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn--primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-menu);
+  border: 1px solid rgba(26, 22, 18, 0.12);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  border-color: rgba(26, 22, 18, 0.28);
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/*
+ * Loại trừ input nội bộ của Ant Design (Select, DatePicker, Cascader, …) — chúng có class
+ * bắt đầu bằng "ant-…" và phải giữ nguyên nền/viền/padding mặc định của antd.
+ * Nếu áp padding + background:#fff vào input ẩn của antd Select, hộp trắng sẽ phủ lên
+ * placeholder/value làm chữ chồng nhau và border-radius tạo ra ký tự "(" ")" ở 2 góc.
+ */
+.field input:not([class*="ant-"]),
+.field textarea,
+.field select {
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  font: inherit;
+  background: #fff;
+}
+
+.field input:not([class*="ant-"]):focus,
+.field textarea:focus,
+.field select:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.muted {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+}
+
+.product-card__media {
+  aspect-ratio: 3 / 4;
+  background: #ece8e2;
+  position: relative;
+}
+
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__body {
+  padding: 1rem 1rem 1.25rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.product-card__discountBadge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+  padding: 0.28rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  line-height: 1.2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.product-card__priceLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.65rem;
+  row-gap: 0.2rem;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.product-card__priceSale {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: var(--color-menu);
+  text-shadow: none;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+.product-card__priceOrig {
+  font-size: 0.82rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-menu);
+  text-decoration: line-through;
+  text-shadow: none;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card .price {
+  color: var(--color-menu);
+  text-shadow: none;
+}
+
+.hero {
+  padding: 2rem 0 3rem;
+}
+
+.hero__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hero__grid {
+    grid-template-columns: 2fr 1fr;
+    align-items: stretch;
+  }
+}
+
+.banner-slide {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  display: block;
+  aspect-ratio: 21 / 9;
+  background: #ddd;
+  min-height: 180px;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: #000;
+  color: #fff;
+  z-index: 9999;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sectionBlock {
+  padding: 2.5rem 0 1rem;
+}
+
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+  flex-wrap: wrap;
+}
+
+.sectionTitle {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 700;
+  margin: 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.shopLook {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 900px) {
+  .shopLook {
+    grid-template-columns: 1fr 2fr;
+    align-items: stretch;
+  }
+}
+
+.shopLookIntro {
+  padding: 1.5rem 0;
+}
+
+.shopLookGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+@media (max-width: 640px) {
+  .shopLookGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shopLookCard {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e8e4de;
+}
+
+.shopLookDot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sectionMuted {
+  background: #f3ece6;
+  padding: 2.5rem 0;
+  margin-top: 2rem;
+}
+
+/*
+ * Nội dung HTML rich-text (blog public, preview admin, mô tả sản phẩm).
+ *
+ * Chiến lược spacing:
+ *  - Reset margin của mọi block con về 0 bằng `!important` (thắng cả inline
+ *    style do TinyMCE chèn).
+ *  - Khoảng cách giữa 2 sibling block đặt một lần qua `* + *` (lobotomized
+ *    owl) — tránh margin-collapse khó lường giữa p / heading / list.
+ *  - Heading mở section mới → gap rộng hơn; ngay sau heading → gap sát hơn.
+ *
+ * Strip các block rỗng / `<br>` còn sót lại đã làm ở bước sanitize
+ * (`prepareShopHtmlForRender`); CSS `:has(> br:only-child)` chỉ là phòng
+ * trường hợp HTML render trực tiếp không qua sanitize.
+ */
+.blog-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.55;
+}
+
+.blog-content > * {
+  margin: 0 !important;
+}
+
+.blog-content > * + * {
+  margin-top: 0.55em !important;
+}
+
+.blog-content > * + :where(h2, h3, h4) {
+  margin-top: 1.1em !important;
+}
+
+.blog-content > :where(h2, h3, h4) + * {
+  margin-top: 0.3em !important;
+}
+
+.blog-content :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text, #1a1612);
+}
+
+.blog-content h2 {
+  font-size: 1.35rem;
+}
+
+.blog-content h3 {
+  font-size: 1.15rem;
+}
+
+.blog-content :where(ul, ol) {
+  padding-left: 1.35rem;
+}
+
+.blog-content :where(li) {
+  margin: 0 !important;
+}
+
+.blog-content :where(li) + :where(li) {
+  margin-top: 0.25em !important;
+}
+
+/* TinyMCE đôi khi gói nội dung li trong p — gỡ margin để không nhân đôi gap */
+.blog-content :where(li) > :where(p) {
+  margin: 0 !important;
+}
+
+.blog-content :where(a) {
+  color: var(--color-accent, #8b7355);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-content :where(img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Bảng / ảnh — TinyMCE thường dùng style inline (đã whitelist trong sanitize). Fallback khi thiếu viền. */
+.blog-content :where(table) {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: inherit;
+}
+
+.blog-content :where(td, th) {
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  padding: 0.45rem 0.6rem;
+  vertical-align: top;
+}
+
+.blog-content :where(th) {
+  font-weight: 600;
+  background: rgba(26, 22, 18, 0.04);
+}
+
+.blog-content :where(caption) {
+  caption-side: top;
+  font-weight: 600;
+  margin-bottom: 0.35em;
+  text-align: left;
+}
+
+.blog-content :where(figure) {
+  margin: 0;
+  max-width: 100%;
+}
+
+.blog-content :where(figure) :where(img) {
+  display: block;
+  max-width: 100%;
+}
+
+.blog-content :where(blockquote) {
+  padding: 0.65rem 0 0.65rem 1rem;
+  border-left: 4px solid rgba(139, 115, 85, 0.45);
+  background: rgba(139, 115, 85, 0.06);
+  border-radius: 0 8px 8px 0;
+}
+
+.blog-content :where(iframe) {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Phòng tuyến cuối — ẩn block rỗng / chỉ chứa <br> nếu sanitize không kịp xử */
+.blog-content :where(p):empty,
+.blog-content :where(p):has(> br:only-child),
+.blog-content :where(li):empty,
+.blog-content :where(li):has(> br:only-child) {
+  display: none !important;
+}

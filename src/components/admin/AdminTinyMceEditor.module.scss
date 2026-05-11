@@ -1,0 +1,21 @@
+.wrap {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border-inner, #dee2e6);
+  /* overflow:hidden cắt menu xổ xuống (Đoạn văn / blocks) của TinyMCE */
+  overflow: visible;
+  background: var(--admin-surface, #fff);
+  position: relative;
+  z-index: 0;
+}
+
+.wrap[data-disabled="true"] {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+/* iframe TinyMCE — co giãn trong grid admin */
+.wrap :global(.tox-tinymce) {
+  border: none !important;
+}

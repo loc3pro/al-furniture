@@ -1,0 +1,82 @@
+.title {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--admin-text);
+}
+
+.lead {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--admin-muted);
+  max-width: 52rem;
+}
+
+.tableWrap {
+  min-width: 0;
+  overflow-x: auto;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.keysTable :global(thead th:nth-child(4)),
+.keysTable :global(tbody td:nth-child(4)) {
+  text-align: center;
+}
+
+.loading {
+  margin: 0;
+  padding: 1rem 0;
+  color: var(--admin-muted);
+}
+
+.tdEllipsis {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pagerMeta {
+  font-size: 0.875rem;
+  color: var(--admin-muted);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modalCancelBtn:global(.db-btn.db-btn--default):hover:not(:disabled) {
+  background: rgba(251, 191, 36, 0.22);
+  border-color: rgba(154, 52, 18, 0.45);
+  color: #9a3412;
+}
+
+.code {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.form {
+  margin-top: 0.5rem;
+}

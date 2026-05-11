@@ -1,0 +1,31 @@
+@use "../../../design-system/tokens.scss" as t;
+
+.title {
+  margin: 0;
+  font-size: t.$text-title;
+  font-weight: 600;
+}
+
+.lead {
+  margin: 0;
+  font-size: t.$text-small;
+  color: var(--admin-muted, #6c757d);
+}
+
+.formNarrow {
+  max-width: 640px;
+}
+
+.formWide {
+  max-width: 720px;
+}
+
+.paymentStack {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-2;
+}
+
+.tabsBody {
+  margin-top: t.$space-2;
+}

@@ -1,0 +1,149 @@
+.viewport {
+  position: fixed;
+  z-index: 10070;
+  right: 1rem;
+  top: max(1rem, env(safe-area-inset-top));
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: flex-end;
+  max-width: min(26rem, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+  max-width: 100%;
+  box-shadow:
+    0 4px 6px rgba(26, 22, 18, 0.04),
+    0 16px 40px rgba(26, 22, 18, 0.12);
+  animation: toastIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid transparent;
+}
+
+.toastText {
+  flex: 1;
+  min-width: 0;
+}
+
+.mark {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-top: 0.06rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(0.65rem) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* —— Shop (cửa hàng) —— */
+.viewport[data-surface="shop"] .toastOk {
+  background: #fffef9;
+  color: #1a3d2e;
+  border-color: rgba(61, 120, 90, 0.28);
+}
+
+.viewport[data-surface="shop"] .toastErr {
+  background: #fff8f7;
+  color: #7f1d1d;
+  border-color: rgba(185, 28, 28, 0.28);
+}
+
+.viewport[data-surface="shop"] .markOk {
+  color: #15803d;
+  background: rgba(21, 128, 61, 0.1);
+}
+
+.viewport[data-surface="shop"] .markErr {
+  color: #b91c1c;
+  background: rgba(185, 28, 28, 0.1);
+}
+
+/* —— Admin sáng —— */
+.viewport[data-surface="admin"] .toastOk {
+  background: #fff;
+  color: #14532d;
+  border-color: rgba(61, 154, 98, 0.32);
+}
+
+.viewport[data-surface="admin"] .toastErr {
+  background: #fff;
+  color: #7f1d1d;
+  border-color: rgba(201, 74, 92, 0.38);
+}
+
+.viewport[data-surface="admin"] .markOk {
+  color: #166534;
+  background: rgba(22, 101, 52, 0.1);
+}
+
+.viewport[data-surface="admin"] .markErr {
+  color: #b91c1c;
+  background: rgba(185, 28, 28, 0.1);
+}
+
+/* —— Admin tối —— */
+.viewport[data-surface="admin"][data-admin-dark="true"] .toastOk {
+  background: #1a2430;
+  color: #86efac;
+  border-color: rgba(93, 184, 131, 0.35);
+}
+
+.viewport[data-surface="admin"][data-admin-dark="true"] .toastErr {
+  background: #1a2430;
+  color: #fecdd3;
+  border-color: rgba(201, 74, 92, 0.45);
+}
+
+.viewport[data-surface="admin"][data-admin-dark="true"] .markOk {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.viewport[data-surface="admin"][data-admin-dark="true"] .markErr {
+  color: #fca5a5;
+  background: rgba(252, 165, 165, 0.12);
+}
+
+@media (max-width: 480px) {
+  .viewport {
+    right: 0.75rem;
+    top: max(0.75rem, env(safe-area-inset-top));
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .toast {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}

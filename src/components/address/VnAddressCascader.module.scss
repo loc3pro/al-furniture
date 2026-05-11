@@ -1,0 +1,212 @@
+.root {
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  border-radius: 12px;
+  background: var(--color-surface, #fff);
+  overflow: hidden;
+}
+
+.disabledBox {
+  padding: 0.75rem 0.9rem;
+  font-size: 0.92rem;
+  color: var(--color-muted, #5c5349);
+  line-height: 1.45;
+  background: rgba(26, 22, 18, 0.04);
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.1);
+}
+
+.tab {
+  flex: 1;
+  padding: 0.65rem 0.5rem;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.45);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.tab:hover:not(:disabled) {
+  color: rgba(26, 22, 18, 0.75);
+}
+
+.tabActive {
+  flex: 1;
+  padding: 0.65rem 0.5rem;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text, #1a1612);
+  cursor: pointer;
+  border-bottom: 2px solid var(--color-text, #1a1612);
+  margin-bottom: -1px;
+}
+
+.tab:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.searchRow {
+  padding: 0.45rem 0.65rem 0.55rem;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  background: rgba(26, 22, 18, 0.02);
+}
+
+.searchLabel {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 18, 0.45);
+  margin-bottom: 0.35rem;
+}
+
+.searchInput {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.48rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-accent-border, #9dcbf0);
+  background: var(--admin-accent-softer, var(--color-surface, #fff));
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--admin-text, var(--color-text, #1a1612));
+}
+
+.searchInput::placeholder {
+  color: var(--admin-muted, rgba(26, 22, 18, 0.45));
+  opacity: 0.85;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--admin-accent-strong, #2586d6);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft, #d4e9f8);
+}
+
+:global([data-admin-dark="true"]) .searchRow {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+:global([data-admin-dark="true"]) .searchLabel {
+  color: rgba(200, 210, 220, 0.55);
+}
+
+:global([data-admin-dark="true"]) .searchInput {
+  background: var(--admin-accent-softer, #152330);
+  border-color: var(--admin-accent-border, #3d6a8c);
+  color: var(--admin-text, #e8f0f7);
+}
+
+:global([data-admin-dark="true"]) .searchInput::placeholder {
+  color: var(--admin-muted, #9db0c0);
+  opacity: 0.85;
+}
+
+:global([data-admin-dark="true"]) .searchInput:focus {
+  border-color: var(--admin-accent-strong, #6ab8f0);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft, #1e3a52);
+}
+
+/* Giới hạn chiều cao danh sách; thanh cuộn mỏng (khớp AdminRightPanel) để không lấn át panel. */
+.list {
+  max-height: min(220px, 42vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108, 117, 125, 0.45) transparent;
+}
+
+.list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(108, 117, 125, 0.45);
+}
+
+:global([data-admin-dark="true"]) .list {
+  scrollbar-color: rgba(157, 176, 192, 0.45) transparent;
+}
+
+:global([data-admin-dark="true"]) .list::-webkit-scrollbar-thumb {
+  background: rgba(157, 176, 192, 0.4);
+}
+
+.itemBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--color-text, #1a1612);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.itemBtn:hover {
+  background: rgba(26, 22, 18, 0.06);
+}
+
+.itemSelected {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  background: rgba(26, 22, 18, 0.07);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text, #1a1612);
+  cursor: pointer;
+}
+
+.emptyHint {
+  padding: 1rem 0.9rem;
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--color-muted, #8a8076);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+}
+
+.summaryBar {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.55);
+  border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+  background: rgba(26, 22, 18, 0.02);
+}

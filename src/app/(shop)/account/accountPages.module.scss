@@ -1,0 +1,575 @@
+.msgOk {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(34, 139, 34, 0.12);
+}
+
+.msgErr {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(200, 60, 40, 0.12);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+
+.card {
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.field {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(26, 22, 18, 0.15);
+  margin-top: 0.35rem;
+}
+
+.muted {
+  color: rgba(26, 22, 18, 0.55);
+  font-size: 0.9rem;
+}
+
+/* Orders */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  max-width: 400px;
+}
+
+.search input {
+  border: none;
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  background: transparent;
+  outline: none;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.35rem;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.1);
+  margin-bottom: 1.35rem;
+  padding-bottom: 0;
+}
+
+.tab {
+  padding: 0.55rem 0.65rem;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: rgba(26, 22, 18, 0.5);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s ease;
+}
+
+.tab:hover {
+  color: #1a1612;
+}
+
+.tabActive {
+  padding: 0.55rem 0.65rem;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: -1px;
+  color: #1a1612;
+  font-weight: 700;
+  border-bottom: 2px solid #1a1612;
+}
+
+.tabActive:hover {
+  color: #1a1612;
+}
+
+.orderDetailBack {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+}
+
+.orderDetailBack a {
+  color: rgba(26, 22, 18, 0.65);
+  text-decoration: none;
+}
+
+.orderDetailBack a:hover {
+  text-decoration: underline;
+  color: #1a1612;
+}
+
+.orderCardLink {
+  display: block;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  outline-offset: 2px;
+}
+
+.orderCardLink:focus-visible {
+  outline: 2px solid rgba(196, 90, 42, 0.65);
+}
+
+.orderCardLink .orderCard {
+  margin-bottom: 0;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.orderCardLink:hover .orderCard {
+  border-color: rgba(26, 22, 18, 0.16);
+  box-shadow: 0 2px 14px rgba(26, 22, 18, 0.07);
+}
+
+.orderCard {
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.orderHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.9rem;
+}
+
+.orderItems {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: rgba(26, 22, 18, 0.75);
+}
+
+.orderCardHint {
+  margin: 0.65rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(26, 22, 18, 0.06);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.emptyBig {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.emptyIcon {
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+/* —— Trang voucher: ô tìm & tab (tách khỏi đơn hàng để thêm màu) —— */
+.couponSearch {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.15rem;
+  max-width: 440px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(26, 22, 18, 0.05);
+}
+
+.couponSearchIcon {
+  flex-shrink: 0;
+  color: var(--color-accent, #8b7355);
+  opacity: 0.85;
+}
+
+.couponSearch input {
+  border: none;
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  background: transparent;
+  outline: none;
+}
+
+.couponTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.35rem;
+  padding: 0.35rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  box-shadow: 0 1px 2px rgba(26, 22, 18, 0.04);
+}
+
+.couponTab {
+  padding: 0.5rem 0.85rem;
+  border: none;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: rgba(26, 22, 18, 0.5);
+  background: transparent;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.couponTab:hover {
+  color: rgba(26, 22, 18, 0.72);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.couponTabActive {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--shop-btn-active-border, rgba(26, 22, 18, 0.14));
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--shop-btn-active-text, var(--color-menu));
+  background: var(--shop-btn-active-bg, #f2ede4);
+  box-shadow: 0 1px 3px rgba(26, 22, 18, 0.06);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.couponTabActive:hover {
+  color: var(--shop-btn-active-text, var(--color-menu));
+  filter: brightness(0.98);
+}
+
+/* Spin / account coupons — nền gọn, nhấn primary/accent */
+.couponList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.couponCard {
+  position: relative;
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem 1.05rem 1.45rem;
+  overflow: hidden;
+  border: 1px solid rgba(26, 22, 18, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.couponCard:hover {
+  transform: translateY(-2px);
+}
+
+.couponCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--color-primary, #2c2620);
+  pointer-events: none;
+}
+
+.couponCard::after {
+  content: "";
+  position: absolute;
+  right: -18%;
+  top: -35%;
+  width: 48%;
+  padding-bottom: 48%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 45%, rgba(139, 115, 85, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.couponCard_active {
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(26, 22, 18, 0.04),
+    0 12px 36px rgba(26, 22, 18, 0.07);
+}
+
+.couponCard_active:hover {
+  box-shadow:
+    0 2px 6px rgba(26, 22, 18, 0.06),
+    0 16px 42px rgba(26, 22, 18, 0.09);
+}
+
+.couponCard_active::before {
+  background: var(--color-primary, #2c2620);
+  box-shadow: none;
+}
+
+.couponCard_active::after {
+  background: radial-gradient(circle at 85% 15%, rgba(139, 115, 85, 0.09) 0%, transparent 58%);
+}
+
+.couponCard_used {
+  background: #faf9f7;
+  box-shadow:
+    0 1px 2px rgba(26, 22, 18, 0.04),
+    0 10px 28px rgba(26, 22, 18, 0.05);
+}
+
+.couponCard_used::before {
+  background: rgba(92, 83, 73, 0.35);
+  box-shadow: none;
+}
+
+.couponCard_used::after {
+  background: radial-gradient(circle at 75% 25%, rgba(92, 83, 73, 0.05) 0%, transparent 55%);
+}
+
+.couponCard_expired {
+  background: linear-gradient(180deg, #fffbf7 0%, #fff8f0 100%);
+  box-shadow:
+    0 1px 2px rgba(180, 83, 9, 0.06),
+    0 10px 28px rgba(180, 83, 9, 0.07);
+}
+
+.couponCard_expired::before {
+  background: rgba(194, 65, 12, 0.55);
+  box-shadow: none;
+}
+
+.couponCard_expired::after {
+  background: radial-gradient(circle at 80% 30%, rgba(234, 88, 12, 0.07) 0%, transparent 58%);
+}
+
+.couponHead {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin-bottom: 0.55rem;
+}
+
+.couponCodeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.55rem;
+  min-width: 0;
+}
+
+.couponCode {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  font-size: 0.98rem;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  color: var(--color-primary, #2c2620);
+}
+
+.couponCard_used .couponCode {
+  color: #475569;
+}
+
+.couponCard_expired .couponCode {
+  color: #9a3412;
+}
+
+.couponBadge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.32rem 0.55rem;
+  border-radius: 999px;
+  line-height: 1;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+
+.couponBadge_active {
+  color: var(--color-accent, #8b7355);
+  background: rgba(139, 115, 85, 0.1);
+  border-color: rgba(139, 115, 85, 0.22);
+  box-shadow: none;
+}
+
+.couponBadge_used {
+  color: #475569;
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.couponBadge_expired {
+  color: #9a3412;
+  background: linear-gradient(180deg, #fed7aa 0%, #fdba74 100%);
+  border-color: rgba(251, 146, 60, 0.45);
+  box-shadow: 0 2px 8px rgba(251, 146, 60, 0.18);
+}
+
+.couponDiscount {
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+}
+
+.couponCard_active .couponDiscount {
+  color: var(--color-primary, #2c2620);
+  background: var(--shop-btn-active-bg, #f2ede4);
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  box-shadow: none;
+}
+
+.couponCard_used .couponDiscount {
+  color: #475569;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.couponCard_expired .couponDiscount {
+  color: #c2410c;
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  box-shadow: 0 3px 10px rgba(251, 146, 60, 0.15);
+}
+
+.couponLabel {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.65rem;
+  font-size: 0.93rem;
+  line-height: 1.45;
+  color: rgba(26, 22, 18, 0.82);
+}
+
+.couponMeta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(26, 22, 18, 0.48);
+}
+
+.couponMetaRow {
+  margin: 0;
+}
+
+.couponMetaKey {
+  font-weight: 700;
+  color: var(--color-accent, #8b7355);
+}
+
+.couponCard_used .couponMetaKey {
+  color: #64748b;
+}
+
+.couponCard_expired .couponMetaKey {
+  color: #c2410c;
+}
+
+.couponMin {
+  position: relative;
+  z-index: 1;
+  margin: 0.55rem 0 0;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(26, 22, 18, 0.62);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px dashed rgba(26, 22, 18, 0.14);
+}
+
+.couponCard_used .couponMin {
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.couponCard_expired .couponMin {
+  border-color: rgba(251, 146, 60, 0.28);
+}
+
+.couponActions {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.couponCard_used .couponActions,
+.couponCard_expired .couponActions {
+  border-top-color: rgba(26, 22, 18, 0.08);
+}
+
+.couponCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-on-primary, #faf8f5);
+  text-decoration: none;
+  border-radius: 999px;
+  background: var(--color-primary, #2c2620);
+  box-shadow: 0 4px 14px rgba(26, 22, 18, 0.18);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.couponCta:hover {
+  color: var(--color-on-primary, #faf8f5);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 18px rgba(26, 22, 18, 0.22);
+  transform: translateY(-1px);
+}

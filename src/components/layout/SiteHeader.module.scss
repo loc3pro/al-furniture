@@ -1,0 +1,1060 @@
+.shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-header-bg);
+}
+
+.topBar {
+  border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+  padding: 0.55rem 0;
+}
+
+.topInner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "brand search util";
+  gap: 1rem 1.25rem;
+  align-items: center;
+}
+
+.brandCluster {
+  grid-area: brand;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.headerStoreName {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-menu);
+  line-height: 1.2;
+  max-width: min(42vw, 200px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Desktop: logo trên thanh header; mobile ẩn — logo chuyển vào drawer */
+.logoBar {
+  display: flex;
+}
+
+.logo {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-size: 1.15rem;
+  color: var(--color-menu);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoHasImg {
+  font-size: 0;
+  line-height: 0;
+  max-height: 2.75rem;
+}
+
+.logoImg {
+  display: block;
+  max-height: 2.35rem;
+  width: auto;
+  max-width: min(38vw, 160px);
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.logoWithBeside {
+  font-size: inherit;
+  line-height: 1.2;
+  max-height: none;
+  min-width: 0;
+  max-width: min(52vw, 320px);
+}
+
+.logoWithBeside .logoImg {
+  flex-shrink: 0;
+}
+
+.logoWordmark {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-size: 0.95rem;
+  color: var(--color-menu);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .logoWithBeside.logoBar {
+    max-width: min(46vw, 260px);
+  }
+
+  .logoWordmark {
+    font-size: 0.86rem;
+  }
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  align-items: stretch;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgba(26, 22, 18, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  padding: 0.55rem 0.85rem;
+  font: inherit;
+  font-size: 0.92rem;
+  min-width: 0;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchBtn {
+  flex-shrink: 0;
+  width: 44px;
+  border: none;
+  background: rgba(26, 22, 18, 0.06);
+  color: var(--color-menu);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.searchBtn:hover {
+  background: rgba(26, 22, 18, 0.1);
+}
+
+.utils {
+  grid-area: util;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-self: end;
+}
+
+.hotline {
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-menu);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 900px) {
+  .hotline {
+    display: inline-flex;
+  }
+}
+
+.hotlineText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.hotlineText small {
+  font-size: 0.72rem;
+  opacity: 0.65;
+  font-weight: 600;
+}
+
+.hotlineText strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.iconRow {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.langWrap {
+  position: relative;
+}
+
+.langBtn {
+  gap: 0.15rem;
+  padding: 0 0.35rem;
+  width: auto;
+  min-width: 40px;
+}
+
+.langCode {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.langPanel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.35rem;
+  min-width: 11rem;
+  padding: 0.35rem;
+  margin-bottom: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12);
+  z-index: 120;
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-menu);
+  transition: background 0.12s;
+}
+
+.langOption:hover {
+  background: rgba(26, 22, 18, 0.06);
+}
+
+.langOptionActive {
+  background: rgba(26, 22, 18, 0.08);
+  font-weight: 700;
+}
+
+.langOptionCode {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.65;
+  width: 1.75rem;
+}
+
+.iconLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--color-menu);
+  transition: background 0.15s;
+}
+
+.iconLink:hover {
+  background: rgba(26, 22, 18, 0.06);
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.28rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.subBar {
+  position: relative;
+  z-index: 110;
+  background: var(--nav-bar-bg, #ece6df);
+  border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+}
+
+.subInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.55rem 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.mainNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1.15rem;
+}
+
+.mainNav a:hover {
+  opacity: 0.7;
+}
+
+/* Card SP trong mega menu là `<a>` — không áp opacity 0.7 (tránh mờ ảnh + chữ). */
+.mainNav .megaDropdown a:hover {
+  opacity: 1;
+}
+
+.navItemMega {
+  position: relative;
+}
+
+.navMegaTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+}
+
+.navMegaTrigger:hover {
+  opacity: 0.7;
+}
+
+.navMegaTriggerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--color-menu);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navMegaTriggerBtn:hover {
+  opacity: 0.7;
+}
+
+.navChevron {
+  flex-shrink: 0;
+  opacity: 0.62;
+}
+
+.megaDropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding-top: 0.35rem;
+  z-index: 140;
+}
+
+.megaDropdown.megaDropdownOpen {
+  display: block;
+}
+
+.megaDropdownInner {
+  background: #fff;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 18px 48px rgba(26, 22, 18, 0.14);
+  padding: 1.15rem 1.35rem;
+  min-width: min(94vw, 920px);
+}
+
+.megaDropdownNarrow {
+  min-width: 14rem;
+  padding: 0.85rem 1rem;
+}
+
+.megaDropdownInner.megaDropdownProducts {
+  min-width: min(98vw, 1080px);
+  padding: 1rem 1.25rem 1.15rem;
+}
+
+.megaPanelTop {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.55rem;
+}
+
+.megaTopLink {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.megaTopLink:hover {
+  text-decoration: underline;
+}
+
+.megaEmpty {
+  margin: 0;
+  padding: 0.75rem 0 0.25rem;
+  font-size: 0.9rem;
+  color: rgba(26, 22, 18, 0.65);
+}
+
+.megaSplit {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .megaSplit {
+    grid-template-columns: minmax(120px, 170px) minmax(0, 1fr);
+  }
+}
+
+.megaCatCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding-right: 0.85rem;
+  border-right: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.megaCatBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 0;
+  padding: 0.42rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-menu);
+  cursor: pointer;
+}
+
+.megaCatBtn:hover,
+.megaCatBtn:focus-visible {
+  background: rgba(26, 22, 18, 0.06);
+  outline: none;
+}
+
+.megaCatBtnActive {
+  background: rgba(44, 38, 32, 0.12);
+  font-weight: 800;
+}
+
+.megaProductCol {
+  min-width: 0;
+}
+
+.megaEmptyProducts {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(26, 22, 18, 0.58);
+}
+
+.megaProductGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+@media (max-width: 1100px) {
+  .megaProductGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.megaProductCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(26, 22, 18, 0.1);
+  background: #faf8f5;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.megaProductCard:hover,
+.megaProductCard:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(26, 22, 18, 0.18);
+  box-shadow: 0 6px 16px rgba(26, 22, 18, 0.08);
+}
+
+/* Menu vs primary quá gần nhau — hover đổi rõ: tên → accent, giá → primary đậm */
+.megaProductCard:hover .megaProductName,
+.megaProductCard:focus-visible .megaProductName {
+  color: var(--color-accent, #8b7355);
+}
+
+.megaProductCard:hover .megaProductPrice,
+.megaProductCard:focus-visible .megaProductPrice {
+  color: var(--color-primary, #2c2620);
+}
+
+.megaProductCard:hover .megaProductWas,
+.megaProductCard:focus-visible .megaProductWas {
+  color: rgba(26, 22, 18, 0.42);
+}
+
+.megaProductImgWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  min-height: 0;
+  /* Hơi thấp hơn 3:4 để card mega menu gọn (vẫn dọng nhẹ, ảnh contain) */
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: rgba(26, 22, 18, 0.06);
+  /* Căn giữa ảnh (contain) — flex ổn định hơn object-fit trong khung absolute 100%. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.megaProductImgStack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.megaProductImg {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.megaProductPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.megaBadge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.megaProductMeta {
+  padding: 0.35rem 0.45rem 0.42rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.megaProductName {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-menu, #1a1612);
+  transition: color 0.18s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.megaProductPrice {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--color-accent, #8b7355);
+  transition: color 0.18s ease;
+}
+
+.megaProductWas {
+  margin-left: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-decoration: line-through;
+  color: rgba(26, 22, 18, 0.38);
+  transition: color 0.18s ease;
+}
+
+.megaCatAllLink {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.megaCatAllLink:hover {
+  text-decoration: underline;
+}
+
+.megaListPlain {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.megaListPlain a {
+  display: block;
+  padding: 0.35rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-menu);
+  text-decoration: none;
+}
+
+.megaListPlain a:hover {
+  opacity: 0.65;
+}
+
+.navMuted {
+  color: rgba(26, 22, 18, 0.45);
+  cursor: default;
+}
+
+.promo {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.65);
+  max-width: 22rem;
+  text-align: right;
+}
+
+.promoLine {
+  display: block;
+}
+
+.promoSub {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(26, 22, 18, 0.62);
+}
+
+.promo strong {
+  color: var(--color-menu);
+  font-weight: 700;
+}
+
+.menuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-menu);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.menuBtn:hover {
+  background: rgba(26, 22, 18, 0.06);
+}
+
+.drawerBackdrop {
+  display: none;
+}
+
+.drawer {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .menuBtn {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .topInner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand util"
+      "search search";
+    gap: 0.45rem 0.5rem;
+    align-items: center;
+  }
+
+  .brandCluster {
+    gap: 0.35rem;
+  }
+
+  .headerStoreName {
+    max-width: min(34vw, 120px);
+    font-size: 0.76rem;
+  }
+
+  .logoBar {
+    display: none !important;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .iconLink {
+    width: 38px;
+    height: 38px;
+  }
+
+  .subBar {
+    display: none;
+  }
+
+  .drawerBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 105;
+    background: rgba(15, 14, 12, 0.45);
+    animation: navFadeIn 0.2s ease;
+  }
+
+  .drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 106;
+    width: min(20rem, 88vw);
+    max-width: 100%;
+    height: 100%;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0 0 max(1rem, env(safe-area-inset-bottom));
+    background: #faf8f5;
+    border-left: 1px solid rgba(26, 22, 18, 0.1);
+    box-shadow: -8px 0 32px rgba(26, 22, 18, 0.12);
+    transform: translateX(100%);
+    visibility: hidden;
+    overflow: hidden;
+    transition:
+      transform 0.28s ease,
+      visibility 0.28s;
+  }
+
+  .drawerOpen {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .drawerHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  }
+
+  .drawerTitle {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(26, 22, 18, 0.55);
+  }
+
+  .drawerClose {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-menu);
+    cursor: pointer;
+  }
+
+  .drawerClose:hover {
+    background: rgba(26, 22, 18, 0.06);
+  }
+
+  .drawerBrand {
+    flex-shrink: 0;
+    padding: 0.5rem 0.85rem 0.85rem;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  }
+
+  .drawerLogoLink {
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .drawerLogoLink.logoHasImg {
+    white-space: nowrap;
+  }
+
+  .drawerLogoLink.logoWithBeside {
+    white-space: normal;
+    align-items: flex-start;
+  }
+
+  .drawerLogoLink.logoWithBeside .logoMark {
+    flex-wrap: wrap;
+    width: 100%;
+    row-gap: 0.35rem;
+  }
+
+  .drawerWordmark {
+    font-size: 0.95rem;
+    line-height: 1.25;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+  }
+
+  .drawerLogoImg {
+    max-height: 2.75rem;
+    max-width: min(100%, 220px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .drawerNav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .drawerNav > a {
+    padding: 0.85rem 1.15rem;
+    color: var(--color-menu);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+  }
+
+  .drawerNav > a:hover {
+    background: rgba(26, 22, 18, 0.04);
+  }
+
+  .drawerDetails {
+    border-bottom: 1px solid rgba(26, 22, 18, 0.06);
+  }
+
+  .drawerDetails summary {
+    padding: 0.85rem 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    color: var(--color-menu);
+  }
+
+  .drawerDetails summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .drawerSubList {
+    margin: 0;
+    padding: 0 1.15rem 0.85rem 1.75rem;
+    list-style: none;
+  }
+
+  .drawerSubList li {
+    margin: 0.35rem 0;
+  }
+
+  .drawerSubList a {
+    display: inline-block;
+    padding: 0.3rem 0;
+    border: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .drawerSubList a:hover {
+    background: transparent;
+    text-decoration: underline;
+  }
+
+  .drawerAccount {
+    flex-shrink: 0;
+    padding: 0.75rem 1.15rem 1rem;
+    border-top: 1px solid rgba(26, 22, 18, 0.08);
+    background: rgba(26, 22, 18, 0.02);
+  }
+
+  .drawerAccountLink {
+    display: block;
+    margin-bottom: 0.65rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .drawerAccountLink:hover {
+    text-decoration: underline;
+  }
+
+  .drawerLogout {
+    width: 100%;
+    margin-top: 0.15rem;
+    padding: 0.65rem 0.85rem;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgba(26, 22, 18, 0.12);
+    background: #fff;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-menu);
+  }
+
+  .drawerLogin {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    text-align: center;
+    border-radius: 10px;
+    background: rgba(26, 22, 18, 0.06);
+    color: var(--color-menu);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .drawerPromo {
+    flex-shrink: 0;
+    margin: 0 1rem;
+    padding: 1rem 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(26, 22, 18, 0.65);
+    line-height: 1.45;
+    border-top: 1px solid rgba(26, 22, 18, 0.08);
+  }
+
+  .drawerPromo strong {
+    color: var(--color-menu);
+  }
+
+  .drawerHotline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 1rem 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    background: rgba(26, 22, 18, 0.06);
+    color: var(--color-menu);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Tablet ngang: thanh dưới cuộn ngang thay vì wrap */
+@media (min-width: 900px) and (max-width: 1100px) {
+  .subInner {
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mainNav {
+    flex-wrap: nowrap;
+    gap: 0.85rem 1rem;
+  }
+
+  .promo {
+    flex-shrink: 0;
+    text-align: left;
+    font-size: 0.74rem;
+    max-width: 16rem;
+  }
+}

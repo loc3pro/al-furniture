@@ -1,0 +1,76 @@
+.root {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.root > [data-admin-print-hide] {
+  flex-shrink: 0;
+}
+
+.scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--admin-section-pad-x, 1.1rem);
+  /* Thoáng giữa header/toolbar và các section/card trong vùng cuộn */
+  padding-top: calc(var(--admin-below-chrome, 1rem) + 0.5rem);
+  /* Nhỏ lại để list/card chiếm thêm chiều cao; pagination sticky + safe-area */
+  padding-bottom: max(15px, env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media (max-width: 991px) {
+  .scroll {
+    padding-top: calc(var(--admin-below-chrome, 1rem) + 0.25rem);
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    /* Full width tới mép an toàn — không chồng padding-inline với safe-area */
+    padding-inline: unset;
+    padding-left: max(var(--admin-section-pad-x, 1.1rem), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--admin-section-pad-x, 1.1rem), env(safe-area-inset-right, 0px));
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Chỉ tăng chừa đáy khi trang có toolbar actions trong header */
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar)) .scroll,
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar--end)) .scroll,
+  .root:has(:global(.adminPageHeaderRow .adminToolbar.adminToolbar--end)) .scroll {
+    padding-bottom: calc(1.9rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Trường hợp chỉ có 1 nút action ở footer mobile */
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar .adminToolbarBtn)):not(
+      :has(:global(.adminPageHeaderRow > .adminToolbar .adminToolbarBtn:nth-child(2)))
+    ) .scroll,
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar--end .adminToolbarBtn)):not(
+      :has(:global(.adminPageHeaderRow > .adminToolbar--end .adminToolbarBtn:nth-child(2)))
+    ) .scroll,
+  .root:has(:global(.adminPageHeaderRow .adminToolbar.adminToolbar--end .adminToolbarBtn)):not(
+      :has(:global(.adminPageHeaderRow .adminToolbar.adminToolbar--end .adminToolbarBtn:nth-child(2)))
+    ) .scroll {
+    padding-bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Nếu toolbar có từ 3 nút trở lên thì chừa nhiều hơn để tránh che nội dung */
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar .adminToolbarBtn:nth-child(3))) .scroll,
+  .root:has(:global(.adminPageHeaderRow > .adminToolbar--end .adminToolbarBtn:nth-child(3))) .scroll,
+  .root:has(:global(.adminPageHeaderRow .adminToolbar.adminToolbar--end .adminToolbarBtn:nth-child(3))) .scroll {
+    padding-bottom: calc(2.6rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Không dùng `.scroll > *:last-child { flex: 1 }` — quy tắc đó làm danh sách dạng cột (banner, v.v.)
+   bị co `flex-shrink` và cắt nội dung. Các màn cần kéo full chiều cao hãy đặt `flex: 1 1 0; min-height: 0`
+   trên wrapper gốc của chính trang đó (vd. bảng sản phẩm, chat). */

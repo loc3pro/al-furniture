@@ -1,0 +1,25 @@
+.root {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sheet {
+  margin-bottom: 2rem;
+}
+
+.sheet:last-child {
+  margin-bottom: 0;
+}
+
+@media print {
+  .sheet {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .sheet:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}

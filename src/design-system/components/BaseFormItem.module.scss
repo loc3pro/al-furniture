@@ -1,0 +1,30 @@
+@use "../tokens.scss" as t;
+
+.item {
+  margin-bottom: t.$space-2;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  font-size: t.$text-small;
+  font-weight: 500;
+  margin-bottom: t.$space-1;
+  color: var(--ds-text, #212529);
+}
+
+.hint {
+  margin-top: t.$space-1;
+  font-size: t.$text-small;
+  color: var(--ds-muted, #6c757d);
+  line-height: 1.4;
+}
+
+.error {
+  margin-top: t.$space-1;
+  font-size: t.$text-small;
+  color: var(--ds-danger, #c92a2a);
+}

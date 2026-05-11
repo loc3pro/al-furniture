@@ -1,0 +1,220 @@
+@keyframes accountSkeletonPulse {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+.pulse {
+  background: rgba(26, 22, 18, 0.09);
+  border-radius: 8px;
+  animation: accountSkeletonPulse 1.15s ease-in-out infinite;
+}
+
+.circlePulse {
+  composes: pulse;
+  border-radius: 50%;
+}
+
+.avatarSk {
+  composes: circlePulse;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.line {
+  composes: pulse;
+  height: 0.72rem;
+  margin-bottom: 0.45rem;
+  border-radius: 4px;
+}
+
+.navRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+}
+
+.navIcon {
+  composes: pulse;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.navText {
+  composes: pulse;
+  flex: 1;
+  height: 0.85rem;
+  max-width: 160px;
+  border-radius: 4px;
+}
+
+.contactLine {
+  composes: pulse;
+  height: 0.65rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+.contactLine:first-child {
+  margin-top: 0;
+}
+
+.logoutSk {
+  composes: pulse;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+}
+
+.mainTitleSk {
+  composes: pulse;
+  height: 1.35rem;
+  width: 48%;
+  max-width: 280px;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.cardSk {
+  composes: pulse;
+  border-radius: 12px;
+  min-height: 5.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Orders */
+.searchSk {
+  composes: pulse;
+  height: 2.55rem;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.tabSk {
+  composes: pulse;
+  height: 2rem;
+  width: 5.5rem;
+  border-radius: 4px;
+}
+
+.tabsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.45rem;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.35rem;
+}
+
+.orderCardSk {
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.orderHeadSk {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.orderAmountSk {
+  composes: pulse;
+  height: 1rem;
+  width: 5.5rem;
+  border-radius: 4px;
+}
+
+.orderStatusSk {
+  composes: pulse;
+  height: 0.85rem;
+  width: 4.5rem;
+  border-radius: 4px;
+}
+
+.metaSk {
+  composes: pulse;
+  height: 0.72rem;
+  width: 72%;
+  max-width: 320px;
+  border-radius: 4px;
+  margin-bottom: 0.65rem;
+}
+
+.itemLineSk {
+  composes: pulse;
+  height: 0.68rem;
+  width: 88%;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.itemLineSk:last-child {
+  margin-bottom: 0;
+  width: 62%;
+}
+
+/* Reviews */
+.reviewTitleRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.reviewLinkSk {
+  composes: pulse;
+  height: 1rem;
+  flex: 1;
+  max-width: 220px;
+  border-radius: 4px;
+}
+
+.reviewDateSk {
+  composes: pulse;
+  height: 0.8rem;
+  width: 5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.starsSk {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0.45rem;
+}
+
+.starSk {
+  composes: pulse;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.commentSk {
+  composes: pulse;
+  height: 0.85rem;
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.commentSkShort {
+  composes: pulse;
+  height: 0.85rem;
+  width: 75%;
+  border-radius: 4px;
+}

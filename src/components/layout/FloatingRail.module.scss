@@ -1,0 +1,266 @@
+.rail {
+  position: fixed;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  overflow: visible;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+/* Cột cố định hẹp — không giãn theo chip đang hover (tránh ô trắng bên trái) */
+.card {
+  width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(26, 22, 18, 0.1);
+  overflow: visible;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: stretch;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+/* Thu gọn: icon căn giữa ô. Hover: mở rộng sang trái, chữ trái / icon phải — chỉ desktop */
+.chip {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 52px;
+  padding: 0 10px;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #ececec;
+  background: #fff;
+  color: var(--color-menu, #1a1612);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-end;
+  transition: width 0.32s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.item:last-child .chip {
+  border-bottom: none;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  width: min(160px, calc(100vw - 1.5rem));
+  justify-content: space-between;
+  z-index: 2;
+  box-shadow: -4px 0 14px rgba(26, 22, 18, 0.1);
+  border-radius: 5px;
+}
+
+.chip:focus {
+  outline: none;
+}
+
+.chip:focus-visible {
+  outline: 2px solid rgba(26, 22, 18, 0.35);
+  outline-offset: 0;
+}
+
+.chipIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chipLabel {
+  display: block;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition:
+    max-width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.18s ease;
+}
+
+.chip:hover .chipLabel,
+.chip:focus-visible .chipLabel {
+  max-width: 180px;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip,
+  .chipLabel {
+    transition-duration: 0.01ms;
+  }
+}
+
+.topBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 52px;
+  gap: 10px;
+  padding: 1.5rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(26, 22, 18, 0.85);
+  color: #faf8f5;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(26, 22, 18, 0.15);
+}
+
+.topArrow {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.topText {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* —— Mobile header: gọi / Zalo / Messenger cạnh nút menu (SiteHeader) —— */
+.headerQuick {
+  flex: 1;
+  min-width: 0;
+}
+
+.headerQuickList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.28rem;
+  flex-wrap: nowrap;
+}
+
+.headerQuickItem {
+  flex-shrink: 0;
+}
+
+.headerQuickChip {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow:
+    0 2px 8px rgba(26, 22, 18, 0.1),
+    0 1px 2px rgba(26, 22, 18, 0.06);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.headerQuickChip:active {
+  transform: scale(0.96);
+}
+
+.headerQuickIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.headerQuickChip[data-channel="phone"] {
+  background: linear-gradient(165deg, #ebe3d8 0%, #ddd1c3 100%);
+  border: 1px solid rgba(26, 22, 18, 0.08);
+}
+
+.headerQuickChip[data-channel="zalo"] {
+  background: #fff;
+  border: 1px solid rgba(26, 22, 18, 0.06);
+}
+
+.headerQuickChip[data-channel="messenger"] {
+  background: #0084ff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headerQuickChip:active {
+    transform: none;
+  }
+}
+
+/* —— Mobile: ẩn cột liên hệ dưới đáy — chip đã chuyển lên header; chỉ giữ nút TOP —— */
+@media (max-width: 900px) {
+  .rail {
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    position: static;
+    width: auto;
+    height: auto;
+    align-items: flex-end;
+    pointer-events: none;
+    gap: 0;
+  }
+
+  .rail > .card {
+    display: none;
+  }
+
+  .topBtn {
+    position: fixed;
+    left: auto;
+    right: max(0.5rem, env(safe-area-inset-right));
+    top: 52%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 46px;
+    min-height: 5.5rem;
+    padding: 0.55rem 0.4rem;
+    border-radius: 10px;
+    z-index: 94;
+    pointer-events: auto;
+  }
+}

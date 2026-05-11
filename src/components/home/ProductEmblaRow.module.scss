@@ -1,0 +1,101 @@
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.25rem 0 0.5rem;
+}
+
+.slide {
+  flex: 0 0 min(260px, 78vw);
+  min-width: 0;
+}
+
+.card {
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(26, 22, 18, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(26, 22, 18, 0.1);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1;
+  background: #f0ebe6;
+}
+
+.body {
+  padding: 1rem 1rem 1.15rem;
+}
+
+.cat {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-bottom: 0.25rem;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+}
+
+.arrow {
+  position: absolute;
+  z-index: 3;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 12px rgba(26, 22, 18, 0.12);
+  color: var(--color-menu);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.arrow:hover:not(:disabled) {
+  background: #fff;
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Trùm nhẹ ra ngoài viewport — không chiếm chỗ ngang, thẻ đầu thẳng hàng tiêu đề */
+.arrowLeft {
+  left: 0;
+  transform: translate(-45%, -50%);
+}
+
+.arrowRight {
+  right: 0;
+  transform: translate(45%, -50%);
+}
+
+@media (max-width: 640px) {
+  .arrow {
+    display: none;
+  }
+}

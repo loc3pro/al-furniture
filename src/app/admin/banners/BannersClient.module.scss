@@ -1,0 +1,326 @@
+.page {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.mainStack {
+  --admin-pagination-sticky-bg: var(--admin-main-canvas);
+
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--admin-text, #1e3a4d);
+}
+
+.lead {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--admin-muted, #5a7a8e);
+  max-width: none;
+}
+
+.lead strong {
+  color: var(--admin-text, #1e3a4d);
+  font-weight: 700;
+}
+
+.alert {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(180, 50, 50, 0.08);
+  color: #9a2424;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.addCard {
+  margin-top: 1rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border, rgba(26, 22, 18, 0.1));
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(26, 22, 18, 0.06);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.addActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.field span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-muted, #5a7a8e);
+}
+
+.field input {
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border, #c8dbe8);
+  font: inherit;
+  background: #fff;
+}
+
+.fieldHint {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.35rem;
+  flex: 1 1 0;
+  min-height: max(12rem, 28vh);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card {
+  border-radius: 14px;
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.12));
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(26, 22, 18, 0.07);
+}
+
+.cardInner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "orderCol formCol";
+  /* Cột 0 — vạch dọc dính mép ô «Thứ tự», không để hở rộng làm mất viền */
+  gap: 1rem 0;
+  padding: 1.15rem 1.25rem;
+  align-items: stretch;
+}
+
+.formCol {
+  grid-area: formCol;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: start;
+  min-height: 0;
+}
+
+@media (max-width: 900px) {
+  .cardInner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "orderCol"
+      "formCol";
+    gap: 1rem;
+  }
+
+  .orderRail {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0 !important;
+    padding-right: 0.45rem;
+    border-right: none;
+  }
+
+  .orderBtns {
+    flex-shrink: 0;
+  }
+
+  .formCol {
+    padding-left: 0;
+    border-top: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+    padding-top: 1rem;
+  }
+
+}
+
+.orderRail {
+  grid-area: orderCol;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  min-width: 3.5rem;
+  padding: 0.65rem 0.45rem;
+  border-radius: 12px;
+  background: var(--admin-control-fill, rgba(26, 22, 18, 0.04));
+  border: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  box-sizing: border-box;
+}
+
+@media (min-width: 901px) {
+  .orderRail {
+    padding-right: 1rem;
+    border-right: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+  }
+
+  .formCol {
+    padding-left: 1.15rem;
+  }
+}
+
+.orderBadge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 18, 0.48);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.orderNum {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--admin-text, #1e3a4d);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.orderBtns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  min-width: 2.4rem;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border, rgba(26, 22, 18, 0.12));
+  background: #fff;
+  color: var(--admin-text, #1e3a4d);
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    opacity 0.12s ease,
+    color 0.12s ease;
+}
+
+.orderBtn:hover:not(:disabled) {
+  background: rgba(30, 77, 71, 0.08);
+  border-color: rgba(30, 77, 71, 0.28);
+  color: var(--admin-accent, #1e4d47);
+}
+
+.orderBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.idHint {
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+  color: rgba(26, 22, 18, 0.38);
+}
+
+.metaPrimaryActions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.saveBtn:global(.btn) {
+  flex: 0 0 auto;
+  min-width: 6.5rem;
+  padding: 0.55rem 1.4rem;
+  justify-content: center;
+}
+
+.dangerBtn:global(.btn) {
+  flex: 0 0 auto;
+  padding: 0.55rem 1.1rem;
+  color: #a83232;
+  border-color: rgba(184, 50, 50, 0.35);
+}
+
+.dangerBtn:global(.btn:hover:not(:disabled)) {
+  background: rgba(184, 50, 50, 0.06);
+  border-color: rgba(184, 50, 50, 0.55);
+  color: #8a2222;
+}
+
+@media (max-width: 480px) {
+  .metaPrimaryActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .saveBtn:global(.btn),
+  .dangerBtn:global(.btn) {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--admin-text, #1e3a4d);
+}
+
+.switchRow input {
+  width: 1rem;
+  height: 1rem;
+}
+
+.empty {
+  margin: 1.5rem auto;
+  max-width: min(26rem, 100%);
+}
+
+.listLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: min(40vh, 280px);
+  margin: 1rem 0;
+}

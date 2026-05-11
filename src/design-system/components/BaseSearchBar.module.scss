@@ -1,0 +1,42 @@
+@use "../tokens.scss" as t;
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: t.$space-2;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.search {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: t.$space-2;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.$space-1;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+@media (max-width: 640px) {
+  .actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

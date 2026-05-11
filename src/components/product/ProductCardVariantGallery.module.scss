@@ -1,0 +1,67 @@
+.root {
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+}
+
+.imageStack {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.imageLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.nameOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  padding: 0.7rem 0.85rem 0.75rem;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 22, 18, 0) 0%,
+    rgba(26, 22, 18, 0.28) 35%,
+    rgba(26, 22, 18, 0.78) 100%
+  );
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.nameOverlayText {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #faf8f5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Chỉ thiết bị có hover — mobile vẫn đọc tên trong thân card */
+@media (hover: hover) and (pointer: fine) {
+  .root:hover .nameOverlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageLayer {
+    transition-duration: 0.12s;
+  }
+
+  .nameOverlay {
+    transition-duration: 0.12s;
+  }
+}

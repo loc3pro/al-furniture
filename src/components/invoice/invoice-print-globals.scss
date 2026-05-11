@@ -1,0 +1,98 @@
+/**
+ * In hóa đơn: ẩn chrome layout — không dùng class CSS Modules (bị hash),
+ * chỉ dùng data-* và class literal (.shop-chrome).
+ */
+
+@media print {
+  @page {
+    margin: 12mm;
+    size: A4 portrait;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  /* ——— Admin shell ——— */
+  [data-admin-shell] {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  [data-admin-shell-banner],
+  [data-admin-sider],
+  [data-admin-shell] .ant-layout-sider-zero-width-trigger {
+    display: none !important;
+  }
+
+  [data-admin-main-column] {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Cột chính: ẩn outlet bên cạnh <main> (class mainStage bị hash — không dùng .mainStage) */
+  [data-admin-main-column] > div > *:not(main) {
+    display: none !important;
+  }
+
+  [data-admin-main-column] > div,
+  [data-admin-main-column] main,
+  [data-admin-main-column] main > div {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* AdminPageLayout: header/toolbar bọc data-admin-print-hide (AdminPageLayout.tsx) */
+  [data-admin-print-hide] {
+    display: none !important;
+  }
+
+  /* ——— Shop chrome ——— */
+  [data-shop-print-hide] {
+    display: none !important;
+  }
+
+  /* Account area: sidebar nằm ngoài ShopChrome — ẩn khi in hóa đơn */
+  [data-account-print-hide] {
+    display: none !important;
+  }
+
+  [data-account-shell] {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  [data-account-shell] > main {
+    width: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .shop-chrome main#main {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+}

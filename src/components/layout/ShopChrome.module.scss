@@ -1,0 +1,7 @@
+/* Giữ chỗ cho SiteHeader position:fixed — trùng --site-header-offset (globals + PLP sidebar). */
+.headerSpacer {
+  width: 100%;
+  height: var(--site-header-offset, 118px);
+  flex-shrink: 0;
+  pointer-events: none;
+}

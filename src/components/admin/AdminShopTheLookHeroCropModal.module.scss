@@ -1,0 +1,66 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.dialog {
+  width: min(560px, 100%);
+  max-height: min(92vh, 720px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border-radius: 14px;
+  background: var(--admin-surface, #fff);
+  border: 1px solid var(--admin-border-inner);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--admin-muted);
+  line-height: 1.4;
+}
+
+.cropWrap {
+  position: relative;
+  width: 100%;
+  height: min(48vh, 360px);
+  background: var(--admin-accent-softer, #0f172a);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.zoomRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+}
+
+.zoomRow input[type="range"] {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}

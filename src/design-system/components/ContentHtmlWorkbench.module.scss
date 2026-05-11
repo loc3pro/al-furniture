@@ -1,0 +1,93 @@
+@use "../tokens.scss" as t;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-2;
+  width: 100%;
+  min-width: 0;
+}
+
+.editorRow {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-2;
+  min-height: 200px;
+}
+
+.editorTextarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  padding: t.$space-2;
+  border-radius: t.$radius-sm;
+  border: 1px solid var(--admin-border-inner, #cfe0d9);
+  background: var(--admin-surface, #fff);
+  color: var(--admin-text, #0f2622);
+  font: inherit;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.editorTextarea:focus-visible {
+  outline: 2px solid var(--admin-accent, #008080);
+  outline-offset: 1px;
+}
+
+.tableWrap {
+  overflow: auto;
+  border: 1px solid var(--ds-panel-border, #e9ecef);
+  border-radius: t.$radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: t.$text-small;
+}
+
+.th,
+.td {
+  padding: t.$space-1 t.$space-2;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--ds-panel-border, #e9ecef);
+}
+
+.th {
+  background: var(--admin-table-header-bg, #eef2f6);
+  font-weight: 600;
+}
+
+.rowButton {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.rowButton:hover,
+.rowButton:focus-visible {
+  text-decoration: underline;
+}
+
+.preview {
+  max-height: 120px;
+  overflow: auto;
+  font-size: t.$text-small;
+  line-height: 1.45;
+}
+
+.previewBox {
+  border: 1px dashed var(--ds-panel-border, #ced4da);
+  border-radius: t.$radius-sm;
+  padding: t.$space-2;
+  min-height: 120px;
+  background: var(--admin-table-row-alt, #fafbfc);
+}

@@ -1,0 +1,630 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+  SELLER
+  CONTENT
+  SUPPORT
+}
+
+enum OrderStatus {
+  PENDING
+  FAILED
+  PAID
+  PROCESSING
+  SHIPPING
+  COMPLETED
+  CANCELLED
+  RETURNED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  COD
+  MOMO
+  BANK_TRANSFER
+}
+
+enum AuthPurpose {
+  REGISTER
+  LOGIN
+  VERIFY_EMAIL
+  VERIFY_PHONE
+}
+
+model User {
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  phone            String?   @unique
+  passwordHash     String?
+  googleSub        String?   @unique
+  avatarUrl        String?
+  role             Role      @default(CUSTOMER)
+  emailVerifiedAt  DateTime?
+  phoneVerifiedAt  DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  addresses Address[]
+  orders    Order[]
+  reviews   Review[]
+  wishlists Wishlist[]
+  chatSessions ChatSession[]
+  productsCreated Product[] @relation("ProductCreatedBy")
+  ordersPlacedAsStaff Order[] @relation("OrderPlacedByStaff")
+  adminAuditLogs    AdminAuditLog[]
+  issuedSpinCoupons IssuedSpinCoupon[]
+  spinWheelSpinLogs SpinWheelSpinLog[]
+}
+
+/// Ghi nhận thao tác admin (tạo SP, đơn thủ công, đổi trạng thái…).
+model AdminAuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  actor       User?    @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+  action      String
+  entityType  String
+  entityId    String?
+  summary     String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entityType, entityId])
+  @@index([actorUserId])
+}
+
+model AuthVerification {
+  id         String      @id @default(cuid())
+  target     String
+  purpose    AuthPurpose
+  code       String
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime    @default(now())
+
+  @@index([target, purpose])
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  line      String
+  ward      String?
+  district  String?
+  city      String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id                  String     @id @default(cuid())
+  nameVi              String
+  nameEn              String
+  slug                String     @unique
+  parentId            String?
+  parent              Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children            Category[] @relation("CategoryTree")
+  metaTitleVi         String?
+  metaTitleEn         String?
+  metaDescriptionVi   String?
+  metaDescriptionEn   String?
+  products            Product[]
+  createdAt           DateTime   @default(now())
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  nameVi          String
+  nameEn          String
+  /// Mã hiển thị cố định — SP-00000000001; gán khi tạo (slug URL vẫn riêng).
+  productCode     String?          @unique
+  slug            String           @unique
+  /// SKU biến thể dùng cho phần [Tên thương hiệu]; để trống → mặc định "Nội thất" khi sinh SKU.
+  brandNameVi     String?
+  brandNameEn     String?
+  descriptionVi   String
+  descriptionEn   String
+  basePrice       Int
+  /// Phần trăm giảm giá so với giá gốc (0–100)
+  discountPercent Int              @default(0)
+  /// Giá bán sau giảm (VNĐ / đơn vị); biến thể cộng thêm priceAdjustment
+  salePrice       Int?
+  // Tiền cọc tối đa mỗi đơn vị (VNĐ); null = không bật đặt cọc cho SP này
+  depositAmount   Int?
+  categoryId      String
+  category        Category         @relation(fields: [categoryId], references: [id])
+  /// Staff đăng sản phẩm từ admin (POST /api/admin/products).
+  createdByUserId String?
+  createdBy       User?            @relation("ProductCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  isFeatured      Boolean          @default(false)
+  /// Nhãn hiển thị shop (VD: "Mới", "Combo") — nhập trong admin, phân tách bằng dấu phẩy.
+  tags            String[]         @default([])
+  viewCount       Int              @default(0)
+  soldCount       Int              @default(0)
+  metaTitleVi     String?
+  metaTitleEn     String?
+  metaDescriptionVi String?
+  metaDescriptionEn String?
+  variants        ProductVariant[]
+  reviews         Review[]
+  wishlists       Wishlist[]
+  shopTheLookHotspots ShopTheLookHotspot[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([createdByUserId])
+}
+
+/// Bài “Shop the Look” — ảnh lifestyle + hotspot gắn sản phẩm (tọa độ % so với khung ảnh).
+model ShopTheLook {
+  id           String               @id @default(cuid())
+  slug         String               @unique
+  title        String
+  subtitle     String?
+  /// Mô tả chi tiết (HTML/plain) hiển thị dưới ảnh / trong trang chi tiết.
+  description  String?              @db.Text
+  heroImageUrl String
+  published    Boolean              @default(false)
+  sortOrder    Int                  @default(0)
+  /// Hệ số zoom UI trong admin lần cuối (1 = 100%) — lưu để căn lại khi chỉnh sau này.
+  editorZoom   Float                @default(1)
+  hotspots     ShopTheLookHotspot[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
+  @@index([published, sortOrder])
+}
+
+model ShopTheLookHotspot {
+  id        String      @id @default(cuid())
+  lookId    String
+  look      ShopTheLook @relation(fields: [lookId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  /// 0–100 theo chiều ngang khung ảnh hiển thị (object-fit: contain → vùng nhấn dùng % trên box ảnh).
+  xPercent  Float
+  yPercent  Float
+  sortOrder Int         @default(0)
+
+  @@index([lookId])
+  @@index([productId])
+}
+
+model ProductVariant {
+  id             String   @id @default(cuid())
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorLabelVi   String
+  colorLabelEn   String
+  colorHex       String?
+  sizeLabelVi    String
+  sizeLabelEn    String
+  priceAdjustment Int     @default(0)
+  stockQuantity  Int      @default(0)
+  sku            String   @unique
+  imageUrls      Json     @default("[]")
+  orderItems     OrderItem[]
+  inventoryLogs  InventoryLog[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([productId])
+}
+
+/// Bộ đếm tuần tự mã đơn O00000000001 — một dòng id `global`.
+model OrderCounter {
+  id      String @id @default("global")
+  lastSeq Int    @default(0)
+}
+
+/// Bộ đếm mã sản phẩm SP-00000000001 — một dòng id `global`.
+model ProductCounter {
+  id      String @id @default("global")
+  lastSeq Int    @default(0)
+}
+
+model Order {
+  id               String         @id @default(cuid())
+  /// Hiển thị: O + 11 chữ số (vd. O00000000001), gán khi tạo đơn.
+  orderNumber      String         @unique
+  userId           String?
+  user             User?          @relation(fields: [userId], references: [id])
+  /// Admin tạo đơn thủ công (POST /api/admin/orders/create). Đơn khách đặt web: null.
+  placedByUserId   String?
+  placedBy         User?          @relation("OrderPlacedByStaff", fields: [placedByUserId], references: [id], onDelete: SetNull)
+  totalAmount      Int
+  // FULL | DEPOSIT
+  payMode          String         @default("FULL")
+  // Số tiền cọc thu ngay (đặt cọc + MoMo); null nếu trả đủ
+  depositDue       Int?
+  // Phần còn lại sau cọc
+  balanceDue       Int?
+  shippingAddress  Json
+  paymentMethod    PaymentMethod  @default(COD)
+  couponId         String?
+  campaignId       String?
+  status           OrderStatus    @default(PENDING)
+  items            OrderItem[]
+  paymentTxs       PaymentTransaction[]
+  issuedSpinCoupon IssuedSpinCoupon?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([placedByUserId])
+}
+
+model OrderItem {
+  id                 String         @id @default(cuid())
+  orderId            String
+  order              Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productVariantId   String
+  productVariant     ProductVariant @relation(fields: [productVariantId], references: [id])
+  quantity           Int
+  price              Int
+  discountSnapshot   Int?
+  colorLabelSnapshot String
+  sizeLabelSnapshot  String
+}
+
+model PaymentTransaction {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider      String
+  status        String
+  rawData       Json?
+  idempotencyKey String? @unique
+  createdAt     DateTime @default(now())
+}
+
+// Cấu hình section trang chủ — một dòng id "default". featuredProductIds/livingProductIds/newProductIds/newsPostIds: JSON string[]
+model HomePageConfig {
+  id String @id @default("default")
+
+  featuredTitle          String  @default("Bộ sưu tập nổi bật")
+  /// null: bản ghi cũ — nếu có `featuredProductIds` thì coi như CUSTOM.
+  featuredProductsMode   String?
+  featuredSectionEnabled Boolean @default(true)
+  featuredProductIds     Json    @default("[]")
+
+  newSectionTitle    String  @default("Sản phẩm mới")
+  newProductsMode    String  @default("AUTO")
+  newSectionEnabled  Boolean @default(true)
+  newProductIds      Json    @default("[]")
+  newProductsLimit   Int     @default(12)
+
+  livingSectionTitle   String  @default("Sản phẩm nổi bật")
+  /// Slug danh mục dùng khi không có danh sách tay — cố định phía server, admin không chỉnh.
+  livingCategorySlug   String  @default("phong-khach")
+  /// null: bản ghi cũ — nếu có `livingProductIds` thì coi như CUSTOM.
+  livingProductsMode   String?
+  livingSectionEnabled Boolean @default(true)
+  livingProductIds     Json    @default("[]")
+  livingLimit          Int     @default(8)
+
+  newsSectionTitle   String  @default("Tin tức")
+  newsMode           String  @default("AUTO")
+  newsSectionEnabled Boolean @default(true)
+  newsPostIds        Json    @default("[]")
+  newsLimit          Int     @default(3)
+
+  /// Khối Shop the look trên trang chủ (ảnh + hotspot).
+  shopLookSectionEnabled Boolean @default(true)
+  shopLookTitle          String  @default("Shop the look")
+  shopLookSubtitle       String  @default("Cảm hứng phối nội thất phòng khách hiện đại — tông trung tính, chất liệu tự nhiên.")
+  /// AUTO: lấy bài đã đăng theo sortOrder. CUSTOM: dùng `shopLookOrderIds`.
+  shopLookMode           String  @default("AUTO")
+  shopLookCardLimit      Int     @default(3)
+  shopLookOrderIds       Json    @default("[]")
+
+  /// Thứ tự khối nội dung dưới banner: FEATURED | SHOP_LOOK | NEW_PRODUCTS | LIVING | NEWS (JSON string[])
+  sectionBlockOrder Json?
+
+  updatedAt DateTime @updatedAt
+}
+
+model ThemeSettings {
+  id            String  @id @default("default")
+  primaryColor  String  @default("#2C2620")
+  accentColor   String  @default("#8B7355")
+  headerBg      String  @default("#F7F4EF")
+  menuColor     String  @default("#1A1612")
+  textOnPrimary String  @default("#FAF8F5")
+  logoUrl       String?
+  logoDarkUrl   String?
+  faviconUrl    String?
+  /// Chữ thương hiệu trên header khi không có logo
+  brandText     String?
+  /// Khi có logo: vẫn hiển thị chữ «Chữ thương hiệu» bên cạnh (nếu ô chữ không trống).
+  headerShowBrandBesideLogo Boolean @default(false)
+  /// Tên cửa hàng hiển thị cạnh logo (header desktop & khối logo trong menu mobile). Tuỳ chọn — để trống = ẩn.
+  headerStoreName String?
+  footerNote    String?
+  socialLinks   Json?
+  /// Nhãn nhỏ phía trên số hotline trên header (vd. «Hotline»).
+  headerHotlineLabel    String @default("Hotline")
+  /// Số điện thoại hiển thị; link gọi dùng chữ số sau khi bỏ ký tự không phải số.
+  headerHotlinePhone    String @default("0931 799 744")
+  /// Dòng 1 bên phải menu (vd. miễn phí ship).
+  headerShippingLine1   String @default("Miễn phí vận chuyển HCM")
+  /// Dòng 2 dưới dòng 1 (vd. điều kiện đơn hàng).
+  headerShippingLine2   String @default("Hóa đơn trên 2.000.000₫")
+  /// Nền hover cho nút / control dạng nút trên cửa hàng (CSS `--color-button-hover`).
+  buttonHoverBg String @default("#EBE5DF")
+  updatedAt     DateTime @updatedAt
+}
+
+model FeatureFlag {
+  id           String  @id @default("default")
+  chatEnabled  Boolean @default(false)
+  blogEnabled  Boolean @default(false)
+  couponEnabled Boolean @default(false)
+}
+
+/// Mega menu header cửa hàng — một bản ghi id "default".
+model ShopNavigationMenuConfig {
+  id     String @id @default("default")
+  /// Số danh mục gốc hiển thị (tối đa bị chặn cứng trong app).
+  maxCategoriesShown     Int @default(6)
+  /// Số ảnh / sản phẩm preview mỗi danh mục.
+  maxProductsPerCategory Int @default(5)
+  /// JSON string[] — thứ tự slug danh mục; [] = bổ sung theo tên A-Z.
+  categorySlugsOrdered   Json @default("[]")
+  /// JSON Record<string, string[]> — thứ tự slug SP trong ô preview theo từng danh mục.
+  productSlugsByCategory Json @default("{}")
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id               String   @id @default(cuid())
+  productId        String
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating           Int
+  comment          String?
+  images           Json     @default("[]")
+  verifiedPurchase Boolean  @default(false)
+  status           String   @default("PENDING")
+  createdAt        DateTime @default(now())
+}
+
+model Wishlist {
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([userId, productId])
+}
+
+model InventoryLog {
+  id               String         @id @default(cuid())
+  productVariantId String
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+  change           Int
+  reason           String
+  createdAt        DateTime       @default(now())
+}
+
+/// Vòng quay khuyến mãi — một bản ghi id "default"
+model SpinWheelConfig {
+  id                 String    @id @default("default")
+  eventActive        Boolean   @default(false)
+  bannerTitle        String    @default("Vòng quay may mắn")
+  startsAt           DateTime?
+  endsAt             DateTime?
+  maxSpinsPerUserDay Int       @default(5)
+  updatedAt          DateTime  @updatedAt
+}
+
+model SpinWheelSegment {
+  id             String   @id @default(cuid())
+  sortOrder      Int      @default(0)
+  label          String
+  weight         Float    @default(1)
+  quantityCap    Int      @default(100)
+  quantityWon    Int      @default(0)
+  discountType   String   @default("PERCENT")
+  discountValue  Int
+  /// Khi giảm %: không giảm quá số này (VNĐ). 0 = không trần.
+  discountMaxVnd Int      @default(0)
+  validityDays   Int      @default(14)
+  minOrderAmount Int      @default(0)
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  issuedCoupons IssuedSpinCoupon[]
+}
+
+model IssuedSpinCoupon {
+  id        String           @id @default(cuid())
+  code      String           @unique
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  segmentId String
+  segment   SpinWheelSegment @relation(fields: [segmentId], references: [id], onDelete: Restrict)
+  issuedAt  DateTime         @default(now())
+  expiresAt DateTime
+  usedAt    DateTime?
+  orderId   String?          @unique
+  order     Order?           @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([code])
+}
+
+model SpinWheelSpinLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  segmentId String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  link      String?
+  title     String?
+  subtitle  String?
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ChatSession {
+  id              String            @id @default(cuid())
+  userId          String?
+  user            User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestKey        String?           @unique
+  status          String            @default("OPEN")
+  /// Staff đã xem phiên (badge admin) — kết hợp với tin STAFF gần nhất trong logic unread.
+  staffLastReadAt DateTime?
+  messages        ChatMessage[]
+  uploadAssets    ChatUploadAsset[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([status])
+}
+
+/// File/ảnh chat tạm — job định kỳ xóa khỏi disk/cloud và gỡ đính kèm tin nhắn.
+model ChatUploadAsset {
+  id            String      @id @default(cuid())
+  sessionId     String
+  session       ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  storage       String
+  publicUrl     String
+  cloudPublicId String?
+  localPath     String?
+  createdAt     DateTime    @default(now())
+
+  @@index([createdAt])
+  @@index([sessionId])
+}
+
+model ChatMessage {
+  id             String      @id @default(cuid())
+  sessionId      String
+  session        ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender         String
+  message        String
+  attachmentUrl  String?
+  attachmentName String?
+  deletedAt      DateTime?
+  recalledAt     DateTime?
+  createdAt      DateTime    @default(now())
+
+  @@index([sessionId])
+}
+
+// Chi nhánh / showroom — hiển thị cho khách (footer, liên hệ)
+model RetailStore {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  address      String
+  phone        String?
+  openingHours String?
+  mapUrl       String?
+  sortOrder    Int      @default(0)
+  /// Một cửa hàng làm mặc định (trang Showroom: bản đồ lớn + badge). Chỉ nên bật một bản ghi.
+  isDefault    Boolean  @default(false)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Tài khoản ngân hàng chuyển khoản — admin cấu hình
+model BankAccount {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  bankName      String
+  accountHolder String
+  accountNumber String
+  branch        String?
+  note          String?
+  /// Ảnh QR chuyển khoản (URL, vd Cloudinary)
+  qrCodeUrl     String?
+  sortOrder     Int      @default(0)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model BlogPost {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  excerpt          String
+  content          String   @db.Text
+  thumbnailUrl     String?
+  authorName       String   @default("Furniture ECM")
+  publishedAt      DateTime @default(now())
+  metaTitle        String?
+  metaDescription  String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([publishedAt])
+}
+
+/// Câu hỏi thường gặp — admin CRUD, shop hiển thị accordion.
+model FaqItem {
+  id         String   @id @default(cuid())
+  questionVi String
+  questionEn String
+  answerVi   String   @db.Text
+  answerEn   String   @db.Text
+  published  Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([published, sortOrder])
+}
+
+/// Cấu hình tích hập hệ thống (tab General / API / Payment / Cloud / SEO / Display) — một bản ghi.
+model SiteIntegrationSettings {
+  id      String   @id @default("default")
+  general Json     @default("{}")
+  api     Json     @default("{}")
+  payment Json     @default("{}")
+  cloud   Json     @default("{}")
+  seo     Json     @default("{}")
+  display Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Khóa / biến môi trường do admin quản lý (tab «Khóa & biến») — lưu plaintext; hạn chế quyền truy cập route admin.
+model AdminManagedKey {
+  id          String   @id @default(cuid())
+  label       String
+  envKey      String   @unique
+  value       String   @db.Text
+  description String?
+  enabled     Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@index([enabled])
+}

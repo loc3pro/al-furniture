@@ -1,0 +1,128 @@
+.page {
+  width: 100%;
+  max-width: none;
+}
+
+.title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--admin-text);
+}
+
+.lead {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--admin-muted);
+  max-width: 42rem;
+  line-height: 1.5;
+}
+
+.page > .section:first-of-type {
+  margin-top: 1.25rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--admin-text);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  min-width: 180px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  box-shadow: 0 2px 12px rgba(40, 53, 72, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cardLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--admin-accent-strong);
+}
+
+.card strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: 0 4px 16px rgba(40, 53, 72, 0.06);
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th,
+.table td {
+  padding: 0.7rem 0.9rem;
+  text-align: start;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+.table thead tr {
+  background: var(--admin-table-thead-fill, #faf9f7);
+}
+
+.table th {
+  width: calc(100% / 3);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+}
+
+.table tbody tr:nth-child(odd) td,
+.table tbody tr:nth-child(even) td {
+  background: var(--admin-table-body-bg, #fff);
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.muted {
+  color: var(--admin-muted);
+  font-style: italic;
+}

@@ -1,0 +1,50 @@
+/* Một dòng: ← + nhãn — dùng cho Link và button */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #0f172a;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  max-width: 100%;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.root:hover {
+  color: var(--admin-accent-strong, #006060);
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  transform: translateY(0);
+}
+
+.text {
+  min-width: 0;
+}
+
+.root:focus-visible {
+  outline: none;
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px var(--admin-accent-soft, rgba(0, 128, 128, 0.22));
+}
+
+:global([data-admin-dark="true"]) .root {
+  color: var(--admin-text, #e8f0f7);
+}
+
+:global([data-admin-dark="true"]) .root:hover {
+  color: var(--admin-accent-strong, #6ab8f0);
+}

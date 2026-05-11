@@ -1,0 +1,120 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.85rem;
+  padding: 2rem 1.25rem;
+  box-sizing: border-box;
+  font-style: normal;
+}
+
+/* Trong ô bảng / card lớn: min-height ~ viewport để minh họa full vùng */
+.boxFill {
+  min-height: min(62vh, 560px);
+  padding: clamp(1.5rem, 4vh, 3rem) 1.25rem;
+  gap: 1rem;
+}
+
+.dense {
+  padding: 1rem 0.85rem;
+  gap: 0.45rem;
+}
+
+.dense.boxFill {
+  min-height: min(36vh, 280px);
+  padding: 1rem 0.85rem;
+}
+
+.figure {
+  width: min(78vw, 260px);
+  max-width: 100%;
+  margin: 0;
+  line-height: 0;
+}
+
+.box:not(.dense) .figure {
+  width: min(82vw, 300px);
+}
+
+.boxFill:not(.dense) .figure {
+  width: min(92vw, 400px);
+}
+
+.dense .figure {
+  width: min(40vw, 112px);
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  max-height: min(42vw, 260px);
+  object-fit: contain;
+}
+
+.box:not(.dense) .img {
+  max-height: min(48vw, 280px);
+}
+
+.boxFill:not(.dense) .img {
+  max-height: min(54vw, 340px);
+}
+
+.dense .img {
+  max-height: min(28vw, 112px);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-style: normal;
+  color: var(--admin-muted, #6c757d);
+}
+
+.boxFill .title {
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+}
+
+.dense .title {
+  font-size: 0.95rem;
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--admin-muted, #6c757d);
+  max-width: 28rem;
+}
+
+.boxFill .desc {
+  font-size: 1rem;
+}
+
+.dense .desc {
+  font-size: 0.8rem;
+}
+
+.trFill {
+  height: 100%;
+}
+
+.tdCell {
+  padding: 1.25rem 1rem !important;
+  vertical-align: middle !important;
+  border: none !important;
+  background: transparent;
+}
+
+/* Ô full chiều cao — nền đồng bộ card admin */
+.tdFill {
+  padding: 0 !important;
+  vertical-align: middle !important;
+  border: none !important;
+  border-bottom: none !important;
+  background: var(--admin-surface, #fff);
+  font-style: normal;
+}

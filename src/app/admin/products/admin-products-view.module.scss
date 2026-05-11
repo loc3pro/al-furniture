@@ -1,0 +1,374 @@
+.surfaceCard {
+  --admin-pagination-sticky-bg: var(--admin-surface, #ffffff);
+
+  flex: 1 1 0;
+  margin-top: 0.75rem;
+  border-radius: var(--admin-card-radius, 28px);
+  box-shadow: var(--admin-card-shadow, 0 16px 48px rgba(0, 0, 0, 0.35));
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--admin-surface, #ffffff);
+  padding: 1rem 1.25rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* Cho phép co trong flex cha (mainViewport) — không thì bảng rộng bị cắt thay vì scroll trong .tableWrap */
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Tiêu đề trang — cùng nhịp với `admin-blog.module.scss` `.title` */
+.pageTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--admin-text, #1e3a4d);
+}
+
+.pageLead {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--admin-muted, #717171);
+}
+
+.tableWrap {
+  flex: 1 1 0;
+  min-height: max(16rem, 36vh);
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+@media (max-width: 991px) {
+  /* Rút ngắn khoảng cách từ pagination tới sticky footer như trang blog */
+  .pageScroll {
+    padding-bottom: calc(2.2rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .surfaceCard {
+    margin-top: 0.5rem;
+    padding: 0.6rem 0.5rem 0.45rem;
+    border-radius: 18px;
+  }
+
+  .pageTitle {
+    font-size: 1.15rem;
+  }
+
+  .pageLead {
+    font-size: 0.84rem;
+  }
+
+  .tableWrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Mobile: giảm bề rộng bảng để tránh tràn card quá mức */
+  .productsTable {
+    min-width: 76rem;
+  }
+
+  .colName {
+    width: 10rem;
+    min-width: 10rem;
+    max-width: 10rem;
+  }
+
+  .colCode {
+    width: 8.5rem;
+    min-width: 8.5rem;
+    max-width: 8.5rem;
+  }
+
+  .colSku {
+    width: 10rem;
+    min-width: 10rem;
+    max-width: 10rem;
+  }
+
+  .colCategory {
+    width: 9rem;
+    min-width: 9rem;
+    max-width: 9rem;
+  }
+}
+
+.emptyCell {
+  text-align: start;
+  color: var(--admin-muted);
+  padding: 2rem 1rem !important;
+}
+
+/* Bảng SP: căn đầu dòng (đồng bộ .db-table), không xuống hàng; tag trạng thái một dòng */
+.productsTable {
+  table-layout: fixed;
+  width: 100%;
+  /* Tổng ≈ các <col> — scroll ngang khi viewport hẹp */
+  min-width: 123rem;
+}
+
+/* Mỗi cột một độ rộng cố định (colgroup) — không chồng header/cell */
+.colName {
+  width: 12rem;
+  min-width: 12rem;
+  max-width: 12rem;
+}
+
+.colCode {
+  width: 11.5rem;
+  min-width: 11.5rem;
+  max-width: 11.5rem;
+}
+
+.colSku {
+  width: 14rem;
+  min-width: 14rem;
+  max-width: 14rem;
+}
+
+.colCategory {
+  width: 13rem;
+  min-width: 13rem;
+  max-width: 13rem;
+}
+
+.colCreator {
+  width: 9rem;
+  min-width: 9rem;
+  max-width: 9rem;
+}
+
+.colPrice {
+  width: 9.5rem;
+  min-width: 9.5rem;
+  max-width: 9.5rem;
+}
+
+.colPriceOrig {
+  width: 10.5rem;
+  min-width: 10.5rem;
+  max-width: 10.5rem;
+}
+
+.colDiscountPct {
+  width: 4.75rem;
+  min-width: 4.75rem;
+  max-width: 4.75rem;
+}
+
+.colVariants {
+  width: 5.5rem;
+  min-width: 5.5rem;
+  max-width: 5.5rem;
+}
+
+.colStock {
+  width: 5.75rem;
+  min-width: 5.75rem;
+  max-width: 5.75rem;
+}
+
+.colStatus {
+  width: 9.5rem;
+  min-width: 9.5rem;
+  max-width: 9.5rem;
+}
+
+.colActions {
+  width: 6.75rem;
+  min-width: 6.75rem;
+  max-width: 6.75rem;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+/* Nút sửa/xóa trong bảng SP — to hơn mặc định admin-shell */
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(.adminTableBtn.adminTableBtn--iconOnly) {
+  width: 2.85rem;
+  min-width: 2.85rem;
+  max-width: 2.85rem;
+  height: 2.85rem;
+  min-height: 2.85rem;
+  max-height: 2.85rem;
+}
+
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(.adminTableBtn.adminTableBtn--iconOnly svg) {
+  width: 1.28rem;
+  height: 1.28rem;
+}
+
+/*
+ * Đè [data-admin-dashboard-v1] .db-table th { text-align: start } trong db-controls.scss
+ * (cùng cấp đặc hiệu nhưng cần 2 class trên table: .db-table + .productsTable)
+ */
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(th) {
+  text-align: start;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(td) {
+  text-align: start;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(thead th:nth-child(11)),
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(thead th:nth-child(12)) {
+  text-align: center;
+}
+
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(tbody td:nth-child(11)),
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(tbody td:nth-child(12)) {
+  text-align: center;
+}
+
+/* Cùng kích thước ô với .adminTableBtn (admin-shell — action w/h) */
+:global([data-admin-dashboard-v1]) table:global(.db-table).productsTable :global(.db-tag) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: var(--admin-table-action-w, 7.35rem);
+  min-width: var(--admin-table-action-w, 7.35rem);
+  max-width: var(--admin-table-action-w, 7.35rem);
+  height: var(--admin-table-action-h, 2.125rem);
+  min-height: var(--admin-table-action-h, 2.125rem);
+  max-height: var(--admin-table-action-h, 2.125rem);
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.codeMono {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8125rem;
+  font-family: ui-monospace, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: start;
+  display: block;
+}
+
+/* Dùng bên trong <td>, không gắn trực tiếp lên <td> — display:block trên td phá table layout */
+.ellipsis {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.sortLink {
+  display: inline-block;
+  max-width: 100%;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: start;
+}
+
+.sortLink:hover {
+  color: var(--admin-accent);
+}
+
+/* Tên SP: text thường (giống mã), bấm mở sửa */
+.nameOpen {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  font-size: inherit;
+  color: var(--admin-text);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  text-align: start;
+}
+
+.nameOpen:hover {
+  color: var(--admin-accent);
+  text-decoration: underline;
+}
+
+.priceLine {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.priceSep {
+  flex-shrink: 0;
+}
+
+.priceMain {
+  color: var(--admin-price-success, #00a651);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.priceOrigCell {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--admin-muted);
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.discountPctCell {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  text-align: start;
+  white-space: nowrap;
+}

@@ -1,0 +1,6 @@
+/*
+ * Admin dashboard v1 — chỉ import từ `src/app/admin/layout.tsx`.
+ * Control `.db-*` được scope trong `[data-admin-dashboard-v1]` (gắn trên AdminShell) để không ảnh hưởng shop.
+ * Token `--admin-*` nằm trong CSS module admin-shell (chỉ bundle với AdminShell).
+ */
+@use "./components/db-controls";

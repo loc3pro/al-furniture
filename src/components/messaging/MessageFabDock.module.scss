@@ -1,0 +1,14 @@
+/* Vị trí chung cho nút tin nhắn / chat — cửa hàng & admin */
+.dock {
+  position: fixed;
+  z-index: 162;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .dock {
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}

@@ -1,0 +1,238 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 2rem;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  padding: 1.25rem 1.35rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border, rgba(15, 23, 42, 0.09));
+  background: var(--admin-surface, #fff);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.h2 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.help {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: rgba(15, 23, 42, 0.55);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.field span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.65);
+}
+
+/* Cùng một “control bar” cho input / select / nút trong form (chiều cao + padding). */
+$spinControlH: 2.5rem;
+
+.field input {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 22rem;
+  min-height: $spinControlH;
+  padding: 0.5rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  background-color: var(--admin-surface, #fff);
+  color: #0f172a;
+}
+
+.discountTypeSelect:global(.ant-select) {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.discountTypeSelect:global(.ant-select .ant-select-selector) {
+  box-sizing: border-box;
+  min-height: $spinControlH !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  font-family: inherit !important;
+  font-size: 0.9rem !important;
+  background-color: var(--admin-surface, #fff) !important;
+  color: #0f172a !important;
+  align-items: center;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+
+.formGrid > .field {
+  margin-bottom: 0;
+}
+
+/* Giữ chỗ cho một dòng label giống các ô khác — nút Submit căn hàng với input */
+.submitWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.submitPlaceholder {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.submitBtn {
+  width: fit-content;
+  box-sizing: border-box;
+  min-height: $spinControlH;
+  padding: 0.5rem 1rem !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+}
+
+.tableWrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border-radius: var(--admin-table-chrome-radius, 12px);
+  border: 1px solid var(--admin-table-chrome-border, rgba(26, 22, 18, 0.08));
+  background: var(--admin-table-chrome-bg, #fff);
+}
+
+.table {
+  width: 100%;
+  /* Nhiều cột — không ép vào viewport; cuộn ngang trong .tableWrap */
+  min-width: 58rem;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.82rem;
+  background: var(--admin-table-chrome-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  border-radius: calc(var(--admin-table-chrome-radius, 12px) - 1px);
+}
+
+.table th,
+.table td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--admin-table-row-line, rgba(26, 22, 18, 0.11));
+  text-align: start;
+  vertical-align: middle;
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  border-left: 1px solid var(--admin-table-col-line, rgba(26, 22, 18, 0.15));
+}
+
+.table th {
+  background: var(--admin-table-thead-fill, #faf9f7);
+  color: var(--admin-table-thead-muted, rgba(26, 22, 18, 0.45));
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.table td {
+  background: var(--admin-table-body-bg, #fff);
+}
+
+.table tbody tr:hover td {
+  background: var(--admin-table-row-hover, rgba(0, 122, 100, 0.045));
+}
+
+.tinyNum {
+  width: 4.5rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  font: inherit;
+}
+
+.tinyNumWide {
+  width: 6.25rem;
+  max-width: 100%;
+  padding: 0.25rem 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  font: inherit;
+}
+
+.pctCell {
+  font-size: 0.82rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.pctDash {
+  opacity: 0.45;
+}
+
+.linkBtn {
+  border: none;
+  background: none;
+  color: #b91c1c;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.linkBtn:hover {
+  text-decoration: underline;
+}
+
+.emptyRow td {
+  padding: 1.25rem 0.75rem;
+  text-align: start;
+  color: rgba(15, 23, 42, 0.55);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}

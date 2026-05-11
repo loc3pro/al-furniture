@@ -1,0 +1,63 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(10, 10, 12, 0.88);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  cursor: zoom-out;
+  animation: chatLightboxIn 0.16s ease;
+}
+
+@keyframes chatLightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.closeFab {
+  position: fixed;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: max(0.75rem, env(safe-area-inset-right));
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  z-index: 1;
+}
+
+.closeFab:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.imgWrap {
+  position: relative;
+  max-width: min(96vw, 1400px);
+  max-height: 92vh;
+  cursor: default;
+}
+
+.img {
+  display: block;
+  max-width: min(96vw, 1400px);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}

@@ -1,0 +1,215 @@
+.themeFormCard {
+  margin-top: 0;
+  padding: 1.1rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border-inner);
+  background: var(--admin-surface);
+  box-shadow: 0 1px 0 rgba(26, 22, 18, 0.04);
+}
+
+.wrap {
+  max-width: none;
+}
+
+.syncNote {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 10px;
+  background: var(--admin-accent-softer);
+  border: 1px solid var(--admin-accent-border);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--admin-text);
+}
+
+.section {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--admin-border-inner);
+  border-radius: 12px;
+  background: var(--admin-table-row-alt);
+}
+
+.sectionTitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.sectionLead {
+  margin: 0 0 1rem;
+  font-size: 0.84rem;
+  color: var(--admin-muted);
+  line-height: 1.5;
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+
+.colorRow {
+  margin-bottom: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--admin-border-inner);
+  border-radius: 10px;
+  background: var(--admin-surface);
+}
+
+.colorRow:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.colorTop {
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 0.15rem;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--admin-muted);
+  line-height: 1.45;
+}
+
+.varCode {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--admin-table-row-alt);
+  color: var(--admin-muted);
+}
+
+.usedFor {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: var(--admin-accent-strong);
+}
+
+.colorInputs {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.colorPicker {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 2px solid var(--admin-border-inner);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.colorPicker:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.hexInput {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border-inner);
+  font: inherit;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.hexInput:disabled {
+  opacity: 0.65;
+}
+
+.textInput {
+  width: 100%;
+  max-width: none;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border-inner);
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.textInput:disabled {
+  opacity: 0.65;
+}
+
+.fieldBlock {
+  margin-bottom: 1rem;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem 0.85rem;
+}
+
+.textArea {
+  width: 100%;
+  min-height: 84px;
+  padding: 0.55rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border-inner);
+  font: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.textArea:disabled {
+  opacity: 0.65;
+}
+
+.checkboxRow {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--admin-text);
+  cursor: pointer;
+  max-width: 36rem;
+}
+
+.checkboxRow input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .themeFormCard {
+    padding: 0.9rem;
+  }
+
+  .section {
+    padding: 0.8rem;
+  }
+
+  .colorGrid,
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkboxRow:has(input:disabled) {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

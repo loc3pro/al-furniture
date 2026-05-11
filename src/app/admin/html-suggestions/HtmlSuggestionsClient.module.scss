@@ -1,0 +1,7 @@
+@use "../../../design-system/tokens.scss" as t;
+
+.title {
+  margin: 0;
+  font-size: t.$text-title;
+  font-weight: 600;
+}

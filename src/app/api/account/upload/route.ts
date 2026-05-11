@@ -1,0 +1,41 @@
+import { NextResponse } from "next/server";
+import { getSession } from "@/lib/session";
+import { isCloudinaryConfigured, uploadImageBuffer } from "@/lib/cloudinary-server";
+
+const MAX_IMAGE = 6 * 1024 * 1024;
+
+/** Avatar / ảnh tài khoản — ảnh Cloudinary, URL lưu User.avatarUrl */
+export async function POST(req: Request) {
+  const session = await getSession();
+  if (!session?.sub) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isCloudinaryConfigured()) {
+    return NextResponse.json(
+      { error: "Cloudinary chưa cấu hình trên server" },
+      { status: 503 },
+    );
+  }
+
+  const form = await req.formData().catch(() => null);
+  const file = form?.get("file");
+  if (!(file instanceof File)) {
+    return NextResponse.json({ error: "Thiếu file" }, { status: 400 });
+  }
+  if (!file.type.startsWith("image/")) {
+    return NextResponse.json({ error: "Chỉ chấp nhận ảnh" }, { status: 400 });
+  }
+  if (file.size > MAX_IMAGE) {
+    return NextResponse.json({ error: "Ảnh tối đa 6MB" }, { status: 400 });
+  }
+
+  const buf = Buffer.from(await file.arrayBuffer());
+  try {
+    const url = await uploadImageBuffer(buf, "account");
+    return NextResponse.json({ url, path: url });
+  } catch (e) {
+    console.error("[account/upload]", e);
+    return NextResponse.json({ error: "Upload thất bại" }, { status: 500 });
+  }
+}

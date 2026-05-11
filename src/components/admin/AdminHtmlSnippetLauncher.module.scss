@@ -1,0 +1,20 @@
+.btn {
+  flex-shrink: 0;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--admin-accent-border, #9dcbf0);
+  background: var(--admin-accent-soft, rgba(61, 154, 232, 0.12));
+  color: var(--admin-accent-strong, #0b5cad);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--admin-accent-border, #9dcbf0);
+}
+
+.mobileBlock {
+  margin-top: 0.65rem;
+}

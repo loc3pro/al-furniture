@@ -1,0 +1,313 @@
+.wrap {
+  display: block;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.hint {
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+/*
+ * Khung 19:9: dùng padding-bottom theo % chiều ngang (ổn định hơn aspect-ratio trong flex).
+ * Nội dung bám inset:0 — tránh button/img % height trên hộp chiều cao 0.
+ */
+.previewShell {
+  --banner-preview-w: 540px;
+  position: relative;
+  width: 100%;
+  max-width: var(--banner-preview-w);
+  border-radius: 22px;
+  border: 1px dashed #c9c9c9;
+  background: #faf8f5;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.previewShell:hover {
+  border-color: rgba(30, 77, 71, 0.5);
+}
+
+.previewShell::before {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-bottom: calc(100% * 9 / 19);
+}
+
+.previewShell > .previewHit,
+.previewShell > .previewEmptyZone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.previewShell > .previewEmptyZone {
+  min-height: 0;
+}
+
+.previewHit {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.previewHit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.previewHit:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--admin-accent-soft, rgba(0, 128, 128, 0.22));
+}
+
+.previewHit:not(:disabled):hover .previewImg {
+  opacity: 0.7;
+}
+
+.previewHit:not(:disabled):hover .previewHoverLabel {
+  opacity: 1;
+}
+
+.previewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: opacity 0.18s ease;
+}
+
+.previewHoverLabel {
+  position: absolute;
+  inset: auto 0 0.65rem 0;
+  margin: 0 auto;
+  width: max-content;
+  max-width: calc(100% - 1rem);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  text-align: center;
+}
+
+.previewEmptyZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  box-sizing: border-box;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.previewEmptyZone:hover:not(:disabled) {
+  background: #f8fcfb;
+}
+
+.previewEmptyZone:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.previewEmptyZone:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--admin-accent-soft, rgba(0, 128, 128, 0.22));
+}
+
+.previewEmptyIcon {
+  display: flex;
+  color: rgba(26, 22, 18, 0.45);
+}
+
+.previewEmptyTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--admin-text, #1e293b);
+}
+
+.previewEmptyMeta {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.35;
+  max-width: 18rem;
+}
+
+.fabClear {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(100, 116, 139, 0.85);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+.fabClear:hover:not(:disabled) {
+  color: #b91c1c;
+  background: #fff;
+}
+
+.fabClear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fabClear:focus-visible {
+  outline: none;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.08),
+    0 0 0 3px var(--admin-accent-soft, rgba(0, 128, 128, 0.22));
+}
+
+:global([data-admin-dark="true"]) .previewShell {
+  background: rgba(30, 41, 55, 0.45);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+:global([data-admin-dark="true"]) .previewEmptyZone {
+  background: var(--admin-surface, #1a2430);
+}
+
+:global([data-admin-dark="true"]) .previewEmptyZone:hover:not(:disabled) {
+  background: rgba(30, 41, 55, 0.85);
+}
+
+:global([data-admin-dark="true"]) .previewEmptyTitle {
+  color: var(--admin-text, #e8f0f7);
+}
+
+:global([data-admin-dark="true"]) .previewEmptyMeta {
+  color: rgba(200, 210, 220, 0.72);
+}
+
+:global([data-admin-dark="true"]) .previewEmptyIcon {
+  color: rgba(200, 210, 220, 0.55);
+}
+
+:global([data-admin-dark="true"]) .previewHit {
+  background: rgba(20, 28, 38, 0.65);
+}
+
+:global([data-admin-dark="true"]) .previewHoverLabel {
+  background: rgba(15, 23, 42, 0.88);
+  color: #f8fafc;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: rgba(26, 22, 18, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  max-width: min(920px, 100%);
+  width: 100%;
+  max-height: min(90vh, 880px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 48px rgba(26, 22, 18, 0.18);
+  overflow: hidden;
+}
+
+.modalHead {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.modalSub {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(26, 22, 18, 0.55);
+}
+
+.cropWrap {
+  position: relative;
+  width: 100%;
+  height: min(52vh, 480px);
+  min-height: 280px;
+  background: #1a1612;
+}
+
+.zoomRow {
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(26, 22, 18, 0.08);
+  font-size: 0.82rem;
+}
+
+.zoomRow input[type="range"] {
+  flex: 1;
+  min-width: 120px;
+}
+
+.modalFoot {
+  padding: 0.85rem 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(26, 22, 18, 0.08);
+}

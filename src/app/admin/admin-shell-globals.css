@@ -1,0 +1,13 @@
+/* Panel trái/phải mở: khóa cuộn nền, chỉ panel body được cuộn. */
+html[data-admin-side-panel-open="true"] {
+  overflow: hidden !important;
+}
+
+html[data-admin-side-panel-open="true"] body {
+  overflow: hidden !important;
+}
+
+html[data-admin-side-panel-open="true"] .mainStage .main {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
