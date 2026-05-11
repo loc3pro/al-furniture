@@ -10,7 +10,18 @@ DEST="${1:-.env}"
 write_kv() {
   local key="$1"
   local val="${2-}"
-  printf '%s=%q\n' "$key" "$val"
+  # Docker Compose env_file: không dùng %q (bash) — dấu nháy sẽ thành phần giá trị.
+  if [[ "$val" == *$'\n'* || "$val" == *$'\r'* ]]; then
+    echo "refusing to write multiline value for ${key}" >&2
+    exit 1
+  fi
+  if [[ "$val" =~ [[:space:]"#\\] ]]; then
+    val="${val//\\/\\\\}"
+    val="${val//\"/\\\"}"
+    printf '%s="%s"\n' "$key" "$val"
+  else
+    printf '%s=%s\n' "$key" "$val"
+  fi
 }
 
 {
