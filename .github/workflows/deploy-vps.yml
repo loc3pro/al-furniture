@@ -14,24 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     steps:
-      - name: Validate SSH target
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST || vars.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER || vars.VPS_USER }}
-          VPS_SSH_PASSWORD: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
+      - name: Require VPS_HOST
         run: |
           if [ -z "$VPS_HOST" ]; then
-            echo "::error::Thiếu VPS_HOST (Repository variable hoặc secret)."
+            echo "::error::Thiếu VPS_HOST. Vào Settings → Secrets and variables → Actions → tab Variables → New repository variable: VPS_HOST = IP VPS (ví dụ 103.183.120.113)."
             exit 1
           fi
-          if [ -z "$VPS_USER" ]; then
-            echo "::error::Thiếu VPS_USER (Repository variable hoặc secret)."
-            exit 1
-          fi
-          if [ -z "$VPS_SSH_PASSWORD" ]; then
-            echo "::error::Thiếu VPS_SSH_PASSWORD (Repository variable hoặc secret)."
-            exit 1
-          fi
+        env:
+          VPS_HOST: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.2.0
         env:
@@ -61,8 +51,8 @@ jobs:
           CHAT_UPLOAD_RETENTION_MS: ${{ vars.CHAT_UPLOAD_RETENTION_MS || secrets.CHAT_UPLOAD_RETENTION_MS }}
           CHAT_UPLOAD_RETENTION_HOURS: ${{ vars.CHAT_UPLOAD_RETENTION_HOURS || secrets.CHAT_UPLOAD_RETENTION_HOURS }}
         with:
-          host: ${{ secrets.VPS_HOST || vars.VPS_HOST }}
-          username: ${{ secrets.VPS_USER || vars.VPS_USER }}
+          host: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
+          username: ${{ vars.VPS_USER || secrets.VPS_USER }}
           password: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
           script_stop: true
           envs: >-
