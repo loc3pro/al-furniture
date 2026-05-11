@@ -49,6 +49,7 @@ jobs:
       SESSION_COOKIE_SECURE: ${{ vars.SESSION_COOKIE_SECURE || secrets.SESSION_COOKIE_SECURE }}
       CHAT_UPLOAD_RETENTION_MS: ${{ vars.CHAT_UPLOAD_RETENTION_MS || secrets.CHAT_UPLOAD_RETENTION_MS }}
       CHAT_UPLOAD_RETENTION_HOURS: ${{ vars.CHAT_UPLOAD_RETENTION_HOURS || secrets.CHAT_UPLOAD_RETENTION_HOURS }}
+      GIT_CLONE_TOKEN: ${{ secrets.GIT_CLONE_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - name: Diagnose VPS_HOST
         run: |
@@ -92,11 +93,23 @@ jobs:
             NEXT_PUBLIC_MESSENGER_URL,NEXT_PUBLIC_ZALO_URL,NEXT_PUBLIC_HOTLINE_TEL,NEXT_PUBLIC_GA_ID,
             NEXT_PUBLIC_FB_PIXEL_ID,NEXT_PUBLIC_CONTACT_EMAIL,NEXT_PUBLIC_APP_MESSAGE,NEXT_PUBLIC_ADMIN_APP_MESSAGE,
             NEXT_PUBLIC_APP_MESSAGE_KIND,REDIS_URL,REDIS_CACHE_PREFIX,OTP_DEBUG,SESSION_COOKIE_SECURE,
-            CHAT_UPLOAD_RETENTION_MS,CHAT_UPLOAD_RETENTION_HOURS
+            CHAT_UPLOAD_RETENTION_MS,CHAT_UPLOAD_RETENTION_HOURS,GIT_CLONE_TOKEN
           script: |
             set -euo pipefail
             APP_DIR="${{ vars.VPS_APP_DIR || secrets.VPS_APP_DIR }}"
             if [ -z "$APP_DIR" ]; then APP_DIR="/root/furniture-ecm/current"; fi
+            REPO_URL="https://github.com/${{ github.repository }}.git"
+            if [ -n "${GIT_CLONE_TOKEN:-}" ]; then
+              REPO_URL="https://x-access-token:${GIT_CLONE_TOKEN}@github.com/${{ github.repository }}.git"
+            fi
+            if [ ! -d "$APP_DIR/.git" ]; then
+              if [ -e "$APP_DIR" ] && [ -n "$(ls -A "$APP_DIR" 2>/dev/null || true)" ]; then
+                echo "APP_DIR exists but is not a git checkout: $APP_DIR"
+                exit 1
+              fi
+              mkdir -p "$(dirname "$APP_DIR")"
+              git clone --branch main "$REPO_URL" "$APP_DIR"
+            fi
             cd "$APP_DIR"
             git fetch origin main
             git reset --hard origin/main
