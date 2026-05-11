@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      vps_host:
+        description: IP VPS (tùy chọn — ghi đè secret/variable khi Run workflow)
+        required: false
+        type: string
 
 concurrency:
   group: deploy-vps
@@ -13,39 +18,56 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    env:
+      DEPLOY_HOST: ${{ inputs.vps_host || vars.VPS_HOST || secrets.VPS_HOST }}
+      DEPLOY_USER: ${{ vars.VPS_USER || secrets.VPS_USER }}
+      DEPLOY_PASSWORD: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
+      DATABASE_URL: ${{ vars.DATABASE_URL || secrets.DATABASE_URL }}
+      AUTH_SECRET: ${{ vars.AUTH_SECRET || secrets.AUTH_SECRET }}
+      CLOUDINARY_URL: ${{ vars.CLOUDINARY_URL || secrets.CLOUDINARY_URL }}
+      CLOUDINARY_API_KEY: ${{ vars.CLOUDINARY_API_KEY || secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ vars.CLOUDINARY_API_SECRET || secrets.CLOUDINARY_API_SECRET }}
+      CLOUDINARY_CLOUD_NAME: ${{ vars.CLOUDINARY_CLOUD_NAME || secrets.CLOUDINARY_CLOUD_NAME }}
+      LIBRE_TRANSLATE_KEY: ${{ vars.LIBRE_TRANSLATE_KEY || secrets.LIBRE_TRANSLATE_KEY }}
+      LIBRE_TRANSLATE_URL: ${{ vars.LIBRE_TRANSLATE_URL || secrets.LIBRE_TRANSLATE_URL }}
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || secrets.NEXT_PUBLIC_SITE_URL }}
+      NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_CLIENT_ID || secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
+      NEXT_PUBLIC_MESSENGER_URL: ${{ vars.NEXT_PUBLIC_MESSENGER_URL || secrets.NEXT_PUBLIC_MESSENGER_URL }}
+      NEXT_PUBLIC_ZALO_URL: ${{ vars.NEXT_PUBLIC_ZALO_URL || secrets.NEXT_PUBLIC_ZALO_URL }}
+      NEXT_PUBLIC_HOTLINE_TEL: ${{ vars.NEXT_PUBLIC_HOTLINE_TEL || secrets.NEXT_PUBLIC_HOTLINE_TEL }}
+      NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID || secrets.NEXT_PUBLIC_GA_ID }}
+      NEXT_PUBLIC_FB_PIXEL_ID: ${{ vars.NEXT_PUBLIC_FB_PIXEL_ID || secrets.NEXT_PUBLIC_FB_PIXEL_ID }}
+      NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL || secrets.NEXT_PUBLIC_CONTACT_EMAIL }}
+      NEXT_PUBLIC_APP_MESSAGE: ${{ vars.NEXT_PUBLIC_APP_MESSAGE || secrets.NEXT_PUBLIC_APP_MESSAGE }}
+      NEXT_PUBLIC_ADMIN_APP_MESSAGE: ${{ vars.NEXT_PUBLIC_ADMIN_APP_MESSAGE || secrets.NEXT_PUBLIC_ADMIN_APP_MESSAGE }}
+      NEXT_PUBLIC_APP_MESSAGE_KIND: ${{ vars.NEXT_PUBLIC_APP_MESSAGE_KIND || secrets.NEXT_PUBLIC_APP_MESSAGE_KIND }}
+      REDIS_URL: ${{ vars.REDIS_URL || secrets.REDIS_URL }}
+      REDIS_CACHE_PREFIX: ${{ vars.REDIS_CACHE_PREFIX || secrets.REDIS_CACHE_PREFIX }}
+      OTP_DEBUG: ${{ vars.OTP_DEBUG || secrets.OTP_DEBUG }}
+      SESSION_COOKIE_SECURE: ${{ vars.SESSION_COOKIE_SECURE || secrets.SESSION_COOKIE_SECURE }}
+      CHAT_UPLOAD_RETENTION_MS: ${{ vars.CHAT_UPLOAD_RETENTION_MS || secrets.CHAT_UPLOAD_RETENTION_MS }}
+      CHAT_UPLOAD_RETENTION_HOURS: ${{ vars.CHAT_UPLOAD_RETENTION_HOURS || secrets.CHAT_UPLOAD_RETENTION_HOURS }}
     steps:
+      - name: Check deploy target
+        run: |
+          if [ -z "${DEPLOY_HOST}" ]; then
+            echo "::error::Missing VPS_HOST. Add a Repository secret or variable named VPS_HOST, or pass vps_host when Run workflow."
+            exit 1
+          fi
+          if [ -z "${DEPLOY_USER}" ]; then
+            echo "::error::Missing VPS_USER (Repository secret or variable)."
+            exit 1
+          fi
+          if [ -z "${DEPLOY_PASSWORD}" ]; then
+            echo "::error::Missing VPS_SSH_PASSWORD (Repository secret)."
+            exit 1
+          fi
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.2.0
-        env:
-          DATABASE_URL: ${{ vars.DATABASE_URL || secrets.DATABASE_URL }}
-          AUTH_SECRET: ${{ vars.AUTH_SECRET || secrets.AUTH_SECRET }}
-          CLOUDINARY_URL: ${{ vars.CLOUDINARY_URL || secrets.CLOUDINARY_URL }}
-          CLOUDINARY_API_KEY: ${{ vars.CLOUDINARY_API_KEY || secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ vars.CLOUDINARY_API_SECRET || secrets.CLOUDINARY_API_SECRET }}
-          CLOUDINARY_CLOUD_NAME: ${{ vars.CLOUDINARY_CLOUD_NAME || secrets.CLOUDINARY_CLOUD_NAME }}
-          LIBRE_TRANSLATE_KEY: ${{ vars.LIBRE_TRANSLATE_KEY || secrets.LIBRE_TRANSLATE_KEY }}
-          LIBRE_TRANSLATE_URL: ${{ vars.LIBRE_TRANSLATE_URL || secrets.LIBRE_TRANSLATE_URL }}
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || secrets.NEXT_PUBLIC_SITE_URL }}
-          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_CLIENT_ID || secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
-          NEXT_PUBLIC_MESSENGER_URL: ${{ vars.NEXT_PUBLIC_MESSENGER_URL || secrets.NEXT_PUBLIC_MESSENGER_URL }}
-          NEXT_PUBLIC_ZALO_URL: ${{ vars.NEXT_PUBLIC_ZALO_URL || secrets.NEXT_PUBLIC_ZALO_URL }}
-          NEXT_PUBLIC_HOTLINE_TEL: ${{ vars.NEXT_PUBLIC_HOTLINE_TEL || secrets.NEXT_PUBLIC_HOTLINE_TEL }}
-          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID || secrets.NEXT_PUBLIC_GA_ID }}
-          NEXT_PUBLIC_FB_PIXEL_ID: ${{ vars.NEXT_PUBLIC_FB_PIXEL_ID || secrets.NEXT_PUBLIC_FB_PIXEL_ID }}
-          NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL || secrets.NEXT_PUBLIC_CONTACT_EMAIL }}
-          NEXT_PUBLIC_APP_MESSAGE: ${{ vars.NEXT_PUBLIC_APP_MESSAGE || secrets.NEXT_PUBLIC_APP_MESSAGE }}
-          NEXT_PUBLIC_ADMIN_APP_MESSAGE: ${{ vars.NEXT_PUBLIC_ADMIN_APP_MESSAGE || secrets.NEXT_PUBLIC_ADMIN_APP_MESSAGE }}
-          NEXT_PUBLIC_APP_MESSAGE_KIND: ${{ vars.NEXT_PUBLIC_APP_MESSAGE_KIND || secrets.NEXT_PUBLIC_APP_MESSAGE_KIND }}
-          REDIS_URL: ${{ vars.REDIS_URL || secrets.REDIS_URL }}
-          REDIS_CACHE_PREFIX: ${{ vars.REDIS_CACHE_PREFIX || secrets.REDIS_CACHE_PREFIX }}
-          OTP_DEBUG: ${{ vars.OTP_DEBUG || secrets.OTP_DEBUG }}
-          SESSION_COOKIE_SECURE: ${{ vars.SESSION_COOKIE_SECURE || secrets.SESSION_COOKIE_SECURE }}
-          CHAT_UPLOAD_RETENTION_MS: ${{ vars.CHAT_UPLOAD_RETENTION_MS || secrets.CHAT_UPLOAD_RETENTION_MS }}
-          CHAT_UPLOAD_RETENTION_HOURS: ${{ vars.CHAT_UPLOAD_RETENTION_HOURS || secrets.CHAT_UPLOAD_RETENTION_HOURS }}
         with:
-          host: ${{ vars.VPS_HOST || secrets.VPS_HOST }}
-          username: ${{ vars.VPS_USER || secrets.VPS_USER }}
-          password: ${{ secrets.VPS_SSH_PASSWORD || vars.VPS_SSH_PASSWORD }}
+          host: ${{ env.DEPLOY_HOST }}
+          username: ${{ env.DEPLOY_USER }}
+          password: ${{ env.DEPLOY_PASSWORD }}
           script_stop: true
           envs: >-
             DATABASE_URL,AUTH_SECRET,CLOUDINARY_URL,CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET,CLOUDINARY_CLOUD_NAME,
