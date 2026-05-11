@@ -273,7 +273,7 @@ export function AdminShopTheLookEditor(props: Props) {
     try {
       let finalHeroUrl = heroImageUrl.trim();
 
-      if (props.mode === "create" && heroFile) {
+      if (heroFile) {
         const uploaded = await uploadHeroToCloudinary(heroFile);
         if (!uploaded) return;
         finalHeroUrl = uploaded;
@@ -284,7 +284,7 @@ export function AdminShopTheLookEditor(props: Props) {
           return null;
         });
       } else if (props.mode === "edit") {
-        finalHeroUrl = props.initial.heroImageUrl.trim();
+        finalHeroUrl = (heroImageUrl.trim() || props.initial.heroImageUrl).trim();
       }
 
       if (!payloadBase.slug || !payloadBase.title || !finalHeroUrl) {
