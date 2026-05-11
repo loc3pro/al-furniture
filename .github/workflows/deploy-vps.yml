@@ -104,8 +104,9 @@ jobs:
             fi
             if [ ! -d "$APP_DIR/.git" ]; then
               if [ -e "$APP_DIR" ] && [ -n "$(ls -A "$APP_DIR" 2>/dev/null || true)" ]; then
-                echo "APP_DIR exists but is not a git checkout: $APP_DIR"
-                exit 1
+                backup="${APP_DIR}.backup-$(date -u +%Y%m%d%H%M%S)"
+                echo "Backing up non-git app directory to ${backup}"
+                mv "$APP_DIR" "$backup"
               fi
               mkdir -p "$(dirname "$APP_DIR")"
               git clone --branch main "$REPO_URL" "$APP_DIR"
